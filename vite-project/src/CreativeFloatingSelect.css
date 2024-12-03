@@ -1,83 +1,181 @@
-/* CreativeFloatingSelect.css */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  min-height: min-content;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-.container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  .select-container {
-    width: 300px;
-    position: relative;
-  }
-  
-  .select-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .select-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    padding: 10px;
-    z-index: 10;
-  }
-  
-  .option-button {
-    width: 100%;
-    padding: 8px;
-    text-align: left;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .selected-options {
-    margin-top: 20px;
-  }
-  
-  .selected-option {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    background-color: #f4f4f4;
-    margin: 5px 0;
-    border-radius: 4px;
-  }
-  
-  .remove-button {
-    background: transparent;
-    border: none;
-    color: #e74c3c;
-    cursor: pointer;
-  }
-  
-  .chevron {
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-  }
-  
-  .open {
-    transform: rotate(180deg);
-  }
+.select-wrapper {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
-  li button{
-    background: white;
+.select-button {
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #06175C;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.select-button:hover {
+  background-color: #0b2885;
+}
+
+.plus-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.select-options {
+  background-color: white;
+  border-top: 1px solid #e0e0e0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  animation: slideDown 0.3s ease forwards;
+
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
   }
+  to {
+    max-height: 300px;
+  }
+}
+
+.select-options h3 {
+  padding: 15px 20px;
+  margin: 0;
+  color: #06175C;
+  font-size: 18px;
+}
+
+.select-options ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.select-options li {
+  padding:  0px 20px 5px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.select-options li:hover {
+  background-color: #f0f0f0;
+}
+
+.select-options button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.selected-options {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.selected-options h2 {
+  color: #06175C;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.selected-options ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.selected-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e6e6fa;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #ff4136;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.remove-button:hover {
+  transform: scale(1.2);
+}
+
+/* Animaciones adicionales */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.select-button:active {
+  animation: pulse 0.3s ease;
+}
+
+#msform > fieldset:nth-child(3) > div:nth-child(4) > div.SelectContainer > div > div.selected-options > ul > li{
+  height: 14px;
+}

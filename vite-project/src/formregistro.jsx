@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+// import { motion, AnimatePresence } from 'framer-motion'
 
 const InputField = ({ label, type = "text", value, onChange, required = true }) => (
   <div className="input-field">

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './CreativeFloatingSelect.css';
 
 // Componente principal
-function CreativeFloatingSelect({ options }) {  // Las opciones ahora se reciben como prop
+function CreativeFloatingSelect({ options }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const selectRef = useRef(null);
@@ -35,9 +35,14 @@ function CreativeFloatingSelect({ options }) {  // Las opciones ahora se reciben
     );
   };
 
+  // Filtrar las opciones disponibles (excluir las seleccionadas)
+  const filteredOptions = options.filter(
+    (option) => !selectedOptions.includes(option.value)
+  );
+
   // Función para renderizar las opciones disponibles
   const renderOptions = () => {
-    return options.map((option) => (
+    return filteredOptions.map((option) => (
       <li key={option.value}>
         <button onClick={() => handleSelectChange(option.value)}>
           {option.label}
@@ -71,7 +76,7 @@ function CreativeFloatingSelect({ options }) {  // Las opciones ahora se reciben
   };
 
   return (
-    <div className="container">
+    <div className="SelectContainer">
       <div className="select-container">
         <div ref={selectRef}>
           <button
