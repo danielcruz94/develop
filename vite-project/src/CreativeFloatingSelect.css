@@ -56,6 +56,7 @@
   overflow: hidden;
   transition: max-height 0.3s ease;
   animation: slideDown 0.3s ease forwards;
+  overflow-y: auto;
 
 }
 
@@ -175,7 +176,6 @@
 .select-button:active {
   animation: pulse 0.3s ease;
 }
-
-#msform > fieldset:nth-child(3) > div:nth-child(4) > div.SelectContainer > div > div.selected-options > ul > li{
-  height: 14px;
+.opciones-seleccionadas{
+   height: 14px;
 }

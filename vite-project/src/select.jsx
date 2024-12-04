@@ -60,7 +60,7 @@ function CreativeFloatingSelect({ options }) {
     return (
       <ul>
         {selectedOptions.map((option) => (
-          <li key={option} className="selected-option">
+          <li key={option} className="selected-option opciones-seleccionadas ">
             <span>{options.find((o) => o.value === option)?.label}</span>
             <button
               onClick={() => removeOption(option)}

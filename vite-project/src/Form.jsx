@@ -12,6 +12,160 @@ const Form =()=>{
         { value: 'AFP', label: 'AFP' },
       ];
 
+      const ingresos = [
+        { value: 'Arriendo', label: 'Arriendo' },
+        { value: 'Auxilio', label: 'Auxilio' },
+        { value: 'Beneficio', label: 'Beneficio' },
+        { value: 'Bonificacion', label: 'Bonificación' },
+        { value: 'Comisiones', label: 'Comisiones' },
+        { value: 'Dividendos', label: 'Dividendos' },
+        { value: 'Honorarios', label: 'Honorarios' },
+        { value: 'PrimaDeServicios', label: 'Prima de Servicios' },
+        { value: 'PrimaExtralegal', label: 'Prima Extralegal' },
+        { value: 'Renta', label: 'Renta' },
+        { value: 'SalarioIntegral', label: 'Salario Integral' },
+        { value: 'SalarioTradicional', label: 'Salario Tradicional' },
+        { value: 'SubsidioDeTransporte', label: 'Subsidio de Transporte' },
+        { value: 'SubsidioFamiliar', label: 'Subsidio Familiar' },
+      ];
+
+      const ahorro = [
+        { value: 'AhorroOffshore', label: 'Ahorro Offshore' },
+        { value: 'CarteraColectiva', label: 'Cartera Colectiva' },
+        { value: 'Cooperativas', label: 'Cooperativas' },
+        { value: 'CuentaAFC', label: 'Cuenta AFC' },
+        { value: 'CuentaCorriente', label: 'Cuenta Corriente' },
+        { value: 'CuentaDeAhorros', label: 'Cuenta de Ahorros' },
+        { value: 'Fiducias', label: 'Fiducias' },
+        { value: 'FondoDeEmpleados', label: 'Fondo de Empleados' },
+        { value: 'FondosMutuos', label: 'Fondos Mutuos' },
+        { value: 'PensionVoluntaria', label: 'Pensión Voluntaria' },
+        { value: 'ProvisionAnualidades', label: 'Provisión Anualidades' },
+        { value: 'Otros', label: 'Otros' },
+      ];
+
+      const transporte = [
+        { value: 'BusesTransmilenio', label: 'Buses / Transmilenio' },
+        { value: 'Gasolina', label: 'Gasolina' },
+        { value: 'Otros', label: 'Otros' },
+        { value: 'Parqueadero', label: 'Parqueadero' },
+        { value: 'Taxis', label: 'Taxis' },
+        { value: 'TransporteEmpresa', label: 'Transporte Empresa' },
+        { value: 'TransporteEscolar', label: 'Transporte Escolar' },
+      ];
+
+      const gastosPersonales = [
+        { value: 'AlmuerzosDiarios', label: 'Almuerzos Diarios' },
+        { value: 'Celular', label: 'Celular' },
+        { value: 'CuidadoPersonal', label: 'Cuidado Personal' },
+        { value: 'DesayunosDiarios', label: 'Desayunos Diarios' },
+        { value: 'Gimnasio', label: 'Gimnasio' },
+        { value: 'MesadaHijos', label: 'Mesada Hijos' },
+        { value: 'Ropa', label: 'Ropa' },
+        { value: 'Medicamentos', label: 'Medicamentos' },
+        { value: 'Barberia', label: 'Barbería' },
+        { value: 'Manicure', label: 'Manicure' },
+        { value: 'Peluqueria', label: 'Peluquería' },
+      ];
+
+      const hogar = [
+        { value: 'Administracion', label: 'Administración' },
+        { value: 'Agua', label: 'Agua' },
+        { value: 'Arrendamiento', label: 'Arrendamiento' },
+        { value: 'Chofer', label: 'Chofer' },
+        { value: 'ComprasCasa', label: 'Compras Casa' },
+        { value: 'Energia', label: 'Energía' },
+        { value: 'Gas', label: 'Gas' },
+        { value: 'Jardinero', label: 'Jardinero' },
+        { value: 'Lavanderia', label: 'Lavandería' },
+        { value: 'Mercado', label: 'Mercado' },
+        { value: 'Ninera', label: 'Niñera' },
+        { value: 'ServicioDomestico', label: 'Servicio Doméstico' },
+        { value: 'ServiciosPublicos', label: 'Servicios Públicos' },
+        { value: 'Internet', label: 'Internet' },
+        { value: 'PlataformasStremm', label: 'Plataformas Stremm' },
+        { value: 'Otros', label: 'Otros' },
+      ];
+
+      const entretenimiento = [
+        { value: 'cines', label: 'Cines' },
+        { value: 'club', label: 'Club' },
+        { value: 'eventos-sociales', label: 'Eventos Sociales' },
+        { value: 'fines-de-semana', label: 'Fines de Semana' },
+        { value: 'golf', label: 'Golf' },
+       
+        { value: 'restaurantes', label: 'Restaurantes' },
+        { value: 'reuniones-sociales', label: 'Reuniones Sociales' },
+        { value: 'rumba', label: 'Rumba' },
+        { value: 'salidas', label: 'Salidas' },
+        { value: 'subscripciones', label: 'Subscripciones' },
+        { value: 'tenis', label: 'Tenis' },
+        { value: 'vacaciones', label: 'Vacaciones' },
+        { value: 'viajes', label: 'Viajes' },
+        { value: 'otros', label: 'Otros' }
+      ];
+
+      const protecciones = [
+        { value: 'AporteAPensionObligatoria', label: 'Aporte a Pensión Obligatoria' },
+        { value: 'AporteASaludObligatoria', label: 'Aporte a Salud Obligatoria' },
+        { value: 'Otros', label: 'Otros' },
+        { value: 'SaludPrepagada', label: 'Salud Prepagada' },
+        { value: 'SeguroDeContenidos', label: 'Seguro de Contenidos' },
+        { value: 'SeguroDeInvalidez', label: 'Seguro de Invalidez' },
+        { value: 'SeguroDeResponsabilidadCivil', label: 'Seguro de Responsabilidad Civil' },
+        { value: 'SeguroDeSalud', label: 'Seguro de Salud' },
+        { value: 'SeguroDeVehiculo', label: 'Seguro de Vehículo' },
+        { value: 'SeguroDeVida', label: 'Seguro de Vida' },
+        { value: 'SeguroExequial', label: 'Seguro Exequial' },
+        { value: 'SeguroVivienda', label: 'Seguro Vivienda' },
+      ];
+
+      const descuentosnomina = [
+        { value: 'AporteAFondoDeSolidaridad', label: 'Aporte a Fondo de Solidaridad' },
+        { value: 'AporteAFondoDeSubsistencia', label: 'Aporte a Fondo de Subsistencia' },
+        { value: 'OtrosDescuentos', label: 'Otros Descuentos' },
+        { value: 'RetencionEnLaFuente', label: 'Retención en la Fuente' },
+        { value: 'Salud', label: 'Salud' },
+        { value: 'Pension', label: 'Pensión' },
+        { value: 'Otros', label: 'Otros' },
+      ];
+      
+      const educacion = [
+        { value: 'BonoEstudiantil', label: 'Bono Estudiantil' },
+        { value: 'Capacitaciones', label: 'Capacitaciones' },
+        { value: 'Cursos', label: 'Cursos' },
+        { value: 'Idiomas', label: 'Idiomas' },
+        { value: 'LibrosYUtiles', label: 'Libros y útiles' },
+        { value: 'MatriculaColegio', label: 'Matrícula Colegio' },
+        { value: 'MatriculaUniversidad', label: 'Matrícula Universidad' },
+        { value: 'PensionColegio', label: 'Pensión Colegio' },
+        { value: 'Uniformes', label: 'Uniformes' },
+        { value: 'Otros', label: 'Otros' },
+      ];
+      
+      const financieros = [
+        { value: 'CuatroXMil', label: '4 x Mil' },
+        { value: 'ComisionesPorAdministracion', label: 'Comisiones por Administración' },
+        { value: 'CuotaDeManejoTarjetaDebito', label: 'Cuota de Manejo Tarjeta Débito' },
+        { value: 'CuotaManejoTarjetaCredito', label: 'Cuota Manejo Tarjeta de Crédito' },
+      ];
+      
+      const otros = [
+        { value: 'AyudaAFamiliar', label: 'Ayuda a un Familiar' },
+        { value: 'Diezmo', label: 'Diezmo' },
+        { value: 'Donaciones', label: 'Donaciones' },
+        { value: 'Finca', label: 'Finca' },
+        { value: 'Otros', label: 'Otros' },
+        { value: 'Regalos', label: 'Regalos' },
+        { value: 'ResponsabilidadSocial', label: 'Responsabilidad Social' },
+        { value: 'SoportePadres', label: 'Soporte Padres' },
+      ];
+      
+      
+      
+      
+      
+
 return(
 
 
@@ -37,7 +191,7 @@ return(
            {/* Seguridad Social */}
 
           <fieldset>
-            <h2 className="fs-title">Seguridad Social</h2>
+           
             <p>Incluye información personal y de seguridad social.</p>
             <p>En esta sección, te pediremos información básica sobre ti, como tu nombre, fecha de nacimiento, dirección, y detalles de seguridad social como tu número de cédula y tu EPS.</p>
             <div className="row">
@@ -48,8 +202,47 @@ return(
 
                 <input type="date" id="fecha" name="fecha" placeholder="Fecha de llenado del formulario"/>
               </div>
-              
+              <h2 className="fs-title">Seguridad Social</h2>
               <Selector options={options}/>
+              <br />
+              <h2 className="fs-title">Ingresos</h2>
+              <Selector options={ingresos}/>
+              <br />
+             
+              <h2 className="fs-title">Ahorro</h2>
+              <Selector options={ahorro}/>
+              <h2 className="fs-title">Transporte</h2>
+              <Selector options={transporte}/>
+              <br />
+              <h2 className="fs-title"> Gastos Personales</h2>
+              <Selector options={gastosPersonales}/>
+              <br />
+              <h2 className="fs-title">Hogar</h2>
+              <Selector options={hogar}/>
+              <br />
+              <h2 className="fs-title">Entretenimiento</h2>
+              <Selector options={entretenimiento}/>
+              <br />
+              <h2 className="fs-title">Protecciones Personales</h2>
+              <Selector options={protecciones}/>
+              <br />
+              <h2 className="fs-title">Descuentos de Nomina</h2>
+              <Selector options={descuentosnomina}/>
+              <br />
+              <h2 className="fs-title">Educacion</h2>
+              <Selector options={educacion}/>
+              <br />
+              <h2 className="fs-title">Financieros</h2>
+              <Selector options={financieros}/>
+              <br />
+              <h2 className="fs-title">Activos Productivos</h2>
+              <Selector options={ingresos}/>
+              <br />
+              <br />
+              <h2 className="fs-title">Otros</h2>
+              <Selector options={otros}/>
+              <h2 className="fs-title">Activos improductivos</h2>
+              <Selector options={ingresos}/>
               <div className="col-md-6">
                 <select name="genero">
                   <option value="">Género</option>
