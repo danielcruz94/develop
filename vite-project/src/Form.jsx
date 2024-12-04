@@ -13,6 +13,8 @@ const Form =()=>{
       ];
 
       const ingresos = [
+        { value: 'SalarioTradicional', label: 'Salario Tradicional' },
+        { value: 'SalarioIntegral', label: 'Salario Integral' },
         { value: 'Arriendo', label: 'Arriendo' },
         { value: 'Auxilio', label: 'Auxilio' },
         { value: 'Beneficio', label: 'Beneficio' },
@@ -23,8 +25,6 @@ const Form =()=>{
         { value: 'PrimaDeServicios', label: 'Prima de Servicios' },
         { value: 'PrimaExtralegal', label: 'Prima Extralegal' },
         { value: 'Renta', label: 'Renta' },
-        { value: 'SalarioIntegral', label: 'Salario Integral' },
-        { value: 'SalarioTradicional', label: 'Salario Tradicional' },
         { value: 'SubsidioDeTransporte', label: 'Subsidio de Transporte' },
         { value: 'SubsidioFamiliar', label: 'Subsidio Familiar' },
       ];
@@ -66,6 +66,7 @@ const Form =()=>{
         { value: 'Barberia', label: 'Barbería' },
         { value: 'Manicure', label: 'Manicure' },
         { value: 'Peluqueria', label: 'Peluquería' },
+        { value: 'otro', label: 'Otro' }
       ];
 
       const hogar = [
@@ -93,7 +94,6 @@ const Form =()=>{
         { value: 'eventos-sociales', label: 'Eventos Sociales' },
         { value: 'fines-de-semana', label: 'Fines de Semana' },
         { value: 'golf', label: 'Golf' },
-       
         { value: 'restaurantes', label: 'Restaurantes' },
         { value: 'reuniones-sociales', label: 'Reuniones Sociales' },
         { value: 'rumba', label: 'Rumba' },
@@ -108,7 +108,7 @@ const Form =()=>{
       const protecciones = [
         { value: 'AporteAPensionObligatoria', label: 'Aporte a Pensión Obligatoria' },
         { value: 'AporteASaludObligatoria', label: 'Aporte a Salud Obligatoria' },
-        { value: 'Otros', label: 'Otros' },
+        
         { value: 'SaludPrepagada', label: 'Salud Prepagada' },
         { value: 'SeguroDeContenidos', label: 'Seguro de Contenidos' },
         { value: 'SeguroDeInvalidez', label: 'Seguro de Invalidez' },
@@ -118,15 +118,17 @@ const Form =()=>{
         { value: 'SeguroDeVida', label: 'Seguro de Vida' },
         { value: 'SeguroExequial', label: 'Seguro Exequial' },
         { value: 'SeguroVivienda', label: 'Seguro Vivienda' },
+        { value: 'Otros', label: 'Otros' }
       ];
 
       const descuentosnomina = [
+        { value: 'Salud', label: 'Salud' },
+        { value: 'Pension', label: 'Pensión' },
+        { value: 'RetencionEnLaFuente', label: 'Retención en la Fuente' },
         { value: 'AporteAFondoDeSolidaridad', label: 'Aporte a Fondo de Solidaridad' },
         { value: 'AporteAFondoDeSubsistencia', label: 'Aporte a Fondo de Subsistencia' },
         { value: 'OtrosDescuentos', label: 'Otros Descuentos' },
-        { value: 'RetencionEnLaFuente', label: 'Retención en la Fuente' },
-        { value: 'Salud', label: 'Salud' },
-        { value: 'Pension', label: 'Pensión' },
+        
         { value: 'Otros', label: 'Otros' },
       ];
       
@@ -155,14 +157,62 @@ const Form =()=>{
         { value: 'Diezmo', label: 'Diezmo' },
         { value: 'Donaciones', label: 'Donaciones' },
         { value: 'Finca', label: 'Finca' },
-        { value: 'Otros', label: 'Otros' },
         { value: 'Regalos', label: 'Regalos' },
         { value: 'ResponsabilidadSocial', label: 'Responsabilidad Social' },
         { value: 'SoportePadres', label: 'Soporte Padres' },
+        { value: 'Otros', label: 'Otros' }
       ];
       
+
+      const activoLiquidos = [
+        { value: 'CuentaAhorros', label: 'Cuenta Ahorros' },
+        { value: 'CuentaCorriente', label: 'Cuenta Corriente' },
+        { value: 'CuentaEnOtraMoneda', label: 'Cuenta en Otra Moneda' },
+        { value: 'Efectivo', label: 'Efectivo' },
+        { value: 'otro', label: 'otro' }
+      ];
       
-      
+      const activosProductivos = [
+        { value: 'Acciones', label: 'Acciones' },
+        { value: 'Apartamento', label: 'Apartamento' },
+        { value: 'BienesRaicesParaInversion', label: 'Bienes Raíces para Inversión' },
+        { value: 'Bodega', label: 'Bodega' },
+        { value: 'Bonos', label: 'Bonos' },
+        { value: 'CarteraColectiva', label: 'Cartera Colectiva' },
+        { value: 'Casa', label: 'Casa' },
+        { value: 'CDT', label: 'CDT' },
+        { value: 'CuentaInversionUSD', label: 'Cuenta Inversión USD' },
+        { value: 'CuentaPorCobrarATerceros', label: 'Cuenta por Cobrar a Terceros' },
+        { value: 'Empresa', label: 'Empresa' },
+        { value: 'Fiducia', label: 'Fiducia' },
+        { value: 'FondoDeCesantias', label: 'Fondo de Cesantías' },
+        { value: 'FondoObligatorioDePensiones', label: 'Fondo Obligatorio de Pensiones' },
+        { value: 'FondoVoluntarioDePensiones', label: 'Fondo Voluntario de Pensiones' },
+        { value: 'FondosMutuos', label: 'Fondos Mutuos' },
+        { value: 'Local', label: 'Local' },
+        { value: 'Negocio', label: 'Negocio' },
+        { value: 'ParticipacionesEnSociedades', label: 'Participaciones en Sociedades' },
+        { value: 'Semovientes', label: 'Semovientes' },
+        { value: 'TituloDeCapitalizacion', label: 'Título de Capitalización' },
+        { value: 'Otros', label: 'Otros' },
+      ];
+
+      const activosImproductivos = [
+        { value: 'Apartamento', label: 'Apartamento' },
+        { value: 'Bodega', label: 'Bodega' },
+        { value: 'Caballos', label: 'Caballos' },
+        { value: 'Casa', label: 'Casa' },
+        { value: 'Finca', label: 'Finca' },
+        { value: 'Joyas', label: 'Joyas' },
+        { value: 'Lancha', label: 'Lancha' },
+        { value: 'Local', label: 'Local' },
+        { value: 'Maquinas', label: 'Máquinas' },
+        { value: 'Moto', label: 'Moto' },
+        { value: 'MueblesYAccesorios', label: 'Muebles y Accesorios' },
+        { value: 'Terreno', label: 'Terreno' },
+        { value: 'Vehiculo', label: 'Vehículo' },
+        { value: 'Otro', label: 'Otro' },
+      ];
       
       
 
@@ -235,14 +285,34 @@ return(
               <h2 className="fs-title">Financieros</h2>
               <Selector options={financieros}/>
               <br />
-              <h2 className="fs-title">Activos Productivos</h2>
-              <Selector options={ingresos}/>
-              <br />
-              <br />
               <h2 className="fs-title">Otros</h2>
               <Selector options={otros}/>
+
+          <span style={{background:'yellow',fontSize:"50px"}}>Gastos anuales</span>
+             
+              <br />
+
+              <h2 className="fs-title">Seguros</h2>
+              <Selector options={otros}/>
+              <br />
+              <h2 className="fs-title">Anualidades Fijas</h2>
+              <Selector options={otros}/>
+              <br />
+              <h2 className="fs-title">Anualidades Presupuestadas</h2>
+              <Selector options={otros}/>
+              <br />
+              <h2 className="fs-title"> Impuestos</h2>
+              <Selector options={otros}/>
+              <br />
+
+              <h2 className="fs-title">Activos Liquidos</h2>
+              <Selector options={activoLiquidos}/>
+              <br />
+              <h2 className="fs-title">Activos Productivos</h2>
+              <Selector options={activosProductivos}/>
+              <br />
               <h2 className="fs-title">Activos improductivos</h2>
-              <Selector options={ingresos}/>
+              <Selector options={activosImproductivos}/>
               <div className="col-md-6">
                 <select name="genero">
                   <option value="">Género</option>
