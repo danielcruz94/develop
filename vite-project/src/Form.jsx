@@ -248,7 +248,7 @@ return(
           
            {/* Seguridad Social */}
 
-          <fieldset style={{background:'yellow'}}>
+          <fieldset>
            
             
             <div className="row">
