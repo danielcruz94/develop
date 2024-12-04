@@ -16,6 +16,11 @@ body {
 }
 
 /*form styles*/
+
+.container{
+ width: 80vw;
+}
+
 #msform {
     text-align: center;
     position: relative;
@@ -229,3 +234,4 @@ body {
 #msform .form-group {
     margin-bottom: 15px; /* Aumentar espacio entre grupos de campos */
 }
+

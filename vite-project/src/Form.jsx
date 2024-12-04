@@ -4,13 +4,14 @@ import Selector from './select'
 
 const Form =()=>{
 
-    const options = [
-        { value: 'EPS', label: 'EPS' },
-        { value: 'MedicinaPrepagada', label: 'Medicina Prepagada' },
-        { value: 'ARL', label: 'ARL' },
-        { value: 'FondoCesantias', label: 'Fondo Cesantias' },
-        { value: 'AFP', label: 'AFP' },
-      ];
+  const options = [
+    { value: 'EPS', label: 'EPS', Help: 'Selecciona tu entidad de salud, ya sea pública o privada, donde estás afiliado para recibir atención médica. Esta es la entidad responsable de brindarte cobertura en servicios médicos.' },
+    { value: 'MedicinaPrepagada', label: 'Medicina Prepagada', Help: 'Elige tu plan de salud privado que te permite acceder a servicios médicos de calidad con mayor rapidez, mediante un contrato con una aseguradora que cubre consultas, tratamientos y otros servicios.' },
+    { value: 'ARL', label: 'ARL', Help: 'Selecciona la aseguradora que cubre los riesgos laborales. La ARL (Administradora de Riesgos Laborales) se encarga de la prevención, atención y compensación de accidentes laborales y enfermedades profesionales.' },
+    { value: 'FondoCesantias', label: 'Fondo Cesantías', Help: 'Indica el fondo al cual estás afiliado para el manejo de tus cesantías. Las cesantías son un ahorro obligatorio que el empleador debe consignar en favor del trabajador, utilizado principalmente en casos de desempleo.' },
+    { value: 'AFP', label: 'AFP', Help: 'Elige la Administradora de Fondos de Pensiones a la cual estás afiliado. La AFP es la encargada de administrar y gestionar los fondos de pensión de los trabajadores para su jubilación.' },
+  ];
+  
 
       const ingresos = [
         { value: 'SalarioTradicional', label: 'Salario Tradicional' },
@@ -242,16 +243,7 @@ return(
 
           <fieldset>
            
-            <p>Incluye información personal y de seguridad social.</p>
-            <p>En esta sección, te pediremos información básica sobre ti, como tu nombre, fecha de nacimiento, dirección, y detalles de seguridad social como tu número de cédula y tu EPS.</p>
-            <div className="row">
-          
-           
-              <div className="col-md-6">
-                <label for="fecha">Fecha de llenado del formulario</label>
-
-                <input type="date" id="fecha" name="fecha" placeholder="Fecha de llenado del formulario"/>
-              </div>
+           <div className="row">    
               <h2 className="fs-title">Seguridad Social</h2>
               <Selector options={options}/>
               <br />

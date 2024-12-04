@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   min-height: min-content;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 20px;
@@ -57,7 +56,6 @@
   transition: max-height 0.3s ease;
   animation: slideDown 0.3s ease forwards;
   overflow-y: auto;
-
 }
 
 @keyframes slideDown {
@@ -104,7 +102,7 @@
 
 .selected-options {
   width: 100%;
-  max-width: 400px;
+  max-width: 90%;
   margin-top: 20px;
   background-color: white;
   border-radius: 10px;
@@ -129,11 +127,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e6e6fa;
-  border-radius: 5px;
-  padding: 10px 15px;
+  background-color: #f5f7fa00; 
+  padding: opx;
   margin-bottom: 10px;
-  animation: fadeIn 0.3s ease;
+  height: min-content;
+  border-bottom: 1px solid #666666b0;
 }
 
 @keyframes fadeIn {
@@ -152,30 +150,110 @@
   border: none;
   color: #ff4136;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 15px;
   transition: transform 0.2s ease;
+  padding: 2px;
+  margin-right: 5px;
 }
 
 .remove-button:hover {
   transform: scale(1.2);
 }
 
-/* Animaciones adicionales */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+.duplicate-icon {
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
 }
 
-.select-button:active {
-  animation: pulse 0.3s ease;
+.selected-input {
+  border: none !important;
+  height: 10px !important;
+  background: #fff;
+  margin: 0px !important;
+  font-family: Helvetica, arial, verdana !important;
 }
-.opciones-seleccionadas{
-   height: 14px;
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
+
+.icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.Icon_Help {
+  font-size: 18px;
+  margin-right: 10px;
+  color:  #06175C;
+  cursor: pointer;
+
+}
+.selected-options-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Define 2 columnas con igual ancho */
+  gap: 10px; /* Espacio entre los elementos (ajústalo como prefieras) */
+}
+
+/* Estilo para el popup/modal */
+.help-popup {
+  position: fixed;  /* Fija el popup en la pantalla */
+  top: 0;  /* Desde la parte superior de la ventana */
+  left: 0;  /* Desde la parte izquierda de la ventana */
+  width: 100vw;  /* Ancho completo de la ventana */
+  height: 100vh;  /* Alto completo de la ventana */
+  background-color: rgba(0, 0, 0, 0.5);  /* Fondo oscuro y semitransparente */
+  display: flex;  /* Usamos flexbox para alinear el contenido */
+  justify-content: center;  /* Centrado horizontal */
+  align-items: center;  /* Centrado vertical */
+  z-index: 9999;  /* Asegura que el popup esté sobre otros elementos */
+}
+
+/* Estilo para el contenido del popup/modal */
+.help-popup-content {
+  background-color: white;  /* Fondo blanco para el contenido */
+  padding: 20px;  /* Espaciado interno */
+  border-radius: 10px;  /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Sombra más pronunciada */
+  width: 80%;  /* Ancho del contenido del modal (80% del ancho de la ventana) */
+  max-width: 500px;  /* No deja que el modal sea demasiado grande */
+  min-width: 300px;  /* Asegura que no sea más pequeño de lo deseado */
+  text-align: center;  /* Centrado del texto */
+  display: flex;  /* Usamos flexbox para organizar el contenido */
+  flex-direction: column;  /* Los elementos se apilan verticalmente */
+  justify-content: center;  /* Asegura que el contenido esté centrado verticalmente */
+  gap: 20px;  /* Espacio entre los elementos */
+}
+
+.help-popup p {
+  background: white;
+  width: 400px;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.help-popup button{
+ display: none;
+
+}
+
+/* Estilo para el botón de cerrar */
+.help-popup-content button {
+  margin-top: 20px;  /* Espacio arriba del botón */
+  padding: 10px 20px;  /* Tamaño del botón */
+  background-color: #007bff;  /* Color de fondo */
+  color: white;  /* Color del texto */
+  border: none;  /* Sin borde */
+  border-radius: 5px;  /* Bordes redondeados */
+  cursor: pointer;  /* Cambia el cursor al pasar sobre el botón */
+  font-size: 16px;  /* Tamaño de la fuente */
+}
+
+.help-popup-content button:hover {
+  background-color: #0056b3;  /* Color de fondo al pasar el cursor */
+}
+
