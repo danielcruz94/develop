@@ -41,36 +41,36 @@ function CreativeFloatingSelect({ options }) {
     (option) => !selectedOptions.includes(option.value)
   );
 
- const duplicateInput = (option) => {
-  // Filtramos las opciones que comienzan con el valor de 'option' seguido de un guion y un número
-  const regex = new RegExp(`^${option}-(\\d+)$`);
-  const matchingOptions = selectedOptions.filter(opt => regex.test(opt));
+    const duplicateInput = (option) => {
+      // Filtramos las opciones que comienzan con el valor de 'option' seguido de un guion y un número
+      const regex = new RegExp(`^${option}-(\\d+)$`);
+      const matchingOptions = selectedOptions.filter(opt => regex.test(opt));
 
-  // Si hay coincidencias, buscamos el sufijo numérico más alto
-  const highestSuffix = matchingOptions.reduce((max, opt) => {
-    const match = opt.match(regex);
-    const suffix = match ? parseInt(match[1], 10) : 0;
-    return Math.max(max, suffix);
-  }, 0);
+      // Si hay coincidencias, buscamos el sufijo numérico más alto
+      const highestSuffix = matchingOptions.reduce((max, opt) => {
+        const match = opt.match(regex);
+        const suffix = match ? parseInt(match[1], 10) : 0;
+        return Math.max(max, suffix);
+      }, 0);
 
-  // Generamos el nuevo nombre con el siguiente sufijo
-  const newOption = `${option}-${highestSuffix + 1}`;
+      // Generamos el nuevo nombre con el siguiente sufijo
+      const newOption = `${option}-${highestSuffix + 1}`;
 
-  // Encontramos el índice de la opción original en el arreglo
-  const originalIndex = selectedOptions.indexOf(option);
+      // Encontramos el índice de la opción original en el arreglo
+      const originalIndex = selectedOptions.indexOf(option);
 
-  // Si la opción original existe, insertamos la nueva opción después de ella
-  if (originalIndex !== -1) {
-    setSelectedOptions((prevOptions) => {
-      const updatedOptions = [...prevOptions];
-      updatedOptions.splice(originalIndex + 1, 0, newOption); // Insertamos la nueva opción después de la original
-      return updatedOptions;
-    });
-  } else {
-    // Si la opción original no existe, solo agregamos la nueva opción al final
-    setSelectedOptions((prevOptions) => [...prevOptions, newOption]);
-  }
-};
+      // Si la opción original existe, insertamos la nueva opción después de ella
+      if (originalIndex !== -1) {
+        setSelectedOptions((prevOptions) => {
+          const updatedOptions = [...prevOptions];
+          updatedOptions.splice(originalIndex + 1, 0, newOption); // Insertamos la nueva opción después de la original
+          return updatedOptions;
+        });
+      } else {
+        // Si la opción original no existe, solo agregamos la nueva opción al final
+        setSelectedOptions((prevOptions) => [...prevOptions, newOption]);
+      }
+    };
 
   
   // Muestra la ayuda flotante
