@@ -161,9 +161,10 @@
 }
 
 .duplicate-icon {
-  font-size: 20px;
-  color: #555;
+  font-size: 15px;
+  color: #3ef60b;
   cursor: pointer;
+  border-radius: 1000%;
 }
 
 .selected-input {
@@ -229,6 +230,8 @@
 }
 
 .help-popup p {
+  top: px !important;
+  left: 0px !important;
   background: white;
   width: 400px;
   padding: 20px;
