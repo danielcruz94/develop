@@ -1,18 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './CreativeFloatingSelect.css';
 
 function CreativeFloatingSelect({ options }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]); 
-  const [helpText, setHelpText] = useState(null); 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [helpText, setHelpText] = useState(null);
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const selectRef = useRef(null);
+
+ 
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
         setIsOpen(false);
-        setHelpText(null); 
+        setHelpText(null);
       }
     };
 
@@ -31,7 +33,7 @@ function CreativeFloatingSelect({ options }) {
 
   // Elimina una opción seleccionada
   const removeOption = (optionToRemove) => {
-    setSelectedOptions((prevOptions) => 
+    setSelectedOptions((prevOptions) =>
       prevOptions.filter((option) => option !== optionToRemove)
     );
   };
@@ -41,38 +43,55 @@ function CreativeFloatingSelect({ options }) {
     (option) => !selectedOptions.includes(option.value)
   );
 
-    const duplicateInput = (option) => {
-      // Filtramos las opciones que comienzan con el valor de 'option' seguido de un guion y un número
-      const regex = new RegExp(`^${option}-(\\d+)$`);
-      const matchingOptions = selectedOptions.filter(opt => regex.test(opt));
-
-      // Si hay coincidencias, buscamos el sufijo numérico más alto
-      const highestSuffix = matchingOptions.reduce((max, opt) => {
-        const match = opt.match(regex);
-        const suffix = match ? parseInt(match[1], 10) : 0;
-        return Math.max(max, suffix);
-      }, 0);
-
-      // Generamos el nuevo nombre con el siguiente sufijo
-      const newOption = `${option}-${highestSuffix + 1}`;
-
-      // Encontramos el índice de la opción original en el arreglo
-      const originalIndex = selectedOptions.indexOf(option);
-
-      // Si la opción original existe, insertamos la nueva opción después de ella
-      if (originalIndex !== -1) {
-        setSelectedOptions((prevOptions) => {
-          const updatedOptions = [...prevOptions];
-          updatedOptions.splice(originalIndex + 1, 0, newOption); // Insertamos la nueva opción después de la original
-          return updatedOptions;
-        });
-      } else {
-        // Si la opción original no existe, solo agregamos la nueva opción al final
-        setSelectedOptions((prevOptions) => [...prevOptions, newOption]);
-      }
-    };
-
+  const duplicateInput = (option) => {
+    // Buscamos el elemento original (que tiene el ícono de duplicar)
+    const originalElement = document.querySelector(`[name="${option}"]`);
   
+    if (originalElement) {
+      // Creamos un clon del contenedor completo (selected-option)
+      const clone = originalElement.closest('.selected-option').cloneNode(true);
+  
+      // Modificamos solo el nombre del input dentro del clon para que sea igual al original
+      const inputField = clone.querySelector('[name]');
+      if (inputField) {
+        inputField.name = option; // El nombre permanece igual
+      }
+  
+      // Eliminar el ícono de duplicación en el clon (si existe)
+      const duplicateIcon = clone.querySelector('.duplicate-icon'); // Suponiendo que el ícono tiene la clase 'duplicate-icon'
+      if (duplicateIcon) {
+        duplicateIcon.remove(); // Elimina el ícono de duplicación en el clon
+      }
+  
+      // Insertamos el clon en el DOM, al lado del original
+      originalElement.closest('.selected-option').parentNode.insertBefore(clone, originalElement.closest('.selected-option').nextSibling);
+  
+     
+      // 1. Evento para el ícono de información    
+    const infoIcons = clone.querySelectorAll('.Icon_Help');
+    
+    infoIcons.forEach(function(infoIcon) {    
+      infoIcon.addEventListener('click', function() {       
+        const selectedOption = options.find((opt) => opt.value === option);
+        setHelpText(selectedOption?.Help || 'No hay ayuda disponible.');
+      });
+    });
+  
+      // 2. Evento para el botón de eliminar
+      const removeButton = clone.querySelector('.remove-button');
+      if (removeButton) {
+        removeButton.addEventListener('click', function() {         
+          clone.remove(); // Elimina el contenedor clonado
+        });
+      }
+    } else {
+      console.log('El elemento original no se encuentra.');
+    }
+  };
+  
+  
+  
+
   // Muestra la ayuda flotante
   const handleHelpClick = (event, option) => {
     const selectedOption = options.find((opt) => opt.value === option);
@@ -101,7 +120,7 @@ function CreativeFloatingSelect({ options }) {
       <div className="selected-options-container">
         {selectedOptions.map((option) => {
           const selectedOption = options.find((opt) => opt.value === option);
-          
+
           // Verifica si la opción es una opción original o una duplicada
           const isDuplicate = option.includes('-'); // Las opciones duplicadas tendrán un guión y un número
 
@@ -118,7 +137,7 @@ function CreativeFloatingSelect({ options }) {
                   </span>
                 )}
                 <input
-                  type="text"
+                  type={selectedOption?.type === 'number' ? 'number' : 'text'}
                   placeholder={selectedOption ? selectedOption.label : option}
                   name={option}
                   className="selected-input"
@@ -173,9 +192,7 @@ function CreativeFloatingSelect({ options }) {
         </div>
 
         {helpText && (
-          <div
-            className="help-popup"
-          >
+          <div className="help-popup">
             <p>{helpText}</p>
             <button onClick={() => setHelpText(null)}>Cerrar</button>
           </div>

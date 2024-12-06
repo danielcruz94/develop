@@ -90,7 +90,7 @@ body {
 
 #msform .action-button-previous {
     width: 100px;
-    background: #C5C5F1;
+    background: #F17649;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -122,11 +122,19 @@ body {
 }
 
 /*progressbar*/
+.progressbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;   
+  }
+
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
     /*CSS counters to number the steps*/
     counter-reset: step;
+    padding: 0px;
 }
 
 #progressbar li {
@@ -134,7 +142,8 @@ body {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 33.33%;
+    /* width: 33.33%;*/
+    width: 16%;
     float: left;
     position: relative;
     letter-spacing: 1px;

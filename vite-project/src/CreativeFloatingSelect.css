@@ -260,3 +260,21 @@
   background-color: #0056b3;  /* Color de fondo al pasar el cursor */
 }
 
+/* Eliminar flechas en Chrome, Safari, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Eliminar flechas en Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Eliminar flechas en IE */
+input[type="number"]::-ms-clear {
+    display: none;
+}
+
+
