@@ -13,7 +13,7 @@ function App() {
        <Routes>   
        <Route path='' element={<Form />} />
        <Route path='login' element={<LoginForm />} />
-       <Route path='reistrarse' element={<Formregistro />} />
+       <Route path='registrarse' element={<Formregistro />} />
       
       </Routes> 
     

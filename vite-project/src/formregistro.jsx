@@ -33,7 +33,7 @@ const ElegantBlueFinancialPlanningForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();   
-    
+  
     // Validación de campos vacíos
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
@@ -41,36 +41,45 @@ const ElegantBlueFinancialPlanningForm = () => {
       'empresa', 'cargo', 'fechaIngreso', 'tipoContratacion', 'profesion', 'universidad',
       'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
     ];
-
+  
     for (let field of requiredFields) {
       if (!formData[field]) {
         alert(`El campo ${field} es obligatorio.`);
         return;
       }
     }
-
+  
+    // Depuración: Verificar los datos que se van a enviar
+    console.log("Datos a enviar:", formData);  // Muestra todos los datos del formulario
+    
     // URL del servidor (puedes cambiarla según tu entorno)
-    const serverUrl = 'https://mi-servidor.com/api/submit-form';
-   
+    const serverUrl = 'http://localhost:3001/api/clientes';
+  
     try {
       const response = await axios.post(serverUrl, formData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
-      if (response.status === 200) {
+  
+      // Depuración: Mostrar la respuesta del servidor
+      console.log("Respuesta del servidor:", response);  // Muestra la respuesta completa
+  
+      // Cambiar el código de estado a 201 para una creación exitosa
+      if (response.status === 201) {
         alert('Formulario enviado exitosamente!');
-        
-        window.location.href = 'https://otra-pagina.com';  // Cambia la URL de destino
+        window.location.href = 'https://www.google.com';  // Cambia la URL de destino
       } else {
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
       }
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      // Depuración: Mostrar detalles del error
+      console.error('Error al enviar el formulario:', error); // Muestra el error completo
       alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
     }
   };
+  
+  
   
 
   const nextStep = () => {  
