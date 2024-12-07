@@ -71,11 +71,10 @@ return(
               <Selector options={financieros}/>
               <br />
               <h2 className="fs-title">Otros</h2>
-              <Selector options={otros}/>
-
-     
-             
+              <Selector options={otros}/>  
               <br />
+
+
 
               <h2 className="fs-title">Seguros</h2>
               <Selector options={otros}/>
@@ -98,6 +97,14 @@ return(
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
               <Selector options={activosImproductivos}/>
+              <br />
+
+
+
+
+
+
+              
               <div className="col-md-6">
                 <select name="genero">
                   <option value="">Género</option>

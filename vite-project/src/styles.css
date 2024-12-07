@@ -13,6 +13,7 @@ html {
 body {
     font-family: Helvetica, arial, verdana;
     background: transparent;
+    min-width: auto;
 }
 
 /*form styles*/
@@ -36,7 +37,7 @@ body {
     box-sizing: border-box;
     width: 80%;
     margin: 0 10%;
-
+    border-radius: 10px;
     /*stacking fieldsets above each other*/
     position: relative;
 }
@@ -244,3 +245,12 @@ body {
     margin-bottom: 15px; /* Aumentar espacio entre grupos de campos */
 }
 
+
+
+/* Media queries para pantallas pequeñas */
+@media screen and (max-width: 800px) {
+    #msform fieldset{
+        margin: 0px;
+        width: 100%;         
+    }
+  }

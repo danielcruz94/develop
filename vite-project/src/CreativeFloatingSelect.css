@@ -6,6 +6,7 @@
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: 20px;
   font-family: Arial, sans-serif;
+  border-radius: 10px;
 }
 
 .select-wrapper {
@@ -191,8 +192,8 @@
   margin-right: 10px;
   color:  #06175C;
   cursor: pointer;
-
 }
+
 .selected-options-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Define 2 columnas con igual ancho */
@@ -229,36 +230,25 @@
   gap: 20px;  /* Espacio entre los elementos */
 }
 
-.help-popup p {
-  top: px !important;
-  left: 0px !important;
+.Cont-Help{
+  background: white;
+  display: flex;
+  flex-direction: column; 
+  left: 0px;
   background: white;
   width: 400px;
   padding: 20px;
   border-radius: 20px;
   font-size: 12px;
+  margin: 0px 15px;
 }
 
-.help-popup button{
- display: none;
-
+.Icon_Help2{
+  font-size: 40px;
+  color: #06175C;
 }
 
-/* Estilo para el botón de cerrar */
-.help-popup-content button {
-  margin-top: 20px;  /* Espacio arriba del botón */
-  padding: 10px 20px;  /* Tamaño del botón */
-  background-color: #007bff;  /* Color de fondo */
-  color: white;  /* Color del texto */
-  border: none;  /* Sin borde */
-  border-radius: 5px;  /* Bordes redondeados */
-  cursor: pointer;  /* Cambia el cursor al pasar sobre el botón */
-  font-size: 16px;  /* Tamaño de la fuente */
-}
 
-.help-popup-content button:hover {
-  background-color: #0056b3;  /* Color de fondo al pasar el cursor */
-}
 
 /* Eliminar flechas en Chrome, Safari, Opera */
 input[type="number"]::-webkit-outer-spin-button,
@@ -278,3 +268,20 @@ input[type="number"]::-ms-clear {
 }
 
 
+
+/* Media queries para pantallas pequeñas */
+@media screen and (max-width: 800px) {
+      .selected-options-container  {
+        display: flex;
+        flex-direction: column; /* Cambia la dirección del contenedor a columna */
+      }
+
+      .help-popup {
+        width: 100%;
+        height: 100%;
+      }
+
+      .help-popup p {           
+        font-size: 16px;
+    }
+}

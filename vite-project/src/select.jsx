@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './CreativeFloatingSelect.css';
 
-function CreativeFloatingSelect({ options }) {
+function CreativeFloatingSelect({ options, seccion }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [helpText, setHelpText] = useState(null);
@@ -9,13 +9,13 @@ function CreativeFloatingSelect({ options }) {
   const selectRef = useRef(null);
 
  
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
         setIsOpen(false);
         setHelpText(null);
       }
+     
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -125,7 +125,7 @@ function CreativeFloatingSelect({ options }) {
           const isDuplicate = option.includes('-'); // Las opciones duplicadas tendrán un guión y un número
 
           return (
-            <div key={option} className="selected-option">
+            <div key={option} className="selected-option" >
               <div className="input-container">
                 {/* Solo las opciones originales tendrán el ícono de duplicar */}
                 {!isDuplicate && selectedOption?.visible && (
@@ -167,8 +167,8 @@ function CreativeFloatingSelect({ options }) {
 
   return (
     <div className="SelectContainer">
-      <div className="select-container">
-        <div ref={selectRef}>
+      <div className="select-container" data-section={seccion || 'default-value'}>
+        <div ref={selectRef} >
           <button
             className="select-button"
             onClick={() => setIsOpen(!isOpen)}
@@ -193,8 +193,10 @@ function CreativeFloatingSelect({ options }) {
 
         {helpText && (
           <div className="help-popup">
-            <p>{helpText}</p>
-            <button onClick={() => setHelpText(null)}>Cerrar</button>
+            <div className='Cont-Help'>
+              <span  className="bi bi-question-circle Icon_Help2"></span>
+              <p>{helpText}</p>
+            </div>
           </div>
         )}
       </div>

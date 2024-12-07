@@ -147,13 +147,13 @@ export const financieros = [
 ];
 
 export const otros = [
-  { value: 'AyudaAFamiliar', label: 'Ayuda a un Familiar', Help: 'Es el dinero o recursos que se destinan a apoyar económicamente a un miembro de la familia en necesidades específicas.', visible: false, type: "number" },
-  { value: 'Diezmo', label: 'Diezmo', Help: 'Es un porcentaje de los ingresos, generalmente el 10%, destinado a fines religiosos o caritativos.', visible: false, type: "number" },
-  { value: 'Donaciones', label: 'Donaciones', Help: 'Contribuciones voluntarias de dinero o bienes a organizaciones benéficas o a personas en necesidad.', visible: false, type: "number" },
-  { value: 'Finca', label: 'Finca', Help: 'Es una propiedad rural que puede ser utilizada para actividades agrícolas, ganaderas o de recreación.', visible: false, type: "number" },
-  { value: 'Regalos', label: 'Regalos', Help: 'Dinero o bienes entregados como obsequio, generalmente en ocasiones especiales o celebraciones.', visible: false, type: "number" },
-  { value: 'ResponsabilidadSocial', label: 'Responsabilidad Social', Help: 'Aportaciones o actividades realizadas con el fin de contribuir al bienestar social y el desarrollo comunitario.', visible: false, type: "number" },
-  { value: 'SoportePadres', label: 'Soporte Padres', Help: 'Es el apoyo financiero que se brinda a los padres para su sustento y bienestar.', visible: false, type: "number" },
+  { value: 'AyudaAFamiliar', label: 'Ayuda a un Familiar', Help: 'Es el dinero o recursos que se destinan a apoyar económicamente a un miembro de la familia en necesidades específicas.', visible: true, type: "number" },
+  { value: 'Diezmo', label: 'Diezmo', Help: 'Es un porcentaje de los ingresos, generalmente el 10%, destinado a fines religiosos o caritativos.', visible: true, type: "number" },
+  { value: 'Donaciones', label: 'Donaciones', Help: 'Contribuciones voluntarias de dinero o bienes a organizaciones benéficas o a personas en necesidad.', visible: true, type: "number" },
+  { value: 'Finca', label: 'Finca', Help: 'Es una propiedad rural que puede ser utilizada para actividades agrícolas, ganaderas o de recreación.', visible: true, type: "number" },
+  { value: 'Regalos', label: 'Regalos', Help: 'Dinero o bienes entregados como obsequio, generalmente en ocasiones especiales o celebraciones.', visible: true, type: "number" },
+  { value: 'ResponsabilidadSocial', label: 'Responsabilidad Social', Help: 'Aportaciones o actividades realizadas con el fin de contribuir al bienestar social y el desarrollo comunitario.', visible: true, type: "number" },
+  { value: 'SoportePadres', label: 'Soporte Padres', Help: 'Es el apoyo financiero que se brinda a los padres para su sustento y bienestar.', visible: true, type: "number" },
   { value: 'Otros', label: 'Otros', Help: 'Gastos que no encajan en las categorías anteriores, pero que aún son relevantes en la gestión financiera personal o familiar.', visible: true, type: "number" },
 ];
 
