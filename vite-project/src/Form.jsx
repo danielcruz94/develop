@@ -160,8 +160,10 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>
               <h2>Objetivos Financieros</h2>
                 <Objetivos seccion="objetivos"/>
-                <h2>Deudas</h2>
-                <Deudas  seccion="Deudas"/>
+                <h2>Deudas Corto Plazo</h2>
+                <Deudas  seccion="DeudasCortoPlazo"/>
+                <h2>Deudas Largo Plazo</h2>
+                <Deudas  seccion="DeudasLargoPlazo"/>
               <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Enviar" />
             </fieldset>

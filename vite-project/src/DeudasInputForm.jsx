@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; // Estilos
 
 
@@ -8,7 +8,7 @@ function DebtInputForm( {seccion }) {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
     entidad: "La entidad a la que se le debe, como un banco o institución financiera.",
-    tasa: "La tasa de interés anual del préstamo, en porcentaje.",
+    tasa: "La tasa de interés anual del préstamo que cobra el banco.",
     cuotasPendientes: "El número de cuotas que quedan por pagar.",
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };

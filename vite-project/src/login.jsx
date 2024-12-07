@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
+import Swal from 'sweetalert2';
 
 const InteractiveLoginForm = () => {
   const [username, setUsername] = useState('')
@@ -6,20 +9,46 @@ const InteractiveLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [shake, setShake] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    // Simular una solicitud de login
-    setTimeout(() => {
-      setIsLoading(false)
-      if (username === 'admin' && password === 'password') {
-        alert('Login successful!')
+  
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    setShake(false);
+    
+    const hashedPassword = bcrypt.hashSync(password, 10); 
+    
+    const serverUrl = 'https://tu-servidor.com/api/login'; // URL del servidor
+    
+    try {
+      const response = await axios.post(serverUrl, {
+        username,
+        password: hashedPassword,
+      });
+
+      if (response.data.valid) {
+        window.location.href = '/pagina-destino'; // Redirigir si la autenticación es exitosa
       } else {
-        setShake(true)
-        setTimeout(() => setShake(false), 500)
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          text: 'Usuario o contraseña incorrectos',
+          confirmButtonText: 'Aceptar',
+        });
+
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
       }
-    }, 2000)
-  }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  
 
   return (
     <div className="login-container">
@@ -55,7 +84,7 @@ const InteractiveLoginForm = () => {
           </button>
         </form>
       </div>
-      <style jsx>{`
+      <style>{`
         .login-container {
           display: flex;
           justify-content: center;
