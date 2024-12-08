@@ -21,6 +21,11 @@ import {
   activoLiquidos,
   activosProductivos,
   activosImproductivos,
+  seguros,
+  anualidadesPresupuestadas,
+  impuestos,
+  anualidadesFijas,
+
 } from './DatosSelect';
 
 const Form = () => {
@@ -127,16 +132,16 @@ const Form = () => {
               <h2>Gastos Anuales</h2>
               <h2 className="fs-title">Seguros</h2>
               
-              <Selector options={otros} seccion="seguros"/>
+              <Selector options={seguros} seccion="seguros"/>
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
-              <Selector options={otros} seccion="AnualidadesFijas"/>
+              <Selector options={anualidadesFijas} seccion="AnualidadesFijas"/>
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
-              <Selector options={otros} seccion="AnualidadesPresupuestadas"/>
+              <Selector options={anualidadesPresupuestadas} seccion="AnualidadesPresupuestadas"/>
               <br />
               <h2 className="fs-title"> Impuestos</h2>
-              <Selector options={otros} seccion="Impuestos"/>
+              <Selector options={impuestos} seccion="Impuestos"/>
               <br />
               <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />

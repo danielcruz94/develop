@@ -161,51 +161,100 @@ export const otros = [
       
 
 export const activoLiquidos = [
-  { value: 'CuentaAhorros', label: 'Cuenta Ahorros', Help: 'Es una cuenta bancaria destinada a ahorrar dinero, con o sin intereses. Ideal para guardar fondos de forma segura.', visible: false, type: "number" },
-  { value: 'CuentaCorriente', label: 'Cuenta Corriente', Help: 'Cuenta bancaria que permite realizar depósitos, retiros y pagos frecuentes, y generalmente no genera intereses.', visible: false, type: "number" },
-  { value: 'CuentaEnOtraMoneda', label: 'Cuenta en Otra Moneda', Help: 'Cuenta bancaria que maneja divisas distintas a la moneda local, útil para personas que realizan transacciones internacionales.', visible: false, type: "number" },
-  { value: 'Efectivo', label: 'Efectivo', Help: 'Dinero en forma de billetes y monedas, disponible para ser gastado de inmediato.', visible: false, type: "number" },
+  { value: 'CuentaAhorros', label: 'Cuenta Ahorros', Help: 'Es una cuenta bancaria destinada a ahorrar dinero, con o sin intereses. Ideal para guardar fondos de forma segura.', visible: true, type: "number" },
+  { value: 'CuentaCorriente', label: 'Cuenta Corriente', Help: 'Cuenta bancaria que permite realizar depósitos, retiros y pagos frecuentes, y generalmente no genera intereses.', visible: true, type: "number" },
+  { value: 'CuentaEnOtraMoneda', label: 'Cuenta en Otra Moneda', Help: 'Cuenta bancaria que maneja divisas distintas a la moneda local, útil para personas que realizan transacciones internacionales.', visible: true, type: "number" },
+  { value: 'Efectivo', label: 'Efectivo', Help: 'Dinero en forma de billetes y monedas, disponible para ser gastado de inmediato.', visible: true, type: "number" },
   { value: 'Otro', label: 'Otro', Help: 'Cualquier otro tipo de activo líquido que no encaje en las categorías anteriores.', visible: true, type: "number" },
 ];
 
 export const activosProductivos = [
-  { value: 'Acciones', label: 'Acciones', Help: 'Títulos valores que representan una parte del capital social de una empresa, que otorgan derechos sobre los dividendos y sobre la propiedad de la empresa.', visible: false, type: "number" },
-  { value: 'Apartamento', label: 'Apartamento', Help: 'Bien inmueble, generalmente residencial, que puede generar ingresos a través de su alquiler o apreciación del valor.', visible: false, type: "number" },
-  { value: 'BienesRaicesParaInversion', label: 'Bienes Raíces para Inversión', Help: 'Propiedades adquiridas con el objetivo de generar ingresos pasivos mediante alquileres o para obtener plusvalía con la revalorización.', visible: false, type: "number" },
+  { value: 'Acciones', label: 'Acciones', Help: 'Títulos valores que representan una parte del capital social de una empresa, que otorgan derechos sobre los dividendos y sobre la propiedad de la empresa.', visible: true, type: "number" },
+  { value: 'Apartamento', label: 'Apartamento', Help: 'Bien inmueble, generalmente residencial, que puede generar ingresos a través de su alquiler o apreciación del valor.', visible: true, type: "number" },
+  { value: 'BienesRaicesParaInversion', label: 'Bienes Raíces para Inversión', Help: 'Propiedades adquiridas con el objetivo de generar ingresos pasivos mediante alquileres o para obtener plusvalía con la revalorización.', visible: true, type: "number" },
   { value: 'Bodega', label: 'Bodega', Help: 'Espacio inmobiliario destinado al almacenamiento de productos o mercancías, ideal para generar ingresos pasivos a través de su alquiler.', visible: false, type: "number" },
-  { value: 'Bonos', label: 'Bonos', Help: 'Instrumentos de deuda emitidos por entidades públicas o privadas que otorgan al titular un pago periódico de intereses y la devolución del principal al vencimiento.', visible: false, type: "number" },
-  { value: 'CarteraColectiva', label: 'Cartera Colectiva', Help: 'Instrumento de inversión colectiva en el cual los fondos de varios inversores se combinan para invertir en una variedad de activos.', visible: false, type: "number" },
-  { value: 'Casa', label: 'Casa', Help: 'Bien inmueble que se utiliza principalmente para vivienda, pero también puede generar ingresos por su alquiler o valorización.', visible: false, type: "number" },
-  { value: 'CDT', label: 'CDT', Help: 'Certificado de Depósito a Término, una inversión de renta fija en la que se compromete una suma de dinero por un plazo determinado, generando un interés.', visible: false, type: "number" },
-  { value: 'CuentaInversionUSD', label: 'Cuenta Inversión USD', Help: 'Cuenta bancaria dedicada a la inversión en dólares, destinada a generar rendimientos a través de productos financieros en moneda extranjera.', visible: false, type: "number" },
-  { value: 'CuentaPorCobrarATerceros', label: 'Cuenta por Cobrar a Terceros', Help: 'Derechos que tiene una empresa o individuo para cobrar dinero a otra parte, generalmente por la venta de productos o servicios.', visible: false, type: "number" },
-  { value: 'Empresa', label: 'Empresa', Help: 'Entidad dedicada a actividades económicas para generar ingresos. Puede incluir diversos activos productivos como bienes, propiedades y capital humano.', visible: false, type: "number" },
-  { value: 'Fiducia', label: 'Fiducia', Help: 'Instrumento legal mediante el cual una persona (fiduciante) transfiere bienes a un fiduciario para que este los administre en beneficio de un tercero.', visible: false, type: "number" },
-  { value: 'FondoDeCesantias', label: 'Fondo de Cesantías', Help: 'Cuenta de ahorro de los empleados destinada a financiar los períodos de desempleo, en la cual el empleador debe realizar aportes periódicos.', visible: false, type: "number" },
-  { value: 'FondoObligatorioDePensiones', label: 'Fondo Obligatorio de Pensiones', Help: 'Fondos destinados a financiar las pensiones de jubilación de los trabajadores, gestionados por administradoras de fondos de pensiones (AFP).', visible: false, type: "number" },
-  { value: 'FondoVoluntarioDePensiones', label: 'Fondo Voluntario de Pensiones', Help: 'Ahorro adicional que realiza un trabajador para incrementar el monto de su pensión en el futuro, por encima del aporte obligatorio.', visible: false, type: "number" },
-  { value: 'FondosMutuos', label: 'Fondos Mutuos', Help: 'Instrumentos financieros donde varios inversores agrupan su dinero para invertir en acciones, bonos y otros activos, bajo la gestión de un administrador profesional.', visible: false, type: "number" },
-  { value: 'Local', label: 'Local', Help: 'Espacio inmobiliario comercial destinado a actividades de venta o prestación de servicios, ideal para generar ingresos a través del alquiler o de su propio negocio.', visible: false, type: "number" },
-  { value: 'Negocio', label: 'Negocio', Help: 'Actividad económica que busca generar ganancias, ya sea a través de la venta de productos, servicios o cualquier otra forma de operación comercial.', visible: false, type: "number" },
-  { value: 'ParticipacionesEnSociedades', label: 'Participaciones en Sociedades', Help: 'Acciones o participaciones en empresas o sociedades, que confieren derechos sobre los beneficios generados por la sociedad.', visible: false, type: "number" },
-  { value: 'Semovientes', label: 'Semovientes', Help: 'Animales destinados a la producción o comercialización, tales como ganado vacuno, caballos o aves.', visible: false, type: "number" },
+  { value: 'Bonos', label: 'Bonos', Help: 'Instrumentos de deuda emitidos por entidades públicas o privadas que otorgan al titular un pago periódico de intereses y la devolución del principal al vencimiento.', visible: true, type: "number" },
+  { value: 'CarteraColectiva', label: 'Cartera Colectiva', Help: 'Instrumento de inversión colectiva en el cual los fondos de varios inversores se combinan para invertir en una variedad de activos.', visible: true, type: "number" },
+  { value: 'Casa', label: 'Casa', Help: 'Bien inmueble que se utiliza principalmente para vivienda, pero también puede generar ingresos por su alquiler o valorización.', visible: true, type: "number" },
+  { value: 'CDT', label: 'CDT', Help: 'Certificado de Depósito a Término, una inversión de renta fija en la que se compromete una suma de dinero por un plazo determinado, generando un interés.', visible: true, type: "number" },
+  { value: 'CuentaInversionUSD', label: 'Cuenta Inversión USD', Help: 'Cuenta bancaria dedicada a la inversión en dólares, destinada a generar rendimientos a través de productos financieros en moneda extranjera.', visible: true, type: "number" },
+  { value: 'CuentaPorCobrarATerceros', label: 'Cuenta por Cobrar a Terceros', Help: 'Derechos que tiene una empresa o individuo para cobrar dinero a otra parte, generalmente por la venta de productos o servicios.', visible: true, type: "number" },
+  { value: 'Empresa', label: 'Empresa', Help: 'Entidad dedicada a actividades económicas para generar ingresos. Puede incluir diversos activos productivos como bienes, propiedades y capital humano.', visible: true, type: "number" },
+  { value: 'Fiducia', label: 'Fiducia', Help: 'Instrumento legal mediante el cual una persona (fiduciante) transfiere bienes a un fiduciario para que este los administre en beneficio de un tercero.', visible: true, type: "number" },
+  { value: 'FondoDeCesantias', label: 'Fondo de Cesantías', Help: 'Cuenta de ahorro de los empleados destinada a financiar los períodos de desempleo, en la cual el empleador debe realizar aportes periódicos.', visible: true, type: "number" },
+  { value: 'FondoObligatorioDePensiones', label: 'Fondo Obligatorio de Pensiones', Help: 'Fondos destinados a financiar las pensiones de jubilación de los trabajadores, gestionados por administradoras de fondos de pensiones (AFP).', visible: true, type: "number" },
+  { value: 'FondoVoluntarioDePensiones', label: 'Fondo Voluntario de Pensiones', Help: 'Ahorro adicional que realiza un trabajador para incrementar el monto de su pensión en el futuro, por encima del aporte obligatorio.', visible: true, type: "number" },
+  { value: 'FondosMutuos', label: 'Fondos Mutuos', Help: 'Instrumentos financieros donde varios inversores agrupan su dinero para invertir en acciones, bonos y otros activos, bajo la gestión de un administrador profesional.', visible: true, type: "number" },
+  { value: 'Local', label: 'Local', Help: 'Espacio inmobiliario comercial destinado a actividades de venta o prestación de servicios, ideal para generar ingresos a través del alquiler o de su propio negocio.', visible: true, type: "number" },
+  { value: 'Negocio', label: 'Negocio', Help: 'Actividad económica que busca generar ganancias, ya sea a través de la venta de productos, servicios o cualquier otra forma de operación comercial.', visible: true, type: "number" },
+  { value: 'ParticipacionesEnSociedades', label: 'Participaciones en Sociedades', Help: 'Acciones o participaciones en empresas o sociedades, que confieren derechos sobre los beneficios generados por la sociedad.', visible: true, type: "number" },
+  { value: 'Semovientes', label: 'Semovientes', Help: 'Animales destinados a la producción o comercialización, tales como ganado vacuno, caballos o aves.', visible: true, type: "number" },
   { value: 'TituloDeCapitalizacion', label: 'Título de Capitalización', Help: 'Instrumento financiero que permite acumular un ahorro con un premio adicional al final del período de suscripción, normalmente utilizado para incentivar el ahorro.', visible: false, type: "number" },
   { value: 'Otros', label: 'Otros', Help: 'Cualquier otro activo productivo que no esté incluido en las categorías anteriores.', visible: true, type: "number" },
 ];
 
 export const activosImproductivos = [
-  { value: 'Apartamento', label: 'Apartamento', Help: 'Propiedad inmobiliaria que no genera ingresos, generalmente se usa para vivienda o descanso.', type: "number" },
+  { value: 'Apartamento', label: 'Apartamento', Help: 'Propiedad inmobiliaria que no genera ingresos, generalmente se usa para vivienda o descanso.', type: "number",visible: true },
   { value: 'Bodega', label: 'Bodega', Help: 'Espacio de almacenamiento que no genera ingresos, a menudo se utiliza para guardar bienes de valor o productos.', type: "number" },
   { value: 'Caballos', label: 'Caballos', Help: 'Animales utilizados principalmente para recreación, deportes o como mascota, sin generar ingresos directos.', type: "number" },
-  { value: 'Casa', label: 'Casa', Help: 'Propiedad inmobiliaria que se utiliza principalmente para vivienda, pero no genera ingresos directos.', type: "number" },
+  { value: 'Casa', label: 'Casa', Help: 'Propiedad inmobiliaria que se utiliza principalmente para vivienda, pero no genera ingresos directos.', type: "number",visible: true  },
   { value: 'Finca', label: 'Finca', Help: 'Terreno rural que se utiliza para actividades recreativas o de descanso, sin generar ingresos pasivos.', type: "number" },
   { value: 'Joyas', label: 'Joyas', Help: 'Bienes de lujo, generalmente utilizados para fines personales o decorativos, sin generar ingresos directos.', type: "number" },
   { value: 'Lancha', label: 'Lancha', Help: 'Embarcación utilizada para ocio o deportes acuáticos, que no genera ingresos por sí sola.', type: "number" },
-  { value: 'Local', label: 'Local', Help: 'Inmueble comercial que no está en uso o alquiler, no genera ingresos por sí mismo.', type: "number" },
+  { value: 'Local', label: 'Local', Help: 'Inmueble comercial que no está en uso o alquiler, no genera ingresos por sí mismo.', type: "number",visible: true  },
   { value: 'Maquinas', label: 'Máquinas', Help: 'Equipos de trabajo o maquinaria que no están siendo utilizados activamente para generar ingresos.', type: "number" },
-  { value: 'Moto', label: 'Moto', Help: 'Vehículo de dos ruedas, generalmente utilizado para transporte personal, sin generar ingresos directos.', type: "number" },
+  { value: 'Moto', label: 'Moto', Help: 'Vehículo de dos ruedas, generalmente utilizado para transporte personal, sin generar ingresos directos.', type: "number",visible: true  },
   { value: 'MueblesYAccesorios', label: 'Muebles y Accesorios', Help: 'Artículos de decoración y mobiliario, sin generar ingresos por su posesión.', type: "number" },
   { value: 'Terreno', label: 'Terreno', Help: 'Propiedad de tierra sin desarrollar que no genera ingresos, aunque puede apreciarse con el tiempo.', type: "number" },
-  { value: 'Vehiculo', label: 'Vehículo', Help: 'Automóvil o transporte personal que no se utiliza para generar ingresos, sino para uso personal o familiar.', type: "number" },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier activo que no se ajusta a las categorías anteriores pero que se considera improductivo.', type: "number" }
+  { value: 'Vehiculo', label: 'Vehículo', Help: 'Automóvil o transporte personal que no se utiliza para generar ingresos, sino para uso personal o familiar.', type: "number",visible: true  },
+  { value: 'Otro', label: 'Otro', Help: 'Cualquier activo que no se ajusta a las categorías anteriores pero que se considera improductivo.', type: "number",visible: true }
+];
+
+
+export const seguros = [
+  { value: 'SeguroContenidos', label: 'Seguro de Contenidos', Help: 'Cobertura para proteger los bienes dentro de una propiedad, como muebles, electrodomésticos, y objetos personales contra daños o robos.', type: "number" },
+  { value: 'SeguroInvalidez', label: 'Seguro de Invalidez', Help: 'Seguro que proporciona una compensación económica en caso de que el asegurado sufra una invalidez que le impida trabajar.', type: "number" },
+  {value:'soat', label:'Soat',Help:"Seguro contra accidentes transito obligatorio",visible: true},
+  { value: 'SeguroResponsabilidadCivil', label: 'Seguro de Responsabilidad Civil', Help: 'Cobertura que protege al asegurado frente a los daños que pueda causar a terceros, ya sea en su propiedad o en su persona.', type: "number" },
+  { value: 'SeguroSalud', label: 'Seguro de Salud', Help: 'Cobertura médica que cubre los gastos derivados de enfermedades, accidentes, y tratamientos médicos del asegurado.', type: "number" },
+  { value: 'SeguroVehiculo', label: 'Seguro de Vehículo', Help: 'Cobertura que protege al vehículo y su propietario ante accidentes, daños a terceros, y otros riesgos relacionados con la conducción del vehículo.', type: "number" },
+  { value: 'SeguroVida', label: 'Seguro de Vida', Help: 'Seguro que garantiza el pago de una suma asegurada a los beneficiarios en caso de fallecimiento del asegurado.', type: "number",visible: true },
+  { value: 'SeguroExequial', label: 'Seguro Exequial', Help: 'Cobertura destinada a cubrir los gastos funerarios y otros servicios relacionados con el fallecimiento del asegurado.', type: "number" },
+  { value: 'SeguroVivienda', label: 'Seguro Vivienda', Help: 'Cobertura que protege el hogar y sus contenidos contra daños o pérdidas debido a incendios, robos, desastres naturales, entre otros.', type: "number" }
+];
+
+
+export const anualidadesPresupuestadas = [
+  { value: 'ComprasDiciembre', label: 'Compras Diciembre', Help: 'Gastos asociados a compras realizadas durante el mes de diciembre, como artículos de consumo o necesidades personales.', type: "number" },
+  { value: 'MantenimientoApto', label: 'Mantenimiento Apto', Help: 'Gastos relacionados con el mantenimiento de un apartamento, como reparaciones, limpieza o mejoras necesarias.', type: "number" },
+  { value: 'MantenimientoVehiculo', label: 'Mantenimiento Vehículo', Help: 'Gastos destinados a la reparación, revisión y mantenimiento general de un vehículo.', type: "number" },
+  { value: 'Regalos', label: 'Regalos', Help: 'Gastos relacionados con la compra de regalos para ocasiones especiales o eventos.', type: "number" },
+  { value: 'RegalosDiciembre', label: 'Regalos Diciembre', Help: 'Gastos asociados a la compra de regalos específicamente para las festividades de diciembre, como Navidad.', type: "number" },
+  { value: 'Remodelaciones', label: 'Remodelaciones', Help: 'Gastos destinados a realizar cambios o mejoras en una propiedad, como remodelaciones de cocina, baño, o espacios generales.', type: "number" },
+  { value: 'Ropa', label: 'Ropa', Help: 'Gastos relacionados con la compra de prendas de vestir y accesorios personales.', type: "number" },
+  { value: 'VacacionesDiciembre', label: 'Vacaciones Diciembre', Help: 'Gastos relacionados con las vacaciones de diciembre, incluyendo transporte, alojamiento y actividades recreativas.', type: "number" },
+  { value: 'Viajes', label: 'Viajes', Help: 'Gastos relacionados con viajes, ya sean por vacaciones, negocios u otros motivos, fuera de la temporada de diciembre.', type: "number" },
+  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro gasto que no encaje en las categorías anteriores.', type: "number",visible: true }
+];
+
+
+export const impuestos = [
+  { value: 'ImpuestoPatrimonio', label: 'Impuesto al Patrimonio', Help: 'Impuesto sobre el valor del patrimonio neto de una persona o entidad, generalmente aplicable a grandes patrimonios.', type: "number" },
+  { value: 'ImpuestoRenta', label: 'Impuesto de Renta', Help: 'Impuesto sobre los ingresos generados por una persona o entidad, calculado según las ganancias obtenidas en un periodo fiscal.',visible: true, type: "number" },
+  { value: 'ImpuestoVehiculo', label: 'Impuesto Vehículo', Help: 'Impuesto anual sobre la propiedad de un vehículo, generalmente basado en el valor del vehículo o su cilindrada.', type: "number" },
+  { value: 'PredialApto', label: 'Predial Apto', Help: 'Impuesto anual sobre la propiedad de un apartamento, calculado en función del valor catastral del inmueble.', type: "number",visible: true },
+  { value: 'PredialOtroInmueble', label: 'Predial Otro Inmueble', Help: 'Impuesto anual sobre la propiedad de otro tipo de inmuebles distintos a apartamentos, como casas, terrenos o propiedades comerciales.', type: "number",visible: true },
+  { value: 'PredialParqueadero', label: 'Predial Parqueadero', Help: 'Impuesto anual sobre la propiedad de un parqueadero, que se cobra como parte de la propiedad de bienes inmuebles.', type: "number" },
+  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro impuesto o gasto relacionado que no se ajusta a las categorías anteriores.', type: "number",visible: true }
+];
+
+export const anualidadesFijas = [
+  { value: 'Curso', label: 'Curso', Help: 'Gastos relacionados con la inscripción y matrícula en cursos, ya sean presenciales o en línea, para educación personal o profesional.', type: "number" },
+  { value: 'Donaciones', label: 'Donaciones', Help: 'Aportes económicos a organizaciones benéficas, fundaciones o causas sociales, realizados de manera voluntaria.', type: "number" },
+  { value: 'PagosAnuales', label: 'Pagos Anuales', Help: 'Gastos de pagos anuales relacionados con servicios, membresías o suscripciones que se pagan una vez al año.', type: "number" },
+  { value: 'PenaInfante', label: 'Peña Infante', Help: 'Gastos relacionados con actividades, eventos o suscripciones vinculadas a un club o agrupación infantil, como la Peña Infante.', type: "number" },
+  { value: 'Suscripciones', label: 'Suscripciones', Help: 'Gastos recurrentes por servicios de suscripción, como revistas, plataformas de streaming, software, entre otros.', type: "number" },
+  { value: 'Universidad', label: 'Universidad', Help: 'Gastos asociados a la educación universitaria, como matrícula, pensiones, materiales o servicios relacionados con la universidad.', type: "number" },
+  { value: 'MatriculasColegio', label: 'Matrículas Colegio', Help: 'Gastos relacionados con la matrícula y otros pagos escolares para la educación de los hijos en instituciones de nivel primario o secundario.', type: "number" },
+  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro gasto relacionado con educación, donaciones u otros pagos que no se ajusten a las categorías anteriores.', type: "number",visible: true }
 ];
