@@ -4,7 +4,7 @@ import Selector from './select';
 import Objetivos from './ObjectiveInputForm';
 import { useSelector } from 'react-redux';
 import Deudas from './DeudasInputForm';
-import { handleSubmit } from './Enviar_Info'; 
+import axios from 'axios';  
 
 import {
   seguridadsocial,
@@ -42,7 +42,72 @@ const Form = () => {
     "Objetivos Financieros"
   ];
 
-console.log(datosMongo)
+console.log(datosMongo.cedula)
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Obtenemos todos los elementos con el atributo data-section
+  const sections = document.querySelectorAll('[data-section]');
+  const formData = {};
+
+  sections.forEach(section => {
+    const sectionName = section.getAttribute('data-section');
+    formData[sectionName] = {}; // Creamos un objeto vacío para cada sección
+
+    const inputs = section.querySelectorAll('input');
+    const placeholdersCount = {}; // Para contar los placeholders
+
+    // Contamos los placeholders para gestionar casos con inputs similares
+    inputs.forEach(input => {
+      const placeholder = input.placeholder || 'Campo sin placeholder';
+      if (placeholdersCount[placeholder]) {
+        placeholdersCount[placeholder] += 1;
+      } else {
+        placeholdersCount[placeholder] = 1;
+      }
+    });
+
+    // Ahora recorremos los inputs y recogemos los datos
+    inputs.forEach(input => {
+      const placeholder = input.placeholder || 'Campo sin placeholder';
+      const value = input.value.trim();
+
+      if (value) {
+        // Si hay más de un input con el mismo placeholder, lo agregamos como array
+        if (placeholdersCount[placeholder] > 1) {
+          if (formData[sectionName][placeholder]) {
+            formData[sectionName][placeholder].push(value);
+          } else {
+            formData[sectionName][placeholder] = [value];
+          }
+        } else {
+          formData[sectionName][placeholder] = value;
+        }
+      }
+    });
+  });
+
+  // Agregamos el dato de 'cedula' al formData antes de enviarlo
+  formData.datosMongo = { ...formData.datosMongo, cedula: datosMongo.cedula };
+
+  // Mostrar los datos para revisión
+  console.log(formData);
+
+  try {
+    // Realizamos el envío de los datos con axios
+    const response = await axios.post('http://localhost:3001/api/actualizar', formData);
+
+    // Manejo de la respuesta
+    console.log('Datos enviados correctamente:', response.data);
+  } catch (error) {
+    // Manejo de errores
+    console.error('Error al enviar los datos:', error);
+  }
+};
+
+
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
