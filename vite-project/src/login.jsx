@@ -37,7 +37,7 @@ const InteractiveLoginForm = () => {
         //console.log('Datos del cliente recibido en el login:', response.data.cliente);
   
         // Comentar esta línea si no deseas redirigir a la página principal
-        navigate('/');
+        navigate('/formulario');
       } else {
         Swal.fire({
           icon: 'error',

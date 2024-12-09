@@ -12,9 +12,9 @@ function App() {
     <Provider store={store}>
       <>
         <Routes>
-          <Route path='' element={<Form />} />
+          <Route path='formulario' element={<Form />} />
           <Route path='login' element={<LoginForm />} />
-          <Route path='registrarse' element={<Formregistro />} />
+          <Route path='/' element={<Formregistro />} />
         </Routes>
       </>
     </Provider>
