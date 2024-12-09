@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { setDatosMongo } from './store'; 
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import Swal from 'sweetalert2';
@@ -9,26 +12,32 @@ const InteractiveLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [shake, setShake] = useState(false)
 
-  
+  const dispatch = useDispatch();  
+  const navigate = useNavigate(); 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+  
     setShake(false);
-    
-    const hashedPassword = bcrypt.hashSync(password, 10); 
-    
-    const serverUrl = 'https://tu-servidor.com/api/login'; // URL del servidor
-    
+  
+    const serverUrl = 'http://localhost:3001/api/login'; // URL de tu servidor
+  
     try {
       const response = await axios.post(serverUrl, {
-        username,
-        password: hashedPassword,
+        username,  
+        password,  
       });
-
+  
       if (response.data.valid) {
-        window.location.href = '/pagina-destino'; // Redirigir si la autenticación es exitosa
+        // Almacenar los datos del cliente en Redux
+        dispatch(setDatosMongo(response.data.cliente)); 
+  
+        // Mostrar los datos del cliente en consola
+        //console.log('Datos del cliente recibido en el login:', response.data.cliente);
+  
+        // Comentar esta línea si no deseas redirigir a la página principal
+        navigate('/');
       } else {
         Swal.fire({
           icon: 'error',
@@ -36,7 +45,7 @@ const InteractiveLoginForm = () => {
           text: 'Usuario o contraseña incorrectos',
           confirmButtonText: 'Aceptar',
         });
-
+  
         setShake(true);
         setTimeout(() => setShake(false), 500);
       }
@@ -47,7 +56,7 @@ const InteractiveLoginForm = () => {
       setIsLoading(false);
     }
   };
-
+  
   
 
   return (

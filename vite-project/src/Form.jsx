@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './styles.css';
 import Selector from './select';
 import Objetivos from './ObjectiveInputForm';
+import { useSelector } from 'react-redux';
 import Deudas from './DeudasInputForm';
 import { handleSubmit } from './Enviar_Info'; 
 
@@ -30,6 +31,7 @@ import {
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const datosMongo = useSelector((state) => state.datosMongo.datosMongo);
 
   const steps = [
     "Seguridad Social",
@@ -39,6 +41,8 @@ const Form = () => {
     "Patrimonio",
     "Objetivos Financieros"
   ];
+
+console.log(datosMongo)
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {

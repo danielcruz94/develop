@@ -1,8 +1,9 @@
 import{ useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./formregistro.css"
-import CryptoJS from "crypto-js"; 
+
 
 const InputField = ({ label, type = "text", value, onChange, required = false }) => (
   <div className="input-field">
@@ -27,12 +28,13 @@ const ElegantBlueFinancialPlanningForm = () => {
     correoElectronico: '', declaranteRenta: '', estadoCivil: '' , contraseña: ''
   })
 
+  const navigate = useNavigate(); 
   
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value })
   }
 
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validación de campos vacíos
@@ -49,10 +51,6 @@ const ElegantBlueFinancialPlanningForm = () => {
         return;
       }
     }
-  
-    // Encriptar la contraseña antes de enviarla
-    const encryptedPassword = CryptoJS.AES.encrypt(formData.contraseña, 'secreto').toString();
-    formData.contraseña = encryptedPassword; // Reemplazar la contraseña original con la encriptada
   
     // Depuración: Verificar los datos que se van a enviar
     console.log("Datos a enviar:", formData);
@@ -72,8 +70,8 @@ const ElegantBlueFinancialPlanningForm = () => {
   
       // Cambiar el código de estado a 201 para una creación exitosa
       if (response.status === 201) {
-        alert('Formulario enviado exitosamente!');
-        window.location.href = 'https://www.google.com';
+       
+        navigate('/login');
       } else {
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
       }
@@ -117,11 +115,12 @@ const ElegantBlueFinancialPlanningForm = () => {
             <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
 
             <select 
+              className='selectsex'
               value={formData.sexo} 
               onChange={handleInputChange('sexo')}
               required
             >
-              <option value="">Seleccione una opción</option>
+              <option value="">Sexo</option>
               <option value="hombre">Hombre</option>
               <option value="mujer">Mujer</option>
             </select>
