@@ -2,6 +2,7 @@ import{ useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios';
 import "./formregistro.css"
+import CryptoJS from "crypto-js"; 
 
 const InputField = ({ label, type = "text", value, onChange, required = false }) => (
   <div className="input-field">
@@ -31,9 +32,9 @@ const ElegantBlueFinancialPlanningForm = () => {
     setFormData({ ...formData, [field]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();   
-  
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     // Validación de campos vacíos
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
@@ -49,9 +50,13 @@ const ElegantBlueFinancialPlanningForm = () => {
       }
     }
   
+    // Encriptar la contraseña antes de enviarla
+    const encryptedPassword = CryptoJS.AES.encrypt(formData.contraseña, 'secreto').toString();
+    formData.contraseña = encryptedPassword; // Reemplazar la contraseña original con la encriptada
+  
     // Depuración: Verificar los datos que se van a enviar
-    console.log("Datos a enviar:", formData);  // Muestra todos los datos del formulario
-    
+    console.log("Datos a enviar:", formData);
+  
     // URL del servidor (puedes cambiarla según tu entorno)
     const serverUrl = 'http://localhost:3001/api/clientes';
   
@@ -63,21 +68,22 @@ const ElegantBlueFinancialPlanningForm = () => {
       });
   
       // Depuración: Mostrar la respuesta del servidor
-      console.log("Respuesta del servidor:", response);  // Muestra la respuesta completa
+      console.log("Respuesta del servidor:", response);
   
       // Cambiar el código de estado a 201 para una creación exitosa
       if (response.status === 201) {
         alert('Formulario enviado exitosamente!');
-        window.location.href = 'https://www.google.com';  // Cambia la URL de destino
+        window.location.href = 'https://www.google.com';
       } else {
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
       }
     } catch (error) {
       // Depuración: Mostrar detalles del error
-      console.error('Error al enviar el formulario:', error); // Muestra el error completo
+      console.error('Error al enviar el formulario:', error);
       alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
     }
   };
+  
   
   
   
@@ -101,6 +107,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
           >
+          
             <h3>Información Personal</h3>
             <InputField label="Nombre" value={formData.nombre} onChange={handleInputChange('nombre')} />
             <InputField label="Apellidos" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
@@ -108,6 +115,17 @@ const ElegantBlueFinancialPlanningForm = () => {
             <InputField label="Fecha de Nacimiento" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
             <InputField label="Lugar de Nacimiento" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
             <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
+
+            <select 
+              value={formData.sexo} 
+              onChange={handleInputChange('sexo')}
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              <option value="hombre">Hombre</option>
+              <option value="mujer">Mujer</option>
+            </select>
+
           </motion.div>
         )
       case 2:
