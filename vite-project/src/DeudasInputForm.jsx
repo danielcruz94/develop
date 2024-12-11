@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; // Estilos
 
-
-function DebtInputForm( {seccion }) {
+function DebtInputForm({ seccion }) {
   // Array de objetos que contiene las explicaciones de cada campo
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
@@ -97,6 +96,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
+                  name={`pasivo-${index}`}  // Agregamos el atributo name
                   value={row.pasivo}
                   onChange={(e) => handleInputChange(index, 'pasivo', e.target.value)}
                   placeholder="Pasivo"
@@ -113,6 +113,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
+                  name={`saldoCapital-${index}`}  // Agregamos el atributo name
                   value={row.saldoCapital}
                   onChange={(e) => handleInputChange(index, 'saldoCapital', e.target.value)}
                   placeholder="Saldo de Capital"
@@ -129,6 +130,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
+                  name={`entidad-${index}`}  // Agregamos el atributo name
                   value={row.entidad}
                   onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}
                   placeholder="Entidad"
@@ -145,6 +147,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
+                  name={`tasa-${index}`}  // Agregamos el atributo name
                   value={row.tasa}
                   onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}
                   placeholder="Tasa (%)"
@@ -161,6 +164,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
+                  name={`cuotasPendientes-${index}`}  // Agregamos el atributo name
                   value={row.cuotasPendientes}
                   onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}
                   placeholder="# Cuotas Pendientes"
@@ -177,6 +181,7 @@ function DebtInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
+                  name={`cuotaMensual-${index}`}  // Agregamos el atributo name
                   value={row.cuotaMensual}
                   onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}
                   placeholder="Cuota Mensual"
@@ -202,6 +207,6 @@ function DebtInputForm( {seccion }) {
       )}
     </div>
   );
-};
+}
 
 export default DebtInputForm;

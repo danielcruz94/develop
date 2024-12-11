@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './styles.css';
 import Selector from './select';
 import Objetivos from './ObjectiveInputForm';
@@ -32,6 +32,7 @@ import {
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const datosMongo = useSelector((state) => state.datosMongo.datosMongo);
+  const [cedula, setCedula] = useState("");
 
   const steps = [
     "Seguridad Social",
@@ -42,70 +43,124 @@ const Form = () => {
     "Objetivos Financieros"
   ];
 
-console.log(datosMongo.cedula)
+  useEffect(() => {
+    const cedulaExistente = localStorage.getItem('cedula');
+
+    if (!cedulaExistente) {
+      setCedula(datosMongo.cedula);
+      localStorage.setItem('cedula', datosMongo.cedula);
+    }
+
+    const cedulaRecuperada = localStorage.getItem('cedula');
+
+    if (cedulaRecuperada) {
+      setCedula(cedulaRecuperada);
+    } else {
+      console.log("La cedula no está disponible.");
+    }
+  }, []);
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  // Obtenemos todos los elementos con el atributo data-section
-  const sections = document.querySelectorAll('[data-section]');
-  const formData = {};
-
-  sections.forEach(section => {
-    const sectionName = section.getAttribute('data-section');
-    formData[sectionName] = {}; // Creamos un objeto vacío para cada sección
-
-    const inputs = section.querySelectorAll('input');
-    const placeholdersCount = {}; // Para contar los placeholders
-
-    // Contamos los placeholders para gestionar casos con inputs similares
-    inputs.forEach(input => {
-      const placeholder = input.placeholder || 'Campo sin placeholder';
-      if (placeholdersCount[placeholder]) {
-        placeholdersCount[placeholder] += 1;
-      } else {
-        placeholdersCount[placeholder] = 1;
-      }
-    });
-
-    // Ahora recorremos los inputs y recogemos los datos
-    inputs.forEach(input => {
-      const placeholder = input.placeholder || 'Campo sin placeholder';
-      const value = input.value.trim();
-
-      if (value) {
-        // Si hay más de un input con el mismo placeholder, lo agregamos como array
-        if (placeholdersCount[placeholder] > 1) {
-          if (formData[sectionName][placeholder]) {
-            formData[sectionName][placeholder].push(value);
-          } else {
-            formData[sectionName][placeholder] = [value];
-          }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const sections = document.querySelectorAll('[data-section]');
+    const formData = {};
+  
+    sections.forEach(section => {
+      const sectionName = section.getAttribute('data-section');
+      formData[sectionName] = {}; 
+  
+      const inputs = section.querySelectorAll('input');
+      const placeholdersCount = {}; 
+  
+      inputs.forEach(input => {
+        const placeholder = input.name || 'Campo sin name';
+        if (placeholdersCount[placeholder]) {
+          placeholdersCount[placeholder] += 1;
         } else {
-          formData[sectionName][placeholder] = value;
+          placeholdersCount[placeholder] = 1;
         }
+      });
+  
+      
+      inputs.forEach(input => {
+        const placeholder = input.name || 'Campo sin name';
+        const value = input.value.trim();
+  
+        if (value) {
+          if (placeholdersCount[placeholder] > 1) {
+            if (formData[sectionName][placeholder]) {
+              formData[sectionName][placeholder].push(value);
+            } else {
+              formData[sectionName][placeholder] = [value];
+            }
+          } else {
+            formData[sectionName][placeholder] = value;
+          }
+        }
+      });
+    });
+  
+    // Deudas Corto Plazo
+    formData.DeudasCortoPlazo = [];
+    const cortoPlazoSections = document.querySelectorAll('[data-section="DeudasCortoPlazo"] input');
+    cortoPlazoSections.forEach((input, index) => {
+      const name = input.name;
+      const value = input.value.trim();
+      if (value) {
+        const deudaIndex = Math.floor(index / 6); 
+        if (!formData.DeudasCortoPlazo[deudaIndex]) {
+          formData.DeudasCortoPlazo[deudaIndex] = {}; 
+        }
+        formData.DeudasCortoPlazo[deudaIndex][name] = value;
       }
     });
-  });
-
-  // Agregamos el dato de 'cedula' al formData antes de enviarlo
-  formData.datosMongo = { ...formData.datosMongo, cedula: datosMongo.cedula };
-
-  // Mostrar los datos para revisión
-  console.log(formData);
-
-  try {
-    // Realizamos el envío de los datos con axios
-    const response = await axios.post('http://localhost:3001/api/actualizar', formData);
-
-    // Manejo de la respuesta
-    console.log('Datos enviados correctamente:', response.data);
-  } catch (error) {
-    // Manejo de errores
-    console.error('Error al enviar los datos:', error);
-  }
-};
+  
+    // Deudas Largo Plazo
+    formData.DeudasLargoPlazo = [];
+    const largoPlazoSections = document.querySelectorAll('[data-section="DeudasLargoPlazo"] input');
+    largoPlazoSections.forEach((input, index) => {
+      const name = input.name;
+      const value = input.value.trim();
+      if (value) {
+        const deudaIndex = Math.floor(index / 6); 
+        if (!formData.DeudasLargoPlazo[deudaIndex]) {
+          formData.DeudasLargoPlazo[deudaIndex] = {}; 
+        }
+        formData.DeudasLargoPlazo[deudaIndex][name] = value;
+      }
+    });
+  
+    // Objetivos
+    formData.objetivos = [];
+    const objetivoSections = document.querySelectorAll('[data-section="objetivos"] input');
+    objetivoSections.forEach((input, index) => {
+      const name = input.name;
+      const value = input.value.trim();
+      if (value) {
+        const objetivoIndex = Math.floor(index / 5); 
+        if (!formData.objetivos[objetivoIndex]) {
+          formData.objetivos[objetivoIndex] = {}; 
+        }
+        formData.objetivos[objetivoIndex][name] = value;
+      }
+    });
+  
+    formData.datosMongo = { ...formData.datosMongo, cedula: cedula };
+  
+    console.log(formData);
+  
+    try {
+     
+      const response = await axios.put('http://localhost:3001/api/actualizar', formData);
+  
+      console.log('Datos enviados correctamente:', response.data);
+    } catch (error) {
+      console.error('Error al enviar los datos:', error);
+    }
+  };
+  
 
 
 
