@@ -166,7 +166,8 @@ const Form = () => {
 
 
   const handleNext = () => {
-    if (currentStep < steps.length - 1) {     
+    if (currentStep < steps.length - 1) {
+     
       setCurrentStep(currentStep + 1);
     }
   };

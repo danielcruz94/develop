@@ -4,6 +4,7 @@ import './CreativeFloatingSelect.css';
 function CreativeFloatingSelect({ options, seccion }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [valueData, setValuedata] = useState("");
   const [helpText, setHelpText] = useState(null);
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [isOtherInputVisible, setIsOtherInputVisible] = useState(false);
@@ -25,6 +26,7 @@ function CreativeFloatingSelect({ options, seccion }) {
   }, []);
 
   const handleSelectChange = (value) => {
+    setValuedata(value)
     const validValues = [
       'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
       'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
@@ -109,7 +111,8 @@ function CreativeFloatingSelect({ options, seccion }) {
     }
 
     return (
-      <div className="selected-options-container" data-section="value del campo sacado del objeto ">
+      <div className="selected-options-container" >
+       
         {selectedOptions.map((option) => {
           
           const isCustomOption = option.includes('Otros');           
@@ -120,7 +123,7 @@ function CreativeFloatingSelect({ options, seccion }) {
      
 
           return (
-            <div key={option} className="selected-option"  >
+            <div key={option} className="selected-option" data-section={valueData} >
               <div className="input-container">
                 {!isCustomOption && selectedOption?.visible && (
                   <span
