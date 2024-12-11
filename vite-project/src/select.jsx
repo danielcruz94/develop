@@ -25,10 +25,17 @@ function CreativeFloatingSelect({ options, seccion }) {
   }, []);
 
   const handleSelectChange = (value) => {
-    if (value === 'Otros') {
-      setIsOtherInputVisible(true); // Muestra el input para "Otros"
+    const validValues = [
+      'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
+      'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
+      'Honorarios', 'PrimaDeServicios', 'PrimaExtralegal', 'Renta', 
+      'SubsidioDeTransporte', 'SubsidioFamiliar', 'Otros'
+    ];
+  
+    if (validValues.includes(value)) {
+      setIsOtherInputVisible(true);  // Muestra el input para 'Otros' o cualquier otro valor válido
     } else {
-      setSelectedOptions((prevOptions) => [...prevOptions, value]);
+      setSelectedOptions((prevOptions) => [...prevOptions, value]);  // Agrega a las opciones seleccionadas
     }
   };
 
@@ -62,26 +69,25 @@ function CreativeFloatingSelect({ options, seccion }) {
   };
 
   const duplicateInput = (option) => {
-    const originalElement = document.querySelector(`[name="${option}"]`);
-    if (originalElement) {
-      const clone = originalElement.closest('.selected-option').cloneNode(true);
-      const inputField = clone.querySelector('[name]');
-      if (inputField) {
-        const uniqueValue = generateUniqueValue(option);
-        inputField.name = uniqueValue;
-        inputField.value = '';
-      }
-
-      const duplicateIcon = clone.querySelector('.duplicate-icon');
-      if (duplicateIcon) {
-        duplicateIcon.remove();
-      }
-
-      originalElement.closest('.selected-option').parentNode.insertBefore(clone, originalElement.closest('.selected-option').nextSibling);
-    } else {
-      console.log('El elemento original no se encuentra.');
+    // Encuentra el índice de la opción seleccionada
+    const index = selectedOptions.findIndex((opt) => opt === option);
+  
+    if (index !== -1) {
+      // Crea un nuevo valor único para la opción duplicada
+      const newOption = generateUniqueValue(option);
+  
+      // Inserta la opción duplicada justo después de la original
+      const updatedOptions = [
+        ...selectedOptions.slice(0, index + 1), 
+        newOption,  // Añade la nueva opción
+        ...selectedOptions.slice(index + 1), 
+      ];
+  
+      setSelectedOptions(updatedOptions);  
     }
   };
+  
+  
 
   const handleHelpClick = (event, option) => {
     const selectedOption = options.find((opt) => opt.value === option);
@@ -103,8 +109,9 @@ function CreativeFloatingSelect({ options, seccion }) {
     }
 
     return (
-      <div className="selected-options-container">
+      <div className="selected-options-container" data-section="value del campo sacado del objeto ">
         {selectedOptions.map((option) => {
+          
           const isCustomOption = option.includes('Otros');           
           const selectedOption = options.find((opt) => opt.value === option);          
           const name = isCustomOption ? otherProductName : option;
@@ -113,7 +120,7 @@ function CreativeFloatingSelect({ options, seccion }) {
      
 
           return (
-            <div key={option} className="selected-option">
+            <div key={option} className="selected-option"  >
               <div className="input-container">
                 {!isCustomOption && selectedOption?.visible && (
                   <span
