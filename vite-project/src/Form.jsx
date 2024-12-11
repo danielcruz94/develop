@@ -157,6 +157,7 @@ const Form = () => {
   
       console.log('Datos enviados correctamente:', response.data);
     } catch (error) {
+      // Manejo de errores
       console.error('Error al enviar los datos:', error);
     }
   };

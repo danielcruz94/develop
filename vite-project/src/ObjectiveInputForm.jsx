@@ -83,7 +83,7 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`objetivo-${index}`}  // Asignamos el name único por fila
+                  name={`objetivo`}  // Asignamos el name único por fila
                   value={row.objetivo}
                   onChange={(e) => handleInputChange(index, 'objetivo', e.target.value)}
                   placeholder="Objetivo"
@@ -100,7 +100,7 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`descripcion-${index}`}  // Asignamos el name único por fila
+                  name={`descripcion`} 
                   value={row.descripcion}
                   onChange={(e) => handleInputChange(index, 'descripcion', e.target.value)}
                   placeholder="Descripción"
@@ -117,7 +117,7 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`plazo-${index}`}  // Asignamos el name único por fila
+                  name={`plazo`}
                   value={row.plazo}
                   onChange={(e) => handleInputChange(index, 'plazo', e.target.value)}
                   placeholder="Plazo (Años)"
@@ -134,7 +134,7 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`vrObjetivo-${index}`}  // Asignamos el name único por fila
+                  name={`vrObjetivo`} 
                   value={row.vrObjetivo}
                   onChange={(e) => handleInputChange(index, 'vrObjetivo', e.target.value)}
                   placeholder="Valor del objetivo"
@@ -151,7 +151,7 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`comentarios-${index}`}  // Asignamos el name único por fila
+                  name={`comentarios`}  
                   value={row.comentarios}
                   onChange={(e) => handleInputChange(index, 'comentarios', e.target.value)}
                   placeholder="Comentarios"

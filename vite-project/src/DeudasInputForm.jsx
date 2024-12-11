@@ -96,7 +96,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`pasivo-${index}`}  // Agregamos el atributo name
+                  name={`pasivo`}  // Agregamos el atributo name
                   value={row.pasivo}
                   onChange={(e) => handleInputChange(index, 'pasivo', e.target.value)}
                   placeholder="Pasivo"
@@ -113,7 +113,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`saldoCapital-${index}`}  // Agregamos el atributo name
+                  name={`saldoCapital`}  
                   value={row.saldoCapital}
                   onChange={(e) => handleInputChange(index, 'saldoCapital', e.target.value)}
                   placeholder="Saldo de Capital"
@@ -130,8 +130,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`entidad-${index}`}  // Agregamos el atributo name
-                  value={row.entidad}
+                  name={`entidad`}  
                   onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}
                   placeholder="Entidad"
                 />
@@ -147,7 +146,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`tasa-${index}`}  // Agregamos el atributo name
+                  name={`tasa`}  
                   value={row.tasa}
                   onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}
                   placeholder="Tasa (%)"
@@ -164,7 +163,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`cuotasPendientes-${index}`}  // Agregamos el atributo name
+                  name={`cuotasPendientes`} 
                   value={row.cuotasPendientes}
                   onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}
                   placeholder="# Cuotas Pendientes"
@@ -181,7 +180,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="number"
-                  name={`cuotaMensual-${index}`}  // Agregamos el atributo name
+                  name={`cuotaMensual`}  
                   value={row.cuotaMensual}
                   onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}
                   placeholder="Cuota Mensual"
