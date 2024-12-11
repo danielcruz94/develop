@@ -166,7 +166,7 @@ const Form = () => {
 
 
   const handleNext = () => {
-    if (currentStep < steps.length - 1) {
+    if (currentStep < steps.length - 1) {     
       setCurrentStep(currentStep + 1);
     }
   };
@@ -295,7 +295,7 @@ const Form = () => {
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
               <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
-              <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Enviar" />
+              <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Guardar" />
             </fieldset>
           </div>
         </div>

@@ -193,41 +193,38 @@
   color:  #06175C;
   cursor: pointer;
 }
-
 .selected-options-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Define 2 columnas con igual ancho */
-  gap: 10px; /* Espacio entre los elementos (ajústalo como prefieras) */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
-/* Estilo para el popup/modal */
 .help-popup {
-  position: fixed;  /* Fija el popup en la pantalla */
-  top: 0;  /* Desde la parte superior de la ventana */
-  left: 0;  /* Desde la parte izquierda de la ventana */
-  width: 100vw;  /* Ancho completo de la ventana */
-  height: 100vh;  /* Alto completo de la ventana */
-  background-color: rgba(0, 0, 0, 0.5);  /* Fondo oscuro y semitransparente */
-  display: flex;  /* Usamos flexbox para alinear el contenido */
-  justify-content: center;  /* Centrado horizontal */
-  align-items: center;  /* Centrado vertical */
-  z-index: 9999;  /* Asegura que el popup esté sobre otros elementos */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-/* Estilo para el contenido del popup/modal */
 .help-popup-content {
-  background-color: white;  /* Fondo blanco para el contenido */
-  padding: 20px;  /* Espaciado interno */
-  border-radius: 10px;  /* Bordes redondeados */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Sombra más pronunciada */
-  width: 80%;  /* Ancho del contenido del modal (80% del ancho de la ventana) */
-  max-width: 500px;  /* No deja que el modal sea demasiado grande */
-  min-width: 300px;  /* Asegura que no sea más pequeño de lo deseado */
-  text-align: center;  /* Centrado del texto */
-  display: flex;  /* Usamos flexbox para organizar el contenido */
-  flex-direction: column;  /* Los elementos se apilan verticalmente */
-  justify-content: center;  /* Asegura que el contenido esté centrado verticalmente */
-  gap: 20px;  /* Espacio entre los elementos */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 500px;
+  min-width: 300px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
 .Cont-Help{
@@ -267,6 +264,30 @@ input[type="number"]::-ms-clear {
     display: none;
 }
 
+.other-input-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.other-input-container input {
+  font-family: Helvetica, arial, verdana !important;
+}
+
+.other-input-container input :hover{
+  border-color: #06175C;
+}
+
+.other-input-container button{
+  background: #06175C;
+  color: white;
+}
 
 
 /* Media queries para pantallas pequeñas */
