@@ -23,8 +23,10 @@ function CreativeFloatingSelect({ options, seccion }) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
 
+   
+  }, []);
+  
   const handleSelectChange = (value) => {   
     
     // Guardamos el valor seleccionado en `selectedValue`
@@ -35,8 +37,17 @@ function CreativeFloatingSelect({ options, seccion }) {
       'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
       'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
       'Honorarios', 'PrimaDeServicios', 'PrimaExtralegal', 'Renta', 
-      'SubsidioDeTransporte', 'SubsidioFamiliar', 'Otros'
+      'SubsidioDeTransporte', 'SubsidioFamiliar', 'Otros',
+      'CuentaAhorros', 'CuentaCorriente', 'CuentaEnOtraMoneda', 'Efectivo', 'Otro',
+      'Acciones', 'Apartamento', 'BienesRaicesParaInversion', 'Bodega', 'Bonos', 
+      'CarteraColectiva', 'Casa', 'CDT', 'CuentaInversionUSD', 'CuentaPorCobrarATerceros', 
+      'Empresa', 'Fiducia', 'FondoDeCesantias', 'FondoObligatorioDePensiones', 
+      'FondoVoluntarioDePensiones', 'FondosMutuos', 'Local', 'Negocio', 
+      'ParticipacionesEnSociedades', 'Semovientes', 'TituloDeCapitalizacion', 'Otros',
+      'Apartamento', 'Bodega', 'Caballos', 'Casa', 'Finca', 'Joyas', 'Lancha', 'Local', 
+      'Maquinas', 'Moto', 'MueblesYAccesorios', 'Terreno', 'Vehiculo', 'Otro'
     ];
+    
   
     if (validValues.includes(value)) {
       setIsOtherInputVisible(true);  // Muestra el input para ingresar el texto adicional
@@ -97,9 +108,11 @@ function CreativeFloatingSelect({ options, seccion }) {
   };
   
   
+  
 
   const handleHelpClick = (event, option) => {
-    const selectedOption = options.find((opt) => opt.value === option);
+    const selectedOption = options.find((opt) => opt.value === option.split('-')[0]);
+    
     setHelpText(selectedOption?.Help || 'Por favor, ingresa el valor correspondiente al producto seleccionado en el campo indicado.');
     setClickPosition({ x: event.clientX, y: event.clientY });
   };
@@ -129,11 +142,12 @@ function CreativeFloatingSelect({ options, seccion }) {
          
   
           if (cleanedName.includes('-')) {
-            Datos = cleanedName.split('-');
+            Datos = cleanedName.split('-');           
           } else {
-            Datos = [cleanedName, cleanedName];
-            Datos[0] = Datos[0].slice(0, -1);
+            Datos = [cleanedName, cleanedName];           
           }
+
+         
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos'?  Datos[0] : undefined}>
@@ -148,8 +162,8 @@ function CreativeFloatingSelect({ options, seccion }) {
                 )}
                 <input
                   type={selectedOption?.type === 'number' ? 'number' : 'text'}
-                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()}
-                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()}
+                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase().slice(0, -1)}
+                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase().slice(0, -1)}
                   onFocus={Datos[0]}
                   className="selected-input"
                 />
@@ -158,7 +172,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                 <span
                   className="bi bi-question-circle Icon_Help"
                   title="Más información"
-                  id={option}
+                  id={option.split('-')[0]}
                   onClick={(e) => handleHelpClick(e, option)}
                 />
                 <button

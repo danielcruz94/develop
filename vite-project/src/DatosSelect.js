@@ -6,7 +6,7 @@ export const seguridadsocial = [
     { value: 'AFP', label: 'AFP', type: 'text', Help: 'Elige la Administradora de Fondos de Pensiones a la cual estás afiliado. La AFP es la encargada de administrar y gestionar los fondos de pensión de los trabajadores para su jubilación.', visible: false }
   ];
   
-  export const ingresos = [
+export const ingresos = [
     { value: 'SalarioTradicional', label: 'Salario Tradicional', Help: 'Este es el salario mensual base que recibes como compensación por tu trabajo. Es un pago fijo acordado entre tú y tu empleador.', visible: true, type: "number" },
     { value: 'SalarioIntegral', label: 'Salario Integral', Help: 'Es un salario que incluye todos los beneficios y prestaciones sociales, como pensión, cesantías y vacaciones, dentro del pago acordado.', visible: true, type: "number" },
     { value: 'Arriendo', label: 'Arriendo', Help: 'Es el valor que recibes por el alquiler de una propiedad. Puede ser por un apartamento, casa o cualquier inmueble que alquiles a otros.', visible: true, type: "number" },
