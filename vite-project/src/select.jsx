@@ -45,8 +45,12 @@ function CreativeFloatingSelect({ options, seccion }) {
       'FondoVoluntarioDePensiones', 'FondosMutuos', 'Local', 'Negocio', 
       'ParticipacionesEnSociedades', 'Semovientes', 'TituloDeCapitalizacion', 'Otros',
       'Apartamento', 'Bodega', 'Caballos', 'Casa', 'Finca', 'Joyas', 'Lancha', 'Local', 
-      'Maquinas', 'Moto', 'MueblesYAccesorios', 'Terreno', 'Vehiculo', 'Otro'
-    ];
+      'Maquinas', 'Moto', 'MueblesYAccesorios', 'Terreno', 'Vehiculo', 'Otro',
+      'CuentaCorriente', 'CuentaDeAhorros', 'Fiducias', 'FondoDeEmpleados', 'inversionesExterior',
+      'CarteraColectiva', 'Cooperativas', 'CuentaAFC', 'FondosMutuos', 'PensionVoluntaria',
+      'ProvisionAnualidades', 'Otros'
+  ];
+  
     
   
     if (validValues.includes(value)) {
