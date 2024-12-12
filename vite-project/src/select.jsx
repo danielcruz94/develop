@@ -134,23 +134,28 @@ function CreativeFloatingSelect({ options, seccion }) {
       <div className="selected-options-container">
         {selectedOptions.map((option) => {
           const isCustomOption = option.includes('Otros');
-          const selectedOption = options.find((opt) => opt.value === option);
-          const name = isCustomOption ? otherProductName : option;
-          const cleanedName = name.replace(/[^a-zA-Z-]/g, '');
+          const selectedOption = options.find((opt) => opt.value === option) || {};
+          const name = isCustomOption ? otherProductName || 'default' : option;
+  
           let Datos = [];
   
-         
-  
-          if (cleanedName.includes('-')) {
-            Datos = cleanedName.split('-');           
+          if (name === "") {
+            if (option.includes('-')) {
+              Datos = option.split('-');
+            } else {
+              Datos = [option, option];
+            }
           } else {
-            Datos = [cleanedName, cleanedName];           
+            if (name.includes('-')) {
+              Datos = name.split('-');
+            }
           }
-
-         
+  
+          const firstData = Datos[0] || 'default';
+          const secondData = Datos[1] || 'default';
   
           return (
-            <div key={option} className="selected-option" data-section={seccion === 'ingresos'?  Datos[0] : undefined}>
+            <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
               <div className="input-container">
                 {!isCustomOption && selectedOption?.visible && (
                   <span
@@ -161,10 +166,10 @@ function CreativeFloatingSelect({ options, seccion }) {
                   </span>
                 )}
                 <input
-                  type={selectedOption?.type === 'number' ? 'number' : 'text'}
-                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase().slice(0, -1)}
-                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase().slice(0, -1)}
-                  onFocus={Datos[0]}
+                  type={selectedOption?.type || "Number"}
+                  placeholder={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
+                  name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
+                  onFocus={() => handleFocus(firstData)}
                   className="selected-input"
                 />
               </div>
@@ -172,7 +177,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                 <span
                   className="bi bi-question-circle Icon_Help"
                   title="Más información"
-                  id={option.split('-')[0]}
+                  id={option.includes('-') ? option.split('-')[0] : option}
                   onClick={(e) => handleHelpClick(e, option)}
                 />
                 <button
@@ -189,6 +194,7 @@ function CreativeFloatingSelect({ options, seccion }) {
       </div>
     );
   };
+  
   
   return (
     <div className="SelectContainer">

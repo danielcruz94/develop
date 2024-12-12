@@ -41,12 +41,12 @@ export const ahorro = [
 
 export const transporte = [
   { value: 'BusesTransmilenio', label: 'Buses / Transmilenio', visible: false, type: "number" },
-  { value: 'Gasolina', label: 'Gasolina', visible: false, type: "number" },
-  { value: 'Otros', label: 'Otros', visible: true, type: "number" },
+  { value: 'Gasolina', label: 'Gasolina', visible: false, type: "number" }, 
   { value: 'Parqueadero', label: 'Parqueadero', visible: false, type: "number" },
   { value: 'Taxis', label: 'Taxis', visible: false, type: "number" },
   { value: 'TransporteEmpresa', label: 'Transporte Empresa', visible: false, type: "number" },
-  { value: 'TransporteEscolar', label: 'Transporte Escolar', visible: false, type: "number" }
+  { value: 'TransporteEscolar', label: 'Transporte Escolar', visible: false, type: "number" },
+  { value: 'Otros', label: 'Otros', visible: true, type: "number" },
 ];
 
 export const gastosPersonales = [
@@ -61,7 +61,7 @@ export const gastosPersonales = [
   { value: 'Barberia', label: 'Barbería', Help: 'Es el gasto destinado a los servicios de corte de cabello, arreglo de barba y otros cuidados relacionados con el cuidado personal masculino.', visible: false, type: "number" },
   { value: 'Manicure', label: 'Manicure', Help: 'Es el gasto relacionado con los servicios de cuidado y embellecimiento de las uñas, generalmente prestados en un salón de belleza.', visible: false, type: "number" },
   { value: 'Peluqueria', label: 'Peluquería', Help: 'Es el gasto asociado a los servicios de corte, peinado y tratamientos capilares que se realizan en un salón de belleza o peluquería.', visible: false, type: "number" },
-  { value: 'otro', label: 'Otro', Help: 'Cualquier otro gasto relacionado con el cuidado personal o necesidades diarias que no se clasifiquen dentro de las opciones anteriores.', visible: true, type: "number" }
+  { value: 'Otros', label: 'Otro', Help: 'Cualquier otro gasto relacionado con el cuidado personal o necesidades diarias que no se clasifiquen dentro de las opciones anteriores.', visible: true, type: "number" }
 ];
 
 export const hogar = [
@@ -97,7 +97,7 @@ export const entretenimiento = [
   { value: 'tenis', label: 'Tenis', Help: 'Es el gasto relacionado con la práctica del tenis, como clases, alquiler de canchas, compra de equipo o participación en torneos.', visible: false, type: "number" },
   { value: 'vacaciones', label: 'Vacaciones', Help: 'Es el gasto relacionado con los viajes y planes vacacionales, incluyendo pasajes, alojamiento, actividades turísticas, y otros gastos asociados a un viaje de descanso.', visible: false, type: "number" },
   { value: 'viajes', label: 'Viajes', Help: 'Es el gasto relacionado con viajes, ya sea por motivos personales o de trabajo, que incluye transporte, alojamiento y otros gastos asociados a la experiencia de viajar.', visible: false, type: "number" },
-  { value: 'otros', label: 'Otros', Help: 'Cualquier otro gasto relacionado con actividades de entretenimiento que no se clasifiquen en las opciones anteriores.', visible: true, type: "number" },
+  { value: 'Otros', label: 'Otros', Help: 'Cualquier otro gasto relacionado con actividades de entretenimiento que no se clasifiquen en las opciones anteriores.', visible: true, type: "number" },
 ];
 
 export const protecciones = [
@@ -165,7 +165,7 @@ export const activoLiquidos = [
   { value: 'CuentaCorriente', label: 'Cuenta Corriente', Help: 'Cuenta bancaria que permite realizar depósitos, retiros y pagos frecuentes, y generalmente no genera intereses.', visible: true, type: "number" },
   { value: 'CuentaEnOtraMoneda', label: 'Cuenta en Otra Moneda', Help: 'Cuenta bancaria que maneja divisas distintas a la moneda local, útil para personas que realizan transacciones internacionales.', visible: true, type: "number" },
   { value: 'Efectivo', label: 'Efectivo', Help: 'Dinero en forma de billetes y monedas, disponible para ser gastado de inmediato.', visible: true, type: "number" },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro tipo de activo líquido que no encaje en las categorías anteriores.', visible: true, type: "number" },
+  { value: 'Otros', label: 'Otros', Help: 'Cualquier otro tipo de activo líquido que no encaje en las categorías anteriores.', visible: true, type: "number" },
 ];
 
 export const activosProductivos = [
@@ -207,14 +207,14 @@ export const activosImproductivos = [
   { value: 'MueblesYAccesorios', label: 'Muebles y Accesorios', Help: 'Artículos de decoración y mobiliario, sin generar ingresos por su posesión.', type: "number" },
   { value: 'Terreno', label: 'Terreno', Help: 'Propiedad de tierra sin desarrollar que no genera ingresos, aunque puede apreciarse con el tiempo.', type: "number" },
   { value: 'Vehiculo', label: 'Vehículo', Help: 'Automóvil o transporte personal que no se utiliza para generar ingresos, sino para uso personal o familiar.', type: "number",visible: true  },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier activo que no se ajusta a las categorías anteriores pero que se considera improductivo.', type: "number",visible: true }
+  { value: 'Otros', label: 'Otros', Help: 'Cualquier activo que no se ajusta a las categorías anteriores pero que se considera improductivo.', type: "number",visible: true }
 ];
 
 
 export const seguros = [
   { value: 'SeguroContenidos', label: 'Seguro de Contenidos', Help: 'Cobertura para proteger los bienes dentro de una propiedad, como muebles, electrodomésticos, y objetos personales contra daños o robos.', type: "number" },
   { value: 'SeguroInvalidez', label: 'Seguro de Invalidez', Help: 'Seguro que proporciona una compensación económica en caso de que el asegurado sufra una invalidez que le impida trabajar.', type: "number" },
-  {value:'soat', label:'Soat',Help:"Seguro contra accidentes transito obligatorio",visible: true},
+  { value:'soat', label:'Soat',Help:"Seguro contra accidentes transito obligatorio",visible: true},
   { value: 'SeguroResponsabilidadCivil', label: 'Seguro de Responsabilidad Civil', Help: 'Cobertura que protege al asegurado frente a los daños que pueda causar a terceros, ya sea en su propiedad o en su persona.', type: "number" },
   { value: 'SeguroSalud', label: 'Seguro de Salud', Help: 'Cobertura médica que cubre los gastos derivados de enfermedades, accidentes, y tratamientos médicos del asegurado.', type: "number" },
   { value: 'SeguroVehiculo', label: 'Seguro de Vehículo', Help: 'Cobertura que protege al vehículo y su propietario ante accidentes, daños a terceros, y otros riesgos relacionados con la conducción del vehículo.', type: "number" },
@@ -234,7 +234,7 @@ export const anualidadesPresupuestadas = [
   { value: 'Ropa', label: 'Ropa', Help: 'Gastos relacionados con la compra de prendas de vestir y accesorios personales.', type: "number" },
   { value: 'VacacionesDiciembre', label: 'Vacaciones Diciembre', Help: 'Gastos relacionados con las vacaciones de diciembre, incluyendo transporte, alojamiento y actividades recreativas.', type: "number" },
   { value: 'Viajes', label: 'Viajes', Help: 'Gastos relacionados con viajes, ya sean por vacaciones, negocios u otros motivos, fuera de la temporada de diciembre.', type: "number" },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro gasto que no encaje en las categorías anteriores.', type: "number",visible: true }
+  { value: 'Otros', label: 'Otros', Help: 'Cualquier otro gasto que no encaje en las categorías anteriores.', type: "number",visible: true }
 ];
 
 
@@ -245,7 +245,7 @@ export const impuestos = [
   { value: 'PredialApto', label: 'Predial Apto', Help: 'Impuesto anual sobre la propiedad de un apartamento, calculado en función del valor catastral del inmueble.', type: "number",visible: true },
   { value: 'PredialOtroInmueble', label: 'Predial Otro Inmueble', Help: 'Impuesto anual sobre la propiedad de otro tipo de inmuebles distintos a apartamentos, como casas, terrenos o propiedades comerciales.', type: "number",visible: true },
   { value: 'PredialParqueadero', label: 'Predial Parqueadero', Help: 'Impuesto anual sobre la propiedad de un parqueadero, que se cobra como parte de la propiedad de bienes inmuebles.', type: "number" },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro impuesto o gasto relacionado que no se ajusta a las categorías anteriores.', type: "number",visible: true }
+  { value: 'Otros', label: 'Otros', Help: 'Cualquier otro impuesto o gasto relacionado que no se ajusta a las categorías anteriores.', type: "number",visible: true }
 ];
 
 export const anualidadesFijas = [
@@ -256,5 +256,5 @@ export const anualidadesFijas = [
   { value: 'Suscripciones', label: 'Suscripciones', Help: 'Gastos recurrentes por servicios de suscripción, como revistas, plataformas de streaming, software, entre otros.', type: "number" },
   { value: 'Universidad', label: 'Universidad', Help: 'Gastos asociados a la educación universitaria, como matrícula, pensiones, materiales o servicios relacionados con la universidad.', type: "number" },
   { value: 'MatriculasColegio', label: 'Matrículas Colegio', Help: 'Gastos relacionados con la matrícula y otros pagos escolares para la educación de los hijos en instituciones de nivel primario o secundario.', type: "number" },
-  { value: 'Otro', label: 'Otro', Help: 'Cualquier otro gasto relacionado con educación, donaciones u otros pagos que no se ajusten a las categorías anteriores.', type: "number",visible: true }
+  { value: 'Otros', label: 'Otro', Help: 'Cualquier otro gasto relacionado con educación, donaciones u otros pagos que no se ajusten a las categorías anteriores.', type: "number",visible: true }
 ];
