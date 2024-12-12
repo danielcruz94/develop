@@ -148,8 +148,8 @@ function CreativeFloatingSelect({ options, seccion }) {
                 )}
                 <input
                   type={selectedOption?.type === 'number' ? 'number' : 'text'}
-                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase()}
-                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase()}
+                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()}
+                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase() || Datos[0].charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()}
                   onFocus={Datos[0]}
                   className="selected-input"
                 />
