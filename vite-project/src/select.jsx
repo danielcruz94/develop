@@ -137,9 +137,10 @@ function CreativeFloatingSelect({ options, seccion }) {
     return (
       <div className="selected-options-container">
         {selectedOptions.map((option) => {
+          const variable = false;
           const isCustomOption = option.includes('Otros');
           const selectedOption = options.find((opt) => opt.value === option) || {};         
-          const name = false ? otherProductName || 'default' : option;
+          const name = variable ? otherProductName || 'default' : option;
 
           console.log(isCustomOption)
   
