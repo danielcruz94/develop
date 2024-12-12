@@ -163,9 +163,10 @@ function CreativeFloatingSelect({ options, seccion }) {
 
        
           
+          
   
           const firstData = Datos[0] || 'default';
-          const secondData = Datos[1] || 'default';
+          const secondData = !isNaN(Datos[1]) ? Datos[0] : Datos[1];
 
           
   
