@@ -139,9 +139,9 @@ function CreativeFloatingSelect({ options, seccion }) {
         {selectedOptions.map((option) => {
           const isCustomOption = option.includes('Otros');
           const selectedOption = options.find((opt) => opt.value === option) || {};         
-          const name = isCustomOption ? otherProductName || 'default' : option;
+          const name = false ? otherProductName || 'default' : option;
 
-          console.log(name)
+          console.log(isCustomOption)
   
           let Datos = [];
   
@@ -160,13 +160,13 @@ function CreativeFloatingSelect({ options, seccion }) {
             }
           }
 
+       
           
   
           const firstData = Datos[0] || 'default';
           const secondData = Datos[1] || 'default';
 
-          console.log(firstData)
-          console.log(secondData)
+          
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
