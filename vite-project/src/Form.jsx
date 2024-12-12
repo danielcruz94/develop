@@ -61,106 +61,123 @@ const Form = () => {
   }, []);
 
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
   
     const sections = document.querySelectorAll('[data-section]');
     const formData = {};
   
-    sections.forEach(section => {
-      const sectionName = section.getAttribute('data-section');
-      formData[sectionName] = {}; 
+    // Función para procesar las secciones
+    const processSection = (section) => {
+        const sectionName = section.getAttribute('data-section');
+        const sectionData = {};
   
-      const inputs = section.querySelectorAll('input');
-      const placeholdersCount = {}; 
-  
-      inputs.forEach(input => {
-        const placeholder = input.name || 'Campo sin name';
-        if (placeholdersCount[placeholder]) {
-          placeholdersCount[placeholder] += 1;
-        } else {
-          placeholdersCount[placeholder] = 1;
-        }
-      });
-  
-      
-      inputs.forEach(input => {
-        const placeholder = input.name || 'Campo sin name';
-        const value = input.value.trim();
-  
-        if (value) {
-          if (placeholdersCount[placeholder] > 1) {
-            if (formData[sectionName][placeholder]) {
-              formData[sectionName][placeholder].push(value);
+        const inputs = section.querySelectorAll('input');
+        const placeholdersCount = {}; 
+
+        // Contamos las ocurrencias de los nombres de los campos (name)
+        inputs.forEach(input => {
+            const placeholder = input.name || 'Campo sin name';
+            if (placeholdersCount[placeholder]) {
+                placeholdersCount[placeholder] += 1;
             } else {
-              formData[sectionName][placeholder] = [value];
+                placeholdersCount[placeholder] = 1;
             }
-          } else {
-            formData[sectionName][placeholder] = value;
-          }
-        }
-      });
-    });
+        });
+
+        // Guardamos los valores de los inputs en el objeto sectionData
+        inputs.forEach(input => {
+            const placeholder = input.name || 'Campo sin name';
+            const value = input.value.trim();
   
-    // Deudas Corto Plazo
+            if (value) {
+                if (placeholdersCount[placeholder] > 1) {
+                    // Si hay varios campos con el mismo nombre, los almacenamos en un array
+                    if (sectionData[placeholder]) {
+                        sectionData[placeholder].push(value);
+                    } else {
+                        sectionData[placeholder] = [value];
+                    }
+                } else {
+                    sectionData[placeholder] = value;
+                }
+            }
+        });
+
+        // Buscamos subsecciones dentro de la sección
+        const subsections = section.querySelectorAll('[data-section]');
+        subsections.forEach(subsection => {
+            const subData = processSection(subsection); // Procesamos recursivamente las subsecciones
+            sectionData[subsection.getAttribute('data-section')] = subData; // Asignamos la subsección como objeto
+        });
+
+        return sectionData;
+    };
+
+    // Procesamos cada sección principal y almacenamos los datos en formData
+    sections.forEach(section => {
+        const sectionName = section.getAttribute('data-section');
+        formData[sectionName] = processSection(section);
+    });
+
+    // Deudas Corto Plazo (lógica específica sin cambios)
     formData.DeudasCortoPlazo = [];
     const cortoPlazoSections = document.querySelectorAll('[data-section="DeudasCortoPlazo"] input');
     cortoPlazoSections.forEach((input, index) => {
-      const name = input.name;
-      const value = input.value.trim();
-      if (value) {
-        const deudaIndex = Math.floor(index / 6); 
-        if (!formData.DeudasCortoPlazo[deudaIndex]) {
-          formData.DeudasCortoPlazo[deudaIndex] = {}; 
+        const name = input.name;
+        const value = input.value.trim();
+        if (value) {
+            const deudaIndex = Math.floor(index / 6);
+            if (!formData.DeudasCortoPlazo[deudaIndex]) {
+                formData.DeudasCortoPlazo[deudaIndex] = {};
+            }
+            formData.DeudasCortoPlazo[deudaIndex][name] = value;
         }
-        formData.DeudasCortoPlazo[deudaIndex][name] = value;
-      }
     });
-  
-    // Deudas Largo Plazo
+
+    // Deudas Largo Plazo (lógica específica sin cambios)
     formData.DeudasLargoPlazo = [];
     const largoPlazoSections = document.querySelectorAll('[data-section="DeudasLargoPlazo"] input');
     largoPlazoSections.forEach((input, index) => {
-      const name = input.name;
-      const value = input.value.trim();
-      if (value) {
-        const deudaIndex = Math.floor(index / 6); 
-        if (!formData.DeudasLargoPlazo[deudaIndex]) {
-          formData.DeudasLargoPlazo[deudaIndex] = {}; 
+        const name = input.name;
+        const value = input.value.trim();
+        if (value) {
+            const deudaIndex = Math.floor(index / 6);
+            if (!formData.DeudasLargoPlazo[deudaIndex]) {
+                formData.DeudasLargoPlazo[deudaIndex] = {};
+            }
+            formData.DeudasLargoPlazo[deudaIndex][name] = value;
         }
-        formData.DeudasLargoPlazo[deudaIndex][name] = value;
-      }
     });
-  
-    // Objetivos
+
+    // Objetivos (lógica específica sin cambios)
     formData.objetivos = [];
     const objetivoSections = document.querySelectorAll('[data-section="objetivos"] input');
     objetivoSections.forEach((input, index) => {
-      const name = input.name;
-      const value = input.value.trim();
-      if (value) {
-        const objetivoIndex = Math.floor(index / 5); 
-        if (!formData.objetivos[objetivoIndex]) {
-          formData.objetivos[objetivoIndex] = {}; 
+        const name = input.name;
+        const value = input.value.trim();
+        if (value) {
+            const objetivoIndex = Math.floor(index / 5);
+            if (!formData.objetivos[objetivoIndex]) {
+                formData.objetivos[objetivoIndex] = {};
+            }
+            formData.objetivos[objetivoIndex][name] = value;
         }
-        formData.objetivos[objetivoIndex][name] = value;
-      }
     });
-  
+
+    // Agregar datos adicionales
     formData.datosMongo = { ...formData.datosMongo, cedula: cedula };
   
     console.log(formData);
-  
+
     try {
-     
-      const response = await axios.put('http://localhost:3001/api/actualizar', formData);
-  
-      console.log('Datos enviados correctamente:', response.data);
+        const response = await axios.put('http://localhost:3001/api/actualizar', formData);
+        console.log('Datos enviados correctamente:', response.data);
     } catch (error) {
-      // Manejo de errores
-      console.error('Error al enviar los datos:', error);
+        console.error('Error al enviar los datos:', error);
     }
-  };
+};
+
   
 
 

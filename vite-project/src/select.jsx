@@ -3,8 +3,8 @@ import './CreativeFloatingSelect.css';
 
 function CreativeFloatingSelect({ options, seccion }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [valueData, setValuedata] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]); 
+  const [selectedValue, setSelectedValue] = useState(''); 
   const [helpText, setHelpText] = useState(null);
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [isOtherInputVisible, setIsOtherInputVisible] = useState(false);
@@ -25,8 +25,12 @@ function CreativeFloatingSelect({ options, seccion }) {
     };
   }, []);
 
-  const handleSelectChange = (value) => {
-    setValuedata(value)
+  const handleSelectChange = (value) => {   
+    
+    // Guardamos el valor seleccionado en `selectedValue`
+    setSelectedValue(value); 
+  
+  
     const validValues = [
       'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
       'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
@@ -35,11 +39,13 @@ function CreativeFloatingSelect({ options, seccion }) {
     ];
   
     if (validValues.includes(value)) {
-      setIsOtherInputVisible(true);  // Muestra el input para 'Otros' o cualquier otro valor válido
+      setIsOtherInputVisible(true);  // Muestra el input para ingresar el texto adicional
     } else {
-      setSelectedOptions((prevOptions) => [...prevOptions, value]);  // Agrega a las opciones seleccionadas
+      setSelectedOptions((prevOptions) => [...prevOptions, value]);
     }
   };
+  
+  
 
   const removeOption = (optionToRemove) => {
     setSelectedOptions((prevOptions) =>
@@ -57,18 +63,19 @@ function CreativeFloatingSelect({ options, seccion }) {
 
   const handleAddOtherProduct = () => {
     if (otherProductName) {
-      const newOption = {
-        label: otherProductName,
-        value: generateUniqueValue(otherProductName),
-        type: 'text',
-        placeholder: otherProductName, 
-      };
-      setSelectedOptions((prevOptions) => [...prevOptions, newOption.value]);
-      setNewOtherOption(newOption);
+      // Concatenamos el valor seleccionado con el texto ingresado por el usuario
+      const concatenatedValue = `${selectedValue}-${otherProductName}`;
+  
+      // Agregamos la opción concatenada a `selectedOptions`
+      setSelectedOptions((prevOptions) => [...prevOptions, concatenatedValue]);
+  
+      // Ocultamos el campo de entrada y reseteamos el texto
       setIsOtherInputVisible(false);
-      setOtherProductName(''); 
+      setOtherProductName('');
     }
   };
+  
+  
 
   const duplicateInput = (option) => {
     // Encuentra el índice de la opción seleccionada
@@ -109,21 +116,27 @@ function CreativeFloatingSelect({ options, seccion }) {
     if (selectedOptions.length === 0) {
       return <p>No hay opciones seleccionadas</p>;
     }
-
+  
     return (
-      <div className="selected-options-container" >
-       
+      <div className="selected-options-container">
         {selectedOptions.map((option) => {
-          
-          const isCustomOption = option.includes('Otros');           
-          const selectedOption = options.find((opt) => opt.value === option);          
+          const isCustomOption = option.includes('Otros');
+          const selectedOption = options.find((opt) => opt.value === option);
           const name = isCustomOption ? otherProductName : option;
-
-          const cleanedName = name.replace(/[^a-zA-Z]/g, '');
-     
-
+          const cleanedName = name.replace(/[^a-zA-Z-]/g, '');
+          let Datos = [];
+  
+         
+  
+          if (cleanedName.includes('-')) {
+            Datos = cleanedName.split('-');
+          } else {
+            Datos = [cleanedName, cleanedName];
+          }
+  
+          
           return (
-            <div key={option} className="selected-option" data-section={valueData} >
+            <div key={option} className="selected-option" data-section={Datos[0]}>
               <div className="input-container">
                 {!isCustomOption && selectedOption?.visible && (
                   <span
@@ -135,8 +148,9 @@ function CreativeFloatingSelect({ options, seccion }) {
                 )}
                 <input
                   type={selectedOption?.type === 'number' ? 'number' : 'text'}
-                  placeholder={cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()}
-                  name={cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase()} 
+                  placeholder={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase()}
+                  name={Datos[1].charAt(0).toUpperCase() + Datos[1].slice(1).toLowerCase()}
+                  onFocus={Datos[0]}
                   className="selected-input"
                 />
               </div>
@@ -161,7 +175,7 @@ function CreativeFloatingSelect({ options, seccion }) {
       </div>
     );
   };
-
+  
   return (
     <div className="SelectContainer">
       <div className="select-container" data-section={seccion || 'default-value'}>
