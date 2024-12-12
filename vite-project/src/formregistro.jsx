@@ -213,6 +213,8 @@ const ElegantBlueFinancialPlanningForm = () => {
   return (
     <div className="form-container">
       <div className="form-content">
+        
+        
         <h2>Planeación Financiera</h2>
         <div className="progress-bar">
           {[1, 2, 3, 4].map((step) => (
