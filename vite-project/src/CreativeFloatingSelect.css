@@ -284,9 +284,10 @@ input[type="number"]::-ms-clear {
   border-color: #06175C;
 }
 
-.other-input-container button{
+.other-input-container button {
   background: #06175C;
   color: white;
+  font-size: 12px;
 }
 
 

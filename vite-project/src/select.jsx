@@ -134,8 +134,10 @@ function CreativeFloatingSelect({ options, seccion }) {
       <div className="selected-options-container">
         {selectedOptions.map((option) => {
           const isCustomOption = option.includes('Otros');
-          const selectedOption = options.find((opt) => opt.value === option) || {};
+          const selectedOption = options.find((opt) => opt.value === option) || {};         
           const name = isCustomOption ? otherProductName || 'default' : option;
+
+          console.log(name)
   
           let Datos = [];
   
@@ -147,12 +149,20 @@ function CreativeFloatingSelect({ options, seccion }) {
             }
           } else {
             if (name.includes('-')) {
-              Datos = name.split('-');
+              Datos = name.split('-');            
+
+            }else{
+              Datos = [name, name]
             }
           }
+
+          
   
           const firstData = Datos[0] || 'default';
           const secondData = Datos[1] || 'default';
+
+          console.log(firstData)
+          console.log(secondData)
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
@@ -167,7 +177,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                 )}
                 <input
                   type={selectedOption?.type || "Number"}
-                  placeholder={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
+                  placeholder={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase() }
                   name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
                   onFocus={() => handleFocus(firstData)}
                   className="selected-input"
@@ -220,7 +230,7 @@ function CreativeFloatingSelect({ options, seccion }) {
         </div>
 
         {isOtherInputVisible && (
-          <div className="other-input-container">
+          <div className="other-input-container">           
             <input
               type="text"
               placeholder="Agregar el nombre del producto"
