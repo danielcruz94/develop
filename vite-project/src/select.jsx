@@ -132,11 +132,11 @@ function CreativeFloatingSelect({ options, seccion }) {
             Datos = cleanedName.split('-');
           } else {
             Datos = [cleanedName, cleanedName];
+            Datos[0] = Datos[0].slice(0, -1);
           }
   
-          
           return (
-            <div key={option} className="selected-option" data-section={Datos[0]}>
+            <div key={option} className="selected-option" data-section={seccion === 'ingresos'?  Datos[0] : undefined}>
               <div className="input-container">
                 {!isCustomOption && selectedOption?.visible && (
                   <span
