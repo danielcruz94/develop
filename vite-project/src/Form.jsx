@@ -43,22 +43,41 @@ const Form = () => {
     "Objetivos Financieros"
   ];
 
-  useEffect(() => {
-    const cedulaExistente = localStorage.getItem('cedula');
+ 
 
-    if (!cedulaExistente) {
-      setCedula(datosMongo.cedula);
-      localStorage.setItem('cedula', datosMongo.cedula);
-    }
+useEffect(() => {
+  const cedulaExistente = localStorage.getItem('cedula');
 
-    const cedulaRecuperada = localStorage.getItem('cedula');
+  if (!cedulaExistente) {
+    setCedula(datosMongo.cedula);
+    localStorage.setItem('cedula', datosMongo.cedula);
+  }
 
-    if (cedulaRecuperada) {
-      setCedula(cedulaRecuperada);
-    } else {
-      console.log("La cedula no está disponible.");
-    }
-  }, []);
+  const cedulaRecuperada = localStorage.getItem('cedula');
+
+  if (cedulaRecuperada) {
+    setCedula(cedulaRecuperada);
+
+    axios.get(`http://localhost:3001/api/cliente/${cedulaRecuperada}/fieldset`)
+      .then(response => {
+        console.log(response.data.fieldset)
+
+            if (response.data.fieldset <= 5) {
+              setCurrentStep(response.data.fieldset);
+              
+          } else {
+              window.location.href = 'https://axia.com.co/';
+          }
+        
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  } else {
+    console.log("La cédula no está disponible.");
+  }
+}, []);
+
 
 
 // Función para recolectar los datos del formulario
@@ -135,7 +154,7 @@ const collectFormData = () => {
   });
 
   // Agregar cédula al objeto final (si es necesario)
-  formData.datosMongo = { ...formData.datosMongo, cedula };
+  formData.datosMongo = { ...formData.datosMongo, cedula , fieldset: currentStep+1 };
 
   return formData;
 };
