@@ -34,26 +34,26 @@ function CreativeFloatingSelect({ options, seccion }) {
   
   
     const validValues = [
-      'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
-      'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
-      'Honorarios', 'PrimaDeServicios', 'PrimaExtralegal', 'Renta', 
-      'SubsidioDeTransporte', 'SubsidioFamiliar', 'Otros',
-      'CuentaAhorros', 'CuentaCorriente', 'CuentaEnOtraMoneda', 'Efectivo', 'Otro',
-      'Acciones', 'Apartamento', 'BienesRaicesParaInversion', 'Bodega', 'Bonos', 
-      'CarteraColectiva', 'Casa', 'CDT', 'CuentaInversionUSD', 'CuentaPorCobrarATerceros', 
-      'Empresa', 'Fiducia', 'FondoDeCesantias', 'FondoObligatorioDePensiones', 
-      'FondoVoluntarioDePensiones', 'FondosMutuos', 'Local', 'Negocio', 
-      'ParticipacionesEnSociedades', 'Semovientes', 'TituloDeCapitalizacion', 'Otros',
-      'Apartamento', 'Bodega', 'Caballos', 'Casa', 'Finca', 'Joyas', 'Lancha', 'Local', 
-      'Maquinas', 'Moto', 'MueblesYAccesorios', 'Terreno', 'Vehiculo', 'Otro',
-      'CuentaCorriente', 'CuentaDeAhorros', 'Fiducias', 'FondoDeEmpleados', 'inversionesExterior',
-      'CarteraColectiva', 'Cooperativas', 'CuentaAFC', 'FondosMutuos', 'PensionVoluntaria',
-      'ProvisionAnualidades', 'Otros'
-  ];
+      'salario_tradicional', 'salario_integral', 'arriendo', 'auxilio', 
+      'beneficio', 'bonificacion', 'comisiones', 'dividendos', 
+      'honorarios', 'prima_de_servicios', 'prima_extralegal', 'renta', 
+      'subsidio_de_transporte', 'subsidio_familiar', 'otros',
+      'cuenta_ahorros', 'cuenta_corriente', 'cuenta_en_otra_moneda', 'efectivo', 'otro',
+      'acciones', 'apartamento', 'bienes_raices_para_inversion', 'bodega', 'bonos', 
+      'cartera_colectiva', 'casa', 'cdt', 'cuenta_inversion_usd', 'cuenta_por_cobrar_a_terceros', 
+      'empresa', 'fiducia', 'fondo_de_cesantias', 'fondo_obligatorio_de_pensiones', 
+      'fondo_voluntario_de_pensiones', 'fondos_mutuos', 'local', 'negocio', 
+      'participaciones_en_sociedades', 'semovientes', 'titulo_de_capitalizacion', 'otros',
+      'apartamento', 'bodega', 'caballos', 'casa', 'finca', 'joyas', 'lancha', 'local', 
+      'maquinas', 'moto', 'muebles_y_accesorios', 'terreno', 'vehiculo', 'otro',
+      'cuenta_corriente', 'cuenta_de_ahorros', 'fiducias', 'fondo_de_empleados', 'inversiones_exterior',
+      'cartera_colectiva', 'cooperativas', 'cuenta_afc', 'fondos_mutuos', 'pension_voluntaria',
+      'provision_anualidades', 'otros'
+    ];
   
     
   
-    if (validValues.includes(value)) {
+    if (validValues.some(v => v.toLowerCase() === value.toLowerCase())) {
       setIsOtherInputVisible(true);  // Muestra el input para ingresar el texto adicional
     } else {
       setSelectedOptions((prevOptions) => [...prevOptions, value]);
@@ -142,7 +142,6 @@ function CreativeFloatingSelect({ options, seccion }) {
           const selectedOption = options.find((opt) => opt.value === option) || {};         
           const name = variable ? otherProductName || 'default' : option;
 
-          console.log(isCustomOption)
   
           let Datos = [];
   
@@ -172,22 +171,25 @@ function CreativeFloatingSelect({ options, seccion }) {
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
-              <div className="input-container">
-                {!isCustomOption && selectedOption?.visible && (
-                  <span
-                    className="duplicate-icon"
-                    onClick={() => duplicateInput(option)}
-                  >
-                    <i className="bi bi-plus-circle duplicate-icon2"></i>
-                  </span>
-                )}
-                <input
-                  type={selectedOption?.type || "Number"}
-                  placeholder={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase() }
-                  name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
-                  onFocus={() => handleFocus(firstData)}
-                  className="selected-input"
-                />
+            
+              <div className='label-input'>
+              <p >{name.replace(/[-_]/g, " ")}</p>
+                  <div className="input-container">
+                    {!isCustomOption && selectedOption?.visible && (
+                      <span
+                        className="duplicate-icon"
+                        onClick={() => duplicateInput(option)}
+                      >
+                        <i className="bi bi-plus-circle duplicate-icon2"></i>
+                      </span>
+                    )}
+                    <input
+                      type={selectedOption?.type || "Number"}                     
+                      name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
+                      onFocus={() => handleFocus(firstData)}
+                      className="selected-input"
+                    />
+                  </div>
               </div>
               <div className="icon-container">
                 <span
