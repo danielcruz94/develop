@@ -80,13 +80,13 @@ function ObjectiveInputForm( {seccion }) {
             )}
 
             <div className="input-group">
+              <p>Objetivo</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`objetivo`}  // Asignamos el name único por fila
                   value={row.objetivo}
-                  onChange={(e) => handleInputChange(index, 'objetivo', e.target.value)}
-                  placeholder="Objetivo"
+                  onChange={(e) => handleInputChange(index, 'objetivo', e.target.value)}                  
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -97,13 +97,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Descripción</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`descripcion`} 
                   value={row.descripcion}
-                  onChange={(e) => handleInputChange(index, 'descripcion', e.target.value)}
-                  placeholder="Descripción"
+                  onChange={(e) => handleInputChange(index, 'descripcion', e.target.value)}                
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -114,13 +114,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Plazo (Años)</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`plazo`}
                   value={row.plazo}
-                  onChange={(e) => handleInputChange(index, 'plazo', e.target.value)}
-                  placeholder="Plazo (Años)"
+                  onChange={(e) => handleInputChange(index, 'plazo', e.target.value)}                 
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -131,13 +131,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Valor del objetivo</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`vrObjetivo`} 
                   value={row.vrObjetivo}
-                  onChange={(e) => handleInputChange(index, 'vrObjetivo', e.target.value)}
-                  placeholder="Valor del objetivo"
+                  onChange={(e) => handleInputChange(index, 'vrObjetivo', e.target.value)}                 
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -148,13 +148,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Comentarios</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`comentarios`}  
                   value={row.comentarios}
-                  onChange={(e) => handleInputChange(index, 'comentarios', e.target.value)}
-                  placeholder="Comentarios"
+                  onChange={(e) => handleInputChange(index, 'comentarios', e.target.value)}                 
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"

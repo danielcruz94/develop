@@ -74,6 +74,14 @@
     margin-left: 10px;
   }
 
+  .input-group p{
+    text-align: left;  
+    font-size: 12px;
+    margin: 0px;
+    color: #5b5353;
+    margin-left: 10px;
+  }
+
   /* Media queries para pantallas pequeñas */
 @media screen and (max-width: 800px) {
 

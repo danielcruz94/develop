@@ -243,7 +243,6 @@ const handleNext = async () => {
             <h2>Ingresos</h2>
               <Selector options={ingresos} seccion="ingresos"/>
               <br />
-              <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
@@ -279,7 +278,6 @@ const handleNext = async () => {
               <h2 className="fs-title">Otros</h2>
               <Selector options={otros} seccion="otros"/>  
               <br />
-              <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
@@ -299,7 +297,6 @@ const handleNext = async () => {
               <h2 className="fs-title"> Impuestos</h2>
               <Selector options={impuestos} seccion="Impuestos"/>
               <br />
-              <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
@@ -314,7 +311,6 @@ const handleNext = async () => {
               <h2 className="fs-title">Activos improductivos</h2>
               <Selector options={activosImproductivos} seccion="activosImproductivos"/>
               <br />
-              <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
@@ -325,7 +321,7 @@ const handleNext = async () => {
                 <Deudas  seccion="DeudasCortoPlazo"/>
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
-              <input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />
+              {/*<input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />*/}
               <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Guardar" />
             </fieldset>
           </div>

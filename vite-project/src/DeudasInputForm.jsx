@@ -93,13 +93,13 @@ function DebtInputForm({ seccion }) {
             )}
 
             <div className="input-group">
+            <p>Pasivo</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`pasivo`}  // Agregamos el atributo name
                   value={row.pasivo}
-                  onChange={(e) => handleInputChange(index, 'pasivo', e.target.value)}
-                  placeholder="Pasivo"
+                  onChange={(e) => handleInputChange(index, 'pasivo', e.target.value)}                  
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -110,13 +110,13 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Saldo de Capital</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`saldoCapital`}  
                   value={row.saldoCapital}
-                  onChange={(e) => handleInputChange(index, 'saldoCapital', e.target.value)}
-                  placeholder="Saldo de Capital"
+                  onChange={(e) => handleInputChange(index, 'saldoCapital', e.target.value)}                 
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -127,12 +127,12 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Entidad</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`entidad`}  
-                  onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}
-                  placeholder="Entidad"
+                  onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}                  
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -143,13 +143,13 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Tasa (%)</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`tasa`}  
                   value={row.tasa}
-                  onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}
-                  placeholder="Tasa (%)"
+                  onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}                  
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -160,13 +160,13 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Numero Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`cuotasPendientes`} 
                   value={row.cuotasPendientes}
-                  onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}
-                  placeholder="# Cuotas Pendientes"
+                  onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}                 
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -177,13 +177,13 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
+            <p>Cuota Mensual</p>
               <div className="input-container2">
                 <input
                   type="number"
                   name={`cuotaMensual`}  
                   value={row.cuotaMensual}
-                  onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}
-                  placeholder="Cuota Mensual"
+                  onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}                  
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"

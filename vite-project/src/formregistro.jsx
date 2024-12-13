@@ -70,8 +70,9 @@ const ElegantBlueFinancialPlanningForm = () => {
   
       // Cambiar el código de estado a 201 para una creación exitosa
       if (response.status === 201) {
-       
-        navigate('/login');
+
+        localStorage.setItem('cedula', response.data.cedula); 
+        navigate('/formulario');
       } else {
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
       }
