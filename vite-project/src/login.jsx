@@ -35,6 +35,8 @@ const InteractiveLoginForm = () => {
   
         // Mostrar los datos del cliente en consola
         //console.log('Datos del cliente recibido en el login:', response.data.cliente);
+
+        localStorage.setItem('cedula', response.data.cliente.cedula);
   
         // Comentar esta línea si no deseas redirigir a la página principal
         navigate('/formulario');
