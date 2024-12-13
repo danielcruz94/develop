@@ -194,6 +194,8 @@ const handleNext = async () => {
      
         if (currentStep < steps.length - 1) {            
             setCurrentStep(currentStep + 1);  // Avanzar al siguiente paso
+            window.scrollTo(0, 0);
+
         } 
     } catch (error) {
         console.error('Error al enviar los datos:', error);

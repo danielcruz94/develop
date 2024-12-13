@@ -160,7 +160,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Numero Cuotas Pendientes</p>
+            <p>Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
                   type="number"
