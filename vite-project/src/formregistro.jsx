@@ -40,11 +40,10 @@ const ElegantBlueFinancialPlanningForm = () => {
     // Validación de campos vacíos
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
-      'direccionCasa', 'direccionOficina', 'celular', 'telefonoCasa', 'telefonoOficina',
-      'empresa', 'cargo', 'fechaIngreso', 'tipoContratacion', 'profesion', 'universidad',
-      'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
+      'direccionCasa', 'celular', 'empresa', 'cargo', 'tipoContratacion', 'profesion', 
+      'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
     ];
-  
+    
     for (let field of requiredFields) {
       if (!formData[field]) {
         alert(`El campo ${field} es obligatorio.`);

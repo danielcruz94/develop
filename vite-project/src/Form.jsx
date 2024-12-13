@@ -164,8 +164,8 @@ const collectFormData = () => {
       // Función para enviar los datos al servidor
       const sendFormData = async (formData) => {
         try {
-            const response = await axios.put('http://localhost:3001/api/actualizar', formData);
-            console.log('Datos enviados correctamente:', response.data);
+            const response = await axios.put('http://localhost:3001/api/actualizar', formData);            
+              window.location.href = 'https://axia.com.co/';
         } catch (error) {
             console.error('Error al enviar los datos:', error);
         }
@@ -173,9 +173,8 @@ const collectFormData = () => {
    
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const formData = collectFormData(); 
-      
-      sendFormData(formData);  
+      const formData = collectFormData();       
+      sendFormData(formData);           
     };
 
 
@@ -202,13 +201,13 @@ const handleNext = async () => {
     }
 };
 
+/*
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
     }
   };
-
-        
+*/    
   
   
 
@@ -322,7 +321,7 @@ const handleNext = async () => {
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
               {/*<input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />*/}
-              <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Guardar" />
+              <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Finalizar" />
             </fieldset>
           </div>
         </div>
