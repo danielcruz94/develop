@@ -167,6 +167,8 @@ function CreativeFloatingSelect({ options, seccion }) {
           const firstData = Datos[0] || 'default';
           const secondData = !isNaN(Datos[1]) ? Datos[0] : Datos[1];
 
+       
+
           
   
           return (
@@ -184,8 +186,9 @@ function CreativeFloatingSelect({ options, seccion }) {
                       </span>
                     )}
                     <input
-                      type={selectedOption?.type || "Number"}                     
-                      name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}
+                      type={selectedOption?.type || "Number"}  
+                     /* name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}   */                
+                      name={name}
                       onFocus={() => handleFocus(firstData)}
                       className="selected-input"
                     />

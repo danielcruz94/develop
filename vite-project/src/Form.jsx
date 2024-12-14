@@ -132,23 +132,39 @@ const collectFormData = () => {
           sections.forEach(section => {
               const sectionName = section.getAttribute('data-section');
               const validValues = [
-                  'SalarioTradicional', 'SalarioIntegral', 'Arriendo', 'Auxilio', 
+                  'Salario_Tradicional', 'Salario_Integral', 'Arriendo', 'Auxilio', 
                   'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
-                  'Honorarios', 'PrimaDeServicios', 'PrimaExtralegal', 'Renta', 
-                  'SubsidioDeTransporte', 'SubsidioFamiliar'
+                  'Honorarios', 'Prima_De_Servicios', 'Prima_Extra_legal', 'Renta', 
+                  'Subsidio_De_Transporte', 'Subsidio_Familiar'
               ];
 
               // Solo procesar secciones dentro del fieldset visible
               if (sectionName === 'ingresos') {
-                  if (!formData.ingresos) formData.ingresos = {};
-                  const subsections = section.querySelectorAll('[data-section]');
-                  subsections.forEach(subsection => {
-                      const subData = processSection(subsection);
-                      formData.ingresos[subsection.getAttribute('data-section')] = subData;
-                  });
-              } else if (!validValues.includes(sectionName)) {
-                  formData[sectionName] = processSection(section);
-              }
+                if (!formData.ingresos) formData.ingresos = {};
+                
+                const subsections = section.querySelectorAll('[data-section]');
+                subsections.forEach(subsection => {
+                    const subData = processSection(subsection);
+                    const subsectionKey = subsection.getAttribute('data-section');
+                    
+                    // Verificamos si ya existe un array para esa subsección
+                    if (formData.ingresos[subsectionKey]) {
+                        // Si es un array, agregamos la nueva subsección al array
+                        if (Array.isArray(formData.ingresos[subsectionKey])) {
+                            formData.ingresos[subsectionKey].push(subData);
+                        } else {
+                            // Si no es un array, lo convertimos a uno y luego agregamos
+                            formData.ingresos[subsectionKey] = [formData.ingresos[subsectionKey], subData];
+                        }
+                    } else {
+                        // Si no existe, simplemente asignamos el valor
+                        formData.ingresos[subsectionKey] = subData;
+                    }
+                });
+            } else if (!validValues.includes(sectionName)) {
+                formData[sectionName] = processSection(section);
+            }
+            
           });
       }
   });
@@ -158,7 +174,6 @@ const collectFormData = () => {
 
   return formData;
 };
-
 
 
       // Función para enviar los datos al servidor

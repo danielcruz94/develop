@@ -290,6 +290,10 @@ input[type="number"]::-ms-clear {
   font-size: 12px;
 }
 
+.label-input{
+  width: 100%;
+}
+
 .label-input p {
   text-align: left;  
   font-size: 12px;
@@ -297,6 +301,7 @@ input[type="number"]::-ms-clear {
   color: #5b5353;
   margin-left: 10px;
 }
+
 
 /* Media queries para pantallas pequeñas */
 @media screen and (max-width: 800px) {

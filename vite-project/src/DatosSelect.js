@@ -216,15 +216,15 @@ export const activosImproductivos = [
 
 
 export const seguros = [
-  { value: 'SeguroContenidos', label: 'Seguro de Contenidos', Help: 'Cobertura para proteger los bienes dentro de una propiedad, como muebles, electrodomésticos, y objetos personales contra daños o robos.', type: "number" },
-  { value: 'SeguroInvalidez', label: 'Seguro de Invalidez', Help: 'Seguro que proporciona una compensación económica en caso de que el asegurado sufra una invalidez que le impida trabajar.', type: "number" },
-  { value:'soat', label:'Soat',Help:"Seguro contra accidentes transito obligatorio",visible: true},
-  { value: 'SeguroResponsabilidadCivil', label: 'Seguro de Responsabilidad Civil', Help: 'Cobertura que protege al asegurado frente a los daños que pueda causar a terceros, ya sea en su propiedad o en su persona.', type: "number" },
-  { value: 'SeguroSalud', label: 'Seguro de Salud', Help: 'Cobertura médica que cubre los gastos derivados de enfermedades, accidentes, y tratamientos médicos del asegurado.', type: "number" },
-  { value: 'SeguroVehiculo', label: 'Seguro de Vehículo', Help: 'Cobertura que protege al vehículo y su propietario ante accidentes, daños a terceros, y otros riesgos relacionados con la conducción del vehículo.', type: "number" },
-  { value: 'SeguroVida', label: 'Seguro de Vida', Help: 'Seguro que garantiza el pago de una suma asegurada a los beneficiarios en caso de fallecimiento del asegurado.', type: "number",visible: true },
-  { value: 'SeguroExequial', label: 'Seguro Exequial', Help: 'Cobertura destinada a cubrir los gastos funerarios y otros servicios relacionados con el fallecimiento del asegurado.', type: "number" },
-  { value: 'SeguroVivienda', label: 'Seguro Vivienda', Help: 'Cobertura que protege el hogar y sus contenidos contra daños o pérdidas debido a incendios, robos, desastres naturales, entre otros.', type: "number" }
+  { value: 'Seguro_Contenidos', label: 'Seguro de Contenidos', Help: 'Cobertura para proteger los bienes dentro de una propiedad, como muebles, electrodomésticos, y objetos personales contra daños o robos.', type: "number" },
+  { value: 'Seguro_Invalidez', label: 'Seguro de Invalidez', Help: 'Seguro que proporciona una compensación económica en caso de que el asegurado sufra una invalidez que le impida trabajar.', type: "number" },
+  { value: 'soat', label:'Soat',Help:"Seguro contra accidentes transito obligatorio",visible: true},
+  { value: 'Seguro_Responsabilidad_Civil', label: 'Seguro de Responsabilidad Civil', Help: 'Cobertura que protege al asegurado frente a los daños que pueda causar a terceros, ya sea en su propiedad o en su persona.', type: "number" },
+  { value: 'Seguro_Salud', label: 'Seguro de Salud', Help: 'Cobertura médica que cubre los gastos derivados de enfermedades, accidentes, y tratamientos médicos del asegurado.', type: "number" },
+  { value: 'Seguro_Vehiculo', label: 'Seguro de Vehículo', Help: 'Cobertura que protege al vehículo y su propietario ante accidentes, daños a terceros, y otros riesgos relacionados con la conducción del vehículo.', type: "number" },
+  { value: 'Seguro_Vida', label: 'Seguro de Vida', Help: 'Seguro que garantiza el pago de una suma asegurada a los beneficiarios en caso de fallecimiento del asegurado.', type: "number",visible: true },
+  { value: 'Seguro_Exequial', label: 'Seguro Exequial', Help: 'Cobertura destinada a cubrir los gastos funerarios y otros servicios relacionados con el fallecimiento del asegurado.', type: "number" },
+  { value: 'Seguro_Vivienda', label: 'Seguro Vivienda', Help: 'Cobertura que protege el hogar y sus contenidos contra daños o pérdidas debido a incendios, robos, desastres naturales, entre otros.', type: "number" }
 ];
 
 
