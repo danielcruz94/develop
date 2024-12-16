@@ -121,8 +121,8 @@ const ElegantBlueFinancialPlanningForm = () => {
               required
             >
               <option value="">Sexo</option>
-              <option value="hombre">Hombre</option>
-              <option value="mujer">Mujer</option>
+              <option value="Hombre">Hombre</option>
+              <option value="Mujer">Mujer</option>
             </select>
 
           </motion.div>
