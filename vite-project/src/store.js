@@ -1,25 +1,43 @@
-// store.js
+// redux/store.js
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-// Crear un slice (una parte del estado) para `datosMongo`
-const datosMongoSlice = createSlice({
-  name: 'datosMongo', 
-  initialState: { datosMongo: {} }, 
+// Slice para `serverURL`
+const serverUrlSlice = createSlice({
+  name: 'serverURL',
+  initialState: {
+    //serverURL: 'http://localhost:3001/api/', 
+    serverURL: 'https://server-axia.vercel.app/api/',  
+  },
   reducers: {
-    setDatosMongo: (state, action) => {
-      state.datosMongo = action.payload; 
+    setServerURL: (state, action) => {
+      state.serverURL = action.payload;
     },
   },
 });
 
-// Exportar las acciones (para actualizar el estado de `datosMongo`)
-export const { setDatosMongo } = datosMongoSlice.actions;
-
-// Configurar el store con el slice `datosMongo`
-const store = configureStore({
-  reducer: {
-    datosMongo: datosMongoSlice.reducer, // Reducer para `datosMongo`
+// Slice para `datosMongo`
+const datosMongoSlice = createSlice({
+  name: 'datosMongo',
+  initialState: {
+    datosMongo: {},
+  },
+  reducers: {
+    setDatosMongo: (state, action) => {
+      state.datosMongo = action.payload;
+    },
   },
 });
+
+// Crear el store con ambos reducers combinados
+const store = configureStore({
+  reducer: {
+    serverURL: serverUrlSlice.reducer,  // Reducer para `serverURL`
+    datosMongo: datosMongoSlice.reducer,  // Reducer para `datosMongo`
+  },
+});
+
+// Exportar las acciones de ambos slices
+export const { setServerURL } = serverUrlSlice.actions;
+export const { setDatosMongo } = datosMongoSlice.actions;
 
 export default store;

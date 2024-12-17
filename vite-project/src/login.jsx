@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setDatosMongo } from './store'; 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
+import { useSelector } from 'react-redux'; 
 import Swal from 'sweetalert2';
 
 const InteractiveLoginForm = () => {
@@ -11,6 +11,8 @@ const InteractiveLoginForm = () => {
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [shake, setShake] = useState(false)
+
+  const serverURL = useSelector(state => state.serverURL.serverURL);
 
   const dispatch = useDispatch();  
   const navigate = useNavigate(); 
@@ -21,7 +23,7 @@ const InteractiveLoginForm = () => {
   
     setShake(false);
   
-    const serverUrl = 'http://localhost:3001/api/login'; // URL de tu servidor
+    const serverUrl = `${serverURL}login`; // URL de tu servidor
   
     try {
       const response = await axios.post(serverUrl, {

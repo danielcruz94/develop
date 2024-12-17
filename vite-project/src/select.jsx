@@ -78,7 +78,7 @@ function CreativeFloatingSelect({ options, seccion }) {
 
   const handleAddOtherProduct = () => {
     if (otherProductName) {
-      // Concatenamos el valor seleccionado con el texto ingresado por el usuario
+      // Concatenamos el valor seleccionado con el texto ingresado por el usuario      
       const concatenatedValue = `${selectedValue}-${otherProductName}`;
   
       // Agregamos la opción concatenada a `selectedOptions`
@@ -160,22 +160,17 @@ function CreativeFloatingSelect({ options, seccion }) {
             }
           }
 
-       
-          
-          
-  
+            
           const firstData = Datos[0] || 'default';
-          const secondData = !isNaN(Datos[1]) ? Datos[0] : Datos[1];
-
-       
-
+         // const secondData = !isNaN(Datos[1]) ? Datos[0] : Datos[1];
+         
           
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
             
               <div className='label-input'>
-              <p >{name.replace(/[-_]/g, " ")}</p>
+              <p >{name.split('--')[0].replace(/[-_]/g, " ")}</p>
                   <div className="input-container">
                     {!isCustomOption && selectedOption?.visible && (
                       <span
@@ -188,7 +183,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                     <input
                       type={selectedOption?.type || "Number"}  
                      /* name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}   */                
-                      name={name}
+                      name={firstData}
                       onFocus={() => handleFocus(firstData)}
                       className="selected-input"
                     />

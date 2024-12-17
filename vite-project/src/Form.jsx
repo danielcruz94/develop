@@ -26,6 +26,7 @@ import {
   anualidadesPresupuestadas,
   impuestos,
   anualidadesFijas,
+  ingresosanuales,
 
 } from './DatosSelect';
 
@@ -33,6 +34,8 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const datosMongo = useSelector((state) => state.datosMongo.datosMongo);
   const [cedula, setCedula] = useState("");
+
+  const serverURL = useSelector(state => state.serverURL.serverURL);
 
   const steps = [
     "Seguridad Social",
@@ -57,10 +60,10 @@ useEffect(() => {
 
   if (cedulaRecuperada) {
     setCedula(cedulaRecuperada);
+    
 
-    axios.get(`http://localhost:3001/api/cliente/${cedulaRecuperada}/fieldset`)
-      .then(response => {
-        console.log(response.data.fieldset)
+    axios.get(`${serverURL}cliente/${cedulaRecuperada}/fieldset`)
+      .then(response => {       
 
             if (response.data.fieldset <= 5) {
               setCurrentStep(response.data.fieldset);
@@ -179,7 +182,7 @@ const collectFormData = () => {
       // Función para enviar los datos al servidor
       const sendFormData = async (formData) => {
         try {
-            const response = await axios.put('http://localhost:3001/api/actualizar', formData);            
+            const response = await axios.put(`${serverURL}actualizar`, formData);            
               window.location.href = 'https://axia.com.co/';
         } catch (error) {
             console.error('Error al enviar los datos:', error);
@@ -204,11 +207,10 @@ const handleNext = async () => {
     // Enviamos los datos al servidor
     try {
        
-        const response = await axios.put('http://localhost:3001/api/actualizar', formData);
-        console.log(response.data); 
+        const response = await axios.put(`${serverURL}actualizar`, formData);       
      
         if (currentStep < steps.length - 1) {            
-            setCurrentStep(currentStep + 1);  // Avanzar al siguiente paso
+            setCurrentStep(currentStep + 1);  
             window.scrollTo(0, 0);
 
         } 
@@ -239,7 +241,7 @@ const handleNext = async () => {
            <ul id="progressbar">
               {steps.map((step, index) => (
                 <li key={index} className={index <= currentStep ? "active" : ""}>
-                  {step}
+                  <p>{step} </p>
                 </li>
               ))}
             </ul>  
@@ -256,8 +258,12 @@ const handleNext = async () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 1 ? 'block' : 'none' }}>
-            <h2>Ingresos</h2>
+            <h2>Ingresos Mensuales</h2>
               <Selector options={ingresos} seccion="ingresos"/>
+              <br />
+
+              <h2>Ingresos Anuales</h2>
+              <Selector options={ingresosanuales} seccion="IngresosAnuales"/>
               <br />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>

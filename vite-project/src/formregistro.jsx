@@ -2,6 +2,7 @@ import{ useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';  
 import "./formregistro.css"
 
 
@@ -20,6 +21,7 @@ const InputField = ({ label, type = "text", value, onChange, required = false })
 
 const ElegantBlueFinancialPlanningForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
+  const serverURL = useSelector(state => state.serverURL.serverURL);
   
   const [formData, setFormData] = useState({
     nombre: '', apellidos: '', cedula: '', fechaNacimiento: '', lugarNacimiento: '', edad: '',
@@ -55,7 +57,7 @@ const ElegantBlueFinancialPlanningForm = () => {
     console.log("Datos a enviar:", formData);
   
     // URL del servidor (puedes cambiarla según tu entorno)
-    const serverUrl = 'http://localhost:3001/api/clientes';
+    const serverUrl = `${serverURL}clientes`;
   
     try {
       const response = await axios.post(serverUrl, formData, {
@@ -87,11 +89,17 @@ const ElegantBlueFinancialPlanningForm = () => {
   
 
   const nextStep = () => {  
-    if (currentStep < 4) setCurrentStep(currentStep + 1)      
+    if (currentStep < 4){
+       setCurrentStep(currentStep + 1) 
+       window.scrollTo(0, 0); 
+    }    
   }
 
   const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1)
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+      window.scrollTo(0, 0);
+    }
   }
 
   const renderStep = () => {

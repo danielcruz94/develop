@@ -253,6 +253,15 @@ body {
 @media screen and (max-width: 800px) {
     #msform fieldset{
         margin: 0px;
-        width: 100%;         
+        width: 100%; 
+        padding: 0px;        
+    }
+
+    #progressbar li p{
+        display: none;
+    }
+
+    #progressbar {        
+        width: 100%;
     }
   }

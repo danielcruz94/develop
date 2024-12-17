@@ -20,7 +20,18 @@ export const ingresos = [
   { value: 'Prima_Extralegal', label: 'Prima Extralegal', Help: 'Es una bonificación adicional que puede ser otorgada por el empleador, fuera de lo que estipula la ley. No es obligatoria y depende de las políticas de la empresa.', visible: true, type: "number" },
   { value: 'Renta', label: 'Renta', Help: 'Es el ingreso periódico recibido por el trabajo, el capital, o cualquier otra fuente que genere un pago regular. Incluye salarios, beneficios y otros pagos.', visible: true, type: "number" },
   { value: 'Subsidio_De_Transporte', label: 'Subsidio de Transporte', Help: 'Es un pago otorgado para cubrir el costo del transporte desde y hacia el lugar de trabajo. En muchos países es un beneficio no sujeto a impuestos.', visible: true, type: "number" },
-  { value: 'Subsidio_Familiar', label: 'Subsidio Familiar', Help: 'Beneficio económico otorgado a los trabajadores para apoyar los gastos familiares, como el cuidado de hijos o personas dependientes.', visible: true, type: "number" }
+  { value: 'Subsidio_Familiar', label: 'Subsidio Familiar', Help: 'Beneficio económico otorgado a los trabajadores para apoyar los gastos familiares, como el cuidado de hijos o personas dependientes.', visible: true, type: "number" },
+  { value: 'Otros', label: 'Otros', Help: 'Agrega en este campo cualquier otro ingreso que no encuentres en la lista .', visible: true, type: "number" }
+
+];
+
+export const ingresosanuales = [
+  { value: 'Bonificacion-', label: 'Bonificación', Help: 'Un pago adicional que se otorga en función del desempeño, resultados o alguna meta alcanzada, como incentivo o reconocimiento.', visible: true, type: "number" },
+  { value: 'Comisiones-', label: 'Comisiones', Help: 'Pago variable que se otorga en función de las ventas o rendimiento de una persona o empresa en su actividad comercial.', visible: true, type: "number" },
+  { value: 'Dividendos-', label: 'Dividendos', Help: 'Son los pagos que los accionistas reciben de las ganancias de una empresa. Se distribuyen de acuerdo con las participaciones que se tengan en la empresa.', visible: true, type: "number" },
+  { value: 'Acciones-', label: 'Acciones', Help: 'Títulos valores que representan una parte del capital social de una empresa, que otorgan derechos sobre los dividendos y sobre la propiedad de la empresa.', visible: true, type: "number" },
+  { value: 'Otros', label: 'Otros', Help: 'Agrega en este campo cualquier otro ingreso que no encuentres en la lista .', visible: true, type: "number" }
+
 ];
 
 export const ahorro = [
@@ -159,9 +170,6 @@ export const otros = [
   { value: 'Soporte_Padres', label: 'Soporte Padres', Help: 'Es el apoyo financiero que se brinda a los padres para su sustento y bienestar.', visible: true, type: "number" },
   { value: 'Otros', label: 'Otros', Help: 'Gastos que no encajan en las categorías anteriores, pero que aún son relevantes en la gestión financiera personal o familiar.', visible: true, type: "number" },
 ];
-
-       
-      
 
 export const activoLiquidos = [
   { value: 'Cuenta_Ahorros', label: 'Cuenta Ahorros', Help: 'Es una cuenta bancaria destinada a ahorrar dinero, con o sin intereses. Ideal para guardar fondos de forma segura.', visible: true, type: "number" },
