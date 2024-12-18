@@ -73,18 +73,16 @@ function CreativeFloatingSelect({ options, seccion }) {
   );
 
   const generateUniqueValue = (baseValue) => {
-    return `${baseValue}-${Date.now()}`;
+    return `${baseValue}@${Date.now()}`;
   };
 
-  const handleAddOtherProduct = () => {
-    if (otherProductName) {
-      // Concatenamos el valor seleccionado con el texto ingresado por el usuario      
+  const handleAddOtherProduct = () => {  
+
+    if (otherProductName) {          
       const concatenatedValue = `${selectedValue}-${otherProductName}`;
-  
-      // Agregamos la opción concatenada a `selectedOptions`
-      setSelectedOptions((prevOptions) => [...prevOptions, concatenatedValue]);
-  
-      // Ocultamos el campo de entrada y reseteamos el texto
+    
+      setSelectedOptions((prevOptions) => [...prevOptions, concatenatedValue]);  
+      
       setIsOtherInputVisible(false);
       setOtherProductName('');
     }
@@ -170,7 +168,7 @@ function CreativeFloatingSelect({ options, seccion }) {
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
             
               <div className='label-input'>
-              <p >{name.split('--')[0].replace(/[-_]/g, " ")}</p>
+              <p >{name.split('--')[0].replace(/[-_]/g, " ").split('@')[0]}</p>
                   <div className="input-container">
                     {!isCustomOption && selectedOption?.visible && (
                       <span
@@ -183,7 +181,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                     <input
                       type={selectedOption?.type || "Number"}  
                      /* name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}   */                
-                      name={firstData}
+                      name={name.split('@')[0]}
                       onFocus={() => handleFocus(firstData)}
                       className="selected-input"
                     />

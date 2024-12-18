@@ -134,8 +134,7 @@ export const descuentosnomina = [
   { value: 'retencion_en_la_fuente', label: 'Retención en la Fuente', Help: 'Es un descuento que realiza el empleador sobre tu salario, destinado al pago anticipado del impuesto sobre la renta.', visible: false, type: "number" },
   { value: 'aporte_a_fondo_de_solidaridad', label: 'Aporte a Fondo de Solidaridad', Help: 'Es un descuento destinado a un fondo de solidaridad para la población más vulnerable o para situaciones de emergencia nacional.', visible: false, type: "number" },
   { value: 'aporte_a_fondo_de_subsistencia', label: 'Aporte a Fondo de Subsistencia', Help: 'Es un descuento destinado a un fondo de subsistencia para situaciones de pobreza extrema o emergencia social.', visible: false, type: "number" },
-  { value: 'otros_descuentos', label: 'Otros Descuentos', Help: 'Cualquier otro tipo de descuento relacionado con situaciones laborales, legales o acordadas que no encajen en las categorías anteriores.', visible: false, type: "number" },
-  { value: 'otros', label: 'Otros', Help: 'Otros descuentos adicionales que no se clasifican en las opciones previas, como acuerdos específicos entre el empleador y el empleado.', visible: true, type: "number" },
+  { value: 'Otros', label: 'Otros', Help: 'Otros descuentos adicionales que no se clasifican en las opciones previas, como acuerdos específicos entre el empleador y el empleado.', visible: true, type: "number" },
 ];
 
 
