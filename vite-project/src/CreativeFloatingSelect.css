@@ -246,20 +246,18 @@
 }
 
 
-
-/* Eliminar flechas en Chrome, Safari, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Eliminar flechas en Firefox */
+
 input[type="number"] {
     -moz-appearance: textfield;
 }
 
-/* Eliminar flechas en IE */
+
 input[type="number"]::-ms-clear {
     display: none;
 }
@@ -307,7 +305,7 @@ input[type="number"]::-ms-clear {
 @media screen and (max-width: 800px) {
       .selected-options-container  {
         display: flex;
-        flex-direction: column; /* Cambia la dirección del contenedor a columna */
+        flex-direction: column; 
       }
 
       .help-popup {

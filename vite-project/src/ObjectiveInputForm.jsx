@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './ObjectiveInputForm.css'; // Estilos
+import './ObjectiveInputForm.css';
 
 function ObjectiveInputForm( {seccion }) {
   const fieldHelpText = {

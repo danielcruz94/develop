@@ -39,7 +39,7 @@ const ElegantBlueFinancialPlanningForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validación de campos vacíos
+   
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
       'direccionCasa', 'celular', 'empresa', 'cargo', 'tipoContratacion', 'profesion', 
@@ -53,10 +53,9 @@ const ElegantBlueFinancialPlanningForm = () => {
       }
     }
   
-    // Depuración: Verificar los datos que se van a enviar
     console.log("Datos a enviar:", formData);
   
-    // URL del servidor (puedes cambiarla según tu entorno)
+
     const serverUrl = `${serverURL}clientes`;
   
     try {
@@ -64,12 +63,10 @@ const ElegantBlueFinancialPlanningForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      });
-  
-      // Depuración: Mostrar la respuesta del servidor
-      console.log("Respuesta del servidor:", response);
-  
-      // Cambiar el código de estado a 201 para una creación exitosa
+      });  
+ 
+      console.log("Respuesta del servidor:", response);  
+    
       if (response.status === 201) {
 
         localStorage.setItem('cedula', response.data.cedula); 
@@ -78,7 +75,7 @@ const ElegantBlueFinancialPlanningForm = () => {
         alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
       }
     } catch (error) {
-      // Depuración: Mostrar detalles del error
+    
       console.error('Error al enviar el formulario:', error);
       alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
     }

@@ -91,17 +91,16 @@ function CreativeFloatingSelect({ options, seccion }) {
   
 
   const duplicateInput = (option) => {
-    // Encuentra el índice de la opción seleccionada
+
     const index = selectedOptions.findIndex((opt) => opt === option);
   
     if (index !== -1) {
-      // Crea un nuevo valor único para la opción duplicada
-      const newOption = generateUniqueValue(option);
-  
-      // Inserta la opción duplicada justo después de la original
+     
+      const newOption = generateUniqueValue(option);  
+    
       const updatedOptions = [
         ...selectedOptions.slice(0, index + 1), 
-        newOption,  // Añade la nueva opción
+        newOption,  
         ...selectedOptions.slice(index + 1), 
       ];
   
@@ -160,9 +159,7 @@ function CreativeFloatingSelect({ options, seccion }) {
 
             
           const firstData = Datos[0] || 'default';
-         // const secondData = !isNaN(Datos[1]) ? Datos[0] : Datos[1];
-         
-          
+               
   
           return (
             <div key={option} className="selected-option" data-section={seccion === 'ingresos' ? firstData : undefined}>
@@ -180,7 +177,7 @@ function CreativeFloatingSelect({ options, seccion }) {
                     )}
                     <input
                       type={selectedOption?.type || "Number"}  
-                     /* name={secondData.charAt(0).toUpperCase() + secondData.slice(1).toLowerCase()}   */                
+                                
                       name={name.split('@')[0]}
                       onFocus={() => handleFocus(firstData)}
                       className="selected-input"

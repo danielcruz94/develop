@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import './ObjectiveInputForm.css'; // Estilos
+import './ObjectiveInputForm.css'; 
 
 function DebtInputForm({ seccion }) {
-  // Array de objetos que contiene las explicaciones de cada campo
+
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
@@ -12,7 +12,7 @@ function DebtInputForm({ seccion }) {
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };
 
-  // Inicializamos el estado con una fila por defecto
+  
   const [rows, setRows] = useState([{
     pasivo: '',
     saldoCapital: '',
@@ -22,17 +22,15 @@ function DebtInputForm({ seccion }) {
     cuotaMensual: ''
   }]);
 
-  const [helpText, setHelpText] = useState(null);  // Para mostrar el texto de ayuda
+  const [helpText, setHelpText] = useState(null);  
   const helpPopupRef = useRef(null);
 
-  // Maneja los cambios de cada input
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
-
-  // Duplicar la fila de inputs
+ 
   const handleDuplicateRow = () => {
     setRows([...rows, {
       pasivo: '',
@@ -43,28 +41,25 @@ function DebtInputForm({ seccion }) {
       cuotaMensual: ''
     }]);
   };
-
-  // Eliminar una fila
+  
   const handleRemoveRow = (index) => {
     const updatedRows = rows.filter((_, i) => i !== index);
     setRows(updatedRows);
   };
 
-  // Mostrar el popup de ayuda con la información específica del campo
   const handleHelpClick = (event, field) => {
     setHelpText(fieldHelpText[field]);
   };
 
-  // Cerrar el popup cuando el usuario haga clic en cualquier parte de la pantalla
+
   const handleClickAnywhere = () => {
     setHelpText(null); // Cerrar el popup
   };
 
-  // Agregar el evento para detectar clics en cualquier parte cuando el componente se monta
+ 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickAnywhere);
-
-    // Limpiar el evento cuando el componente se desmonte
+    
     return () => {
       document.removeEventListener('mousedown', handleClickAnywhere);
     };
@@ -76,14 +71,13 @@ function DebtInputForm({ seccion }) {
       <div className="form-container">
         {rows.map((row, index) => (
           <div key={index} className="form-row">
-            {/* Mostrar la X de eliminar solo en las filas copiadas (índice > 0) y al inicio */}
+          
             {index > 0 && (
               <button onClick={() => handleRemoveRow(index)} className="remove-btn">
-                <span className="bi bi-x"></span> {/* Icono de X */}
+                <span className="bi bi-x"></span> 
               </button>
             )}
-
-            {/* Icono de duplicar solo en la primera fila */}
+           
             {index === 0 && (
               <span
                 className="bi bi-plus-circle duplicate-icon"
@@ -97,7 +91,7 @@ function DebtInputForm({ seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`pasivo`}  // Agregamos el atributo name
+                  name={`pasivo`} 
                   value={row.pasivo}
                   onChange={(e) => handleInputChange(index, 'pasivo', e.target.value)}                  
                 />

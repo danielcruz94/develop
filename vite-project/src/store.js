@@ -28,15 +28,13 @@ const datosMongoSlice = createSlice({
   },
 });
 
-// Crear el store con ambos reducers combinados
 const store = configureStore({
   reducer: {
-    serverURL: serverUrlSlice.reducer,  // Reducer para `serverURL`
-    datosMongo: datosMongoSlice.reducer,  // Reducer para `datosMongo`
+    serverURL: serverUrlSlice.reducer, 
+    datosMongo: datosMongoSlice.reducer,  
   },
 });
 
-// Exportar las acciones de ambos slices
 export const { setServerURL } = serverUrlSlice.actions;
 export const { setDatosMongo } = datosMongoSlice.actions;
 

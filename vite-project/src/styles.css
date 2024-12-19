@@ -6,8 +6,8 @@
 
 html {
     height: 100%;
-    background: #06175C; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+    background: #06175C; 
+    background: -webkit-linear-gradient(to left, #6441A5, #2a0845);
 }
 
 body {
@@ -16,7 +16,6 @@ body {
     min-width: auto;
 }
 
-/*form styles*/
 
 .container{
  width: 80vw;
@@ -38,16 +37,15 @@ body {
     width: 80%;
     margin: 0 10%;
     border-radius: 10px;
-    /*stacking fieldsets above each other*/
     position: relative;
 }
 
-/*Hide all except first fieldset*/
+
 #msform fieldset:not(:first-of-type) {
     display: none;
 }
 
-/*inputs*/
+
 #msform input, #msform textarea {
     padding: 15px;
     border: 1px solid #ccc;
@@ -107,7 +105,6 @@ body {
     box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
 }
 
-/*headings*/
 .fs-title {
     font-size: 18px;
     text-transform: uppercase;
@@ -124,7 +121,6 @@ body {
     margin-bottom: 20px;
 }
 
-/*progressbar*/
 .progressbar {
     display: flex;
     justify-content: center;
@@ -134,8 +130,7 @@ body {
 
 #progressbar {
     margin-bottom: 30px;
-    overflow: hidden;
-    /*CSS counters to number the steps*/
+    overflow: hidden;    
     counter-reset: step;
     padding: 0px;
 }
@@ -145,7 +140,6 @@ body {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    /* width: 33.33%;*/
     width: 16%;
     float: left;
     position: relative;
@@ -166,7 +160,6 @@ body {
     margin: 0 auto 10px auto;
 }
 
-/*progressbar connectors*/
 #progressbar li:after {
     content: '';
     width: 100%;
@@ -175,23 +168,21 @@ body {
     position: absolute;
     left: -50%;
     top: 9px;
-    z-index: -1; /*put it behind the numbers*/
+    z-index: -1; 
 }
 
-#progressbar li:first-child:after {
-    /*connector not needed before the first step*/
+#progressbar li:first-child:after {   
     content: none;
 }
 
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
+
 #progressbar li.active:before, #progressbar li.active:after {
     background: #F17649;
     color: white;
 }
 
 
-/* Not relevant to this form */
+
 .dme_link {
     margin-top: 30px;
     text-align: center;
@@ -212,7 +203,7 @@ body {
     text-decoration: none;
 }
 
-/* Estilos para ejemplos debajo de cada input */
+
 .field-example {
     margin-bottom: 5px;
     font-size: 12px;
@@ -220,7 +211,7 @@ body {
     text-align: left;
 }
 
-/* Estilos para diferenciar visualmente cada iteración */
+
 .iteration-light {
     background-color: #f9f9f9;
     padding: 10px;
@@ -233,23 +224,47 @@ body {
     border-radius: 5px;
 }
 
-/* Separador visual entre iteraciones */
+
 .iteration-separator {
     height: 20px;
 }
 
-/* Mejora visual para inputs y select */
+
 #msform input, #msform select {
-    margin-bottom: 15px; /* Aumentar espacio entre campos */
+    margin-bottom: 15px;
+
 }
 
 #msform .form-group {
-    margin-bottom: 15px; /* Aumentar espacio entre grupos de campos */
+    margin-bottom: 15px; 
 }
 
+.logout-button-container {
+    text-align: right;       
+    padding: 10px;            
+  }
+
+  .logout-button {
+    background-color: white;
+    color: #06175C;
+    width: 50px;
+    font-size: 15px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    vertical-align: middle;
+    font-family: Helvetica, arial, verdana;
+    padding-left: 19px;
+}
+
+  .logout-button:hover {
+    background-color: #506cdb;    
+    border: solid 1px white;
+    color: white;
+  }
 
 
-/* Media queries para pantallas pequeñas */
 @media screen and (max-width: 800px) {
     #msform fieldset{
         margin: 0px;

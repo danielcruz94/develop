@@ -82,19 +82,15 @@ useEffect(() => {
 }, []);
 
 
-
-// Función para recolectar los datos del formulario
 const collectFormData = () => {
   const formData = {};
 
-  // Seleccionar todos los fieldsets
   const fieldsets = document.querySelectorAll('fieldset');
 
-  // Función interna para procesar las secciones dentro de un fieldset visible
   const processSection = (section) => {
       const sectionData = {};
       const inputs = section.querySelectorAll('input');
-      const placeholdersCount = {}; // Contador de ocurrencias de los 'name'
+      const placeholdersCount = {}; 
 
       inputs.forEach(input => {
           const placeholder = input.name || 'Campo sin name';
@@ -119,18 +115,16 @@ const collectFormData = () => {
 
       const subsections = section.querySelectorAll('[data-section]');
       subsections.forEach(subsection => {
-          const subData = processSection(subsection); // Procesar subsección
+          const subData = processSection(subsection); 
           sectionData[subsection.getAttribute('data-section')] = subData;
       });
 
       return sectionData;
   };
 
-  // Recolectar los datos solo de los fieldsets visibles (display: block)
   fieldsets.forEach(fieldset => {
-      // Verificar si el fieldset está visible (display: block)
       if (window.getComputedStyle(fieldset).display === 'block') {
-          const sections = fieldset.querySelectorAll('[data-section]'); // Buscar todas las secciones dentro de este fieldset
+          const sections = fieldset.querySelectorAll('[data-section]'); 
 
           sections.forEach(section => {
               const sectionName = section.getAttribute('data-section');
@@ -141,7 +135,6 @@ const collectFormData = () => {
                   'Subsidio_De_Transporte', 'Subsidio_Familiar'
               ];
 
-              // Solo procesar secciones dentro del fieldset visible
               if (sectionName === 'ingresos') {
                 if (!formData.ingresos) formData.ingresos = {};
                 
@@ -150,17 +143,13 @@ const collectFormData = () => {
                     const subData = processSection(subsection);
                     const subsectionKey = subsection.getAttribute('data-section');
                     
-                    // Verificamos si ya existe un array para esa subsección
                     if (formData.ingresos[subsectionKey]) {
-                        // Si es un array, agregamos la nueva subsección al array
                         if (Array.isArray(formData.ingresos[subsectionKey])) {
                             formData.ingresos[subsectionKey].push(subData);
                         } else {
-                            // Si no es un array, lo convertimos a uno y luego agregamos
                             formData.ingresos[subsectionKey] = [formData.ingresos[subsectionKey], subData];
                         }
                     } else {
-                        // Si no existe, simplemente asignamos el valor
                         formData.ingresos[subsectionKey] = subData;
                     }
                 });
@@ -172,14 +161,13 @@ const collectFormData = () => {
       }
   });
 
-  // Agregar cédula al objeto final (si es necesario)
   formData.datosMongo = { ...formData.datosMongo, cedula , fieldset: currentStep+1 };
 
   return formData;
 };
 
 
-      // Función para enviar los datos al servidor
+    
       const sendFormData = async (formData) => {
         try {
             const response = await axios.put(`${serverURL}actualizar`, formData);            
@@ -196,15 +184,12 @@ const collectFormData = () => {
     };
 
 
-  
-
 
 const handleNext = async () => {
    
-    const formData = collectFormData(); // Recolectamos los datos
+    const formData = collectFormData(); 
     console.log(formData); 
-
-    // Enviamos los datos al servidor
+  
     try {
        
         const response = await axios.put(`${serverURL}actualizar`, formData);       
@@ -218,20 +203,24 @@ const handleNext = async () => {
         console.error('Error al enviar los datos:', error);
         
     }
-};
+};  
 
-/*
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-*/    
-  
-  
+const handleLogout = () => {
+   localStorage.removeItem('authToken');
+   window.location.href = '/login'; 
+};
 
   return (
     <div className="container">
+
+      <div className="logout-button-container">
+          <button className="logout-button" onClick={handleLogout}>
+            {/* Icono de Bootstrap */}
+            <i className="bi bi-box-arrow-right"></i> {/* Icono de cerrar sesión */}
+          </button>
+      </div>
+    
+      
       <div className="row">
         <div className="col-md-12">
           <div id="msform">
@@ -245,10 +234,9 @@ const handleNext = async () => {
                 </li>
               ))}
             </ul>  
-          </div>
-            
+          </div>           
 
-            {/* Render the corresponding fieldset based on current step */}
+          
             <fieldset style={{ display: currentStep === 0 ? 'block' : 'none' }}>
            
              <h2>Seguridad Social</h2>
@@ -302,8 +290,7 @@ const handleNext = async () => {
               <br />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
-
-            {/*REVISAR EL ERROR DE LA LISTA */}
+         
             <fieldset style={{ display: currentStep === 3 ? 'block' : 'none' }}>
               <h2>Gastos Anuales</h2>
               <h2 className="fs-title">Seguros</h2>
@@ -343,7 +330,6 @@ const handleNext = async () => {
                 <Deudas  seccion="DeudasCortoPlazo"/>
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
-              {/*<input type="button" name="previous" className="previous action-button-previous" value="Anterior" onClick={handlePrevious} />*/}
               <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Finalizar" />
             </fieldset>
           </div>
