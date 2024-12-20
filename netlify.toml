@@ -1,0 +1,22 @@
+# Configuración de Netlify
+
+# Definir los parámetros de construcción
+[build]
+  # Comando que Netlify ejecutará para construir tu proyecto
+  command = "CI= npm run build"  # El comando para construir el proyecto (usando Vite)
+
+  # Directorio donde se encuentran los archivos estáticos después de la construcción
+  publish = "dist"  # Directorio generado por Vite que contiene los archivos de producción
+
+  # Si tienes dependencias que deben instalarse antes del build
+  # functions = "functions"   # (Si estás usando funciones lambda en Netlify, habilítalo y apunta al directorio)
+
+# Configuración de la base URL (si la tienes configurada)
+[context.production.environment]
+  # Configura variables de entorno específicas para producción (si las necesitas)
+  # Ejemplo: podrías necesitar configurar una clave de API aquí.
+  # API_KEY = "your-api-key"
+
+  # Puedes desactivar la variable CI para evitar posibles problemas con la integración continua
+  CI = "false"  # Desactiva las configuraciones predeterminadas de CI para evitar errores
+
