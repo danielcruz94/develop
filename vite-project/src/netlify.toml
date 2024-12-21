@@ -1,0 +1,3 @@
+[build]
+  command = "npm rnun build"
+  publish = "dist"
