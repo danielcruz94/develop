@@ -7,7 +7,7 @@ body {
   
   .form-container {
     max-width: 600px;
-    margin: 0.5rem auto;
+    margin: 2.5rem auto;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);

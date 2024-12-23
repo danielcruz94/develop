@@ -159,6 +159,7 @@
 
 .remove-button:hover {
   transform: scale(1.2);
+  background: none !important;
 }
 
 .duplicate-icon {
