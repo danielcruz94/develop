@@ -225,6 +225,7 @@ const handleLogout = () => {
         <div className="col-md-12">
           <div id="msform">
             <img src="/axia-logo.png" alt="logo" />
+         
 
           <div className='progressbar'>
            <ul id="progressbar">
