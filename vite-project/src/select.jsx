@@ -27,9 +27,10 @@ function CreativeFloatingSelect({ options, seccion }) {
    
   }, []);
   
-  const handleSelectChange = (value) => {   
+  const handleSelectChange = (value) => {  
+    setIsOpen(false)
+    document.body.style.overflow = 'hidden';    
     
-    // Guardamos el valor seleccionado en `selectedValue`
     setSelectedValue(value); 
   
   
@@ -60,6 +61,10 @@ function CreativeFloatingSelect({ options, seccion }) {
     }
   };
   
+  const cerrarModal = () => {
+    document.body.style.overflow = 'auto';    
+    setIsOtherInputVisible(false);  // Esto cierra el modal
+  };
   
 
   const removeOption = (optionToRemove) => {
@@ -76,9 +81,10 @@ function CreativeFloatingSelect({ options, seccion }) {
     return `${baseValue}@${Date.now()}`;
   };
 
-  const handleAddOtherProduct = () => {  
+  const handleAddOtherProduct = () => {     
 
-    if (otherProductName) {          
+    if (otherProductName) {  
+      document.body.style.overflow = 'auto';         
       const concatenatedValue = `${selectedValue}-${otherProductName}`;
     
       setSelectedOptions((prevOptions) => [...prevOptions, concatenatedValue]);  
@@ -118,7 +124,7 @@ function CreativeFloatingSelect({ options, seccion }) {
     setClickPosition({ x: event.clientX, y: event.clientY });
   };
 
-  const renderOptions = () => {
+  const renderOptions = () => {      
     return filteredOptions.map((option) => (
       <li key={option.value}>
         <button onClick={() => handleSelectChange(option.value)}>{option.label}</button>
@@ -231,14 +237,18 @@ function CreativeFloatingSelect({ options, seccion }) {
         </div>
 
         {isOtherInputVisible && (
-          <div className="other-input-container">           
-            <input
-              type="text"
-              placeholder="Agregar el nombre del producto"
-              value={otherProductName}
-              onChange={(e) => setOtherProductName(e.target.value)}
-            />
-            <button onClick={handleAddOtherProduct}>Agregar</button>
+          <div className='modal_conten'>
+
+            <button className="cerrarmodal" onClick={cerrarModal}>X</button>
+            <div className="other-input-container">           
+              <input
+                type="text"
+                placeholder="Agregar el nombre del producto"
+                value={otherProductName}
+                onChange={(e) => setOtherProductName(e.target.value)}
+              />
+              <button onClick={handleAddOtherProduct}>Agregar</button>
+            </div>
           </div>
         )}
 

@@ -32,9 +32,7 @@
   transition: all 0.3s ease;
 }
 
-.select-button:hover {
-  background-color: #0b2885;
-}
+
 
 .plus-icon {
   font-size: 20px;
@@ -263,6 +261,32 @@ input[type="number"]::-ms-clear {
     display: none;
 }
 
+.modal_conten {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000d1;
+  z-index: 1000;
+}
+
+.modal_conten button.cerrarmodal {
+  position: absolute;
+  top: 15px;  
+  left: 90%; 
+  background: none;  
+  border: none;     
+  color: rgb(254, 0, 0);     
+  font-size: 20px;  
+  cursor: pointer;  
+  z-index: 1001;    
+  width: 20px; 
+  font-size: 30px;
+  font-weight: 600;
+}
+
+
 .other-input-container {
   position: fixed;
   top: 50%;
@@ -316,5 +340,9 @@ input[type="number"]::-ms-clear {
 
       .help-popup p {           
         font-size: 16px;
+    }
+
+    .modal_conten button.cerrarmodal { 
+      left: 80%; 
     }
 }

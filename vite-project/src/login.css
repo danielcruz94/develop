@@ -83,10 +83,7 @@
     transition: background-color 0.3s;
   }
   
-  button:hover {
-    background-color: #0A1F7D;
-  }
-  
+    
   button:disabled {
     background-color: #999;
     cursor: not-allowed;

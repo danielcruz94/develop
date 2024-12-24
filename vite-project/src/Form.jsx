@@ -211,7 +211,6 @@ const handleLogout = () => {
    window.location.href = '/login'; 
 };
 
-console.log(path)
 
   return (
     <div className="container">
