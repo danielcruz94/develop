@@ -29,6 +29,7 @@ import {
   ingresosanuales,
 
 } from './DatosSelect';
+import { path } from 'framer-motion/client';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -210,6 +211,8 @@ const handleLogout = () => {
    window.location.href = '/login'; 
 };
 
+console.log(path)
+
   return (
     <div className="container">
 
@@ -224,7 +227,8 @@ const handleLogout = () => {
       <div className="row">
         <div className="col-md-12">
           <div id="msform">
-            <img src="../axia-logo.png" alt="logo" />
+          <img src="axia-logo.png" alt="logo" />
+
          
 
           <div className='progressbar'>
