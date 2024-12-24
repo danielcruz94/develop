@@ -27,12 +27,9 @@ function CreativeFloatingSelect({ options, seccion }) {
    
   }, []);
   
-  const handleSelectChange = (value) => {  
-    setIsOpen(false)
-    document.body.style.overflow = 'hidden';    
+  const handleSelectChange = (value) => {       
     
-    setSelectedValue(value); 
-  
+    setSelectedValue(value);   
   
     const validValues = [
       'salario_tradicional', 'salario_integral', 'arriendo', 'auxilio', 
@@ -50,12 +47,12 @@ function CreativeFloatingSelect({ options, seccion }) {
       'cuenta_corriente', 'cuenta_de_ahorros', 'fiducias', 'fondo_de_empleados', 'inversiones_exterior',
       'cartera_colectiva', 'cooperativas', 'cuenta_afc', 'fondos_mutuos', 'pension_voluntaria',
       'provision_anualidades', 'otros'
-    ];
-  
-    
+    ];     
   
     if (validValues.some(v => v.toLowerCase() === value.toLowerCase())) {
-      setIsOtherInputVisible(true);  // Muestra el input para ingresar el texto adicional
+      setIsOpen(false)
+      document.body.style.overflow = 'hidden';   
+      setIsOtherInputVisible(true); 
     } else {
       setSelectedOptions((prevOptions) => [...prevOptions, value]);
     }
