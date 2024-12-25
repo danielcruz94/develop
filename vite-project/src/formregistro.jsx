@@ -120,7 +120,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
 
             <select 
-              className='selectsex'
+              className='selectInput'
               value={formData.sexo} 
               onChange={handleInputChange('sexo')}
               required
@@ -161,7 +161,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             <h3>Información Laboral</h3>
             <InputField label="Empresa" value={formData.empresa} onChange={handleInputChange('empresa')} />
             <InputField label="Cargo" value={formData.cargo} onChange={handleInputChange('cargo')} />
-            <InputField label="Fecha de Ingreso Compañía" type="date" value={formData.fechaIngreso} onChange={handleInputChange('fechaIngreso')} />
+            <InputField label="Fecha de Ingreso Compañía" type="date"  value={formData.fechaIngreso} onChange={handleInputChange('fechaIngreso')} />
             <InputField label="Tipo de contratación" value={formData.tipoContratacion} onChange={handleInputChange('tipoContratacion')} />
             <InputField label="Profesión" value={formData.profesion} onChange={handleInputChange('profesion')} />
             <InputField label="Universidad" value={formData.universidad} onChange={handleInputChange('universidad')} />
@@ -182,27 +182,28 @@ const ElegantBlueFinancialPlanningForm = () => {
                 value={formData.declaranteRenta} 
                 onChange={handleInputChange('declaranteRenta')}
                 required
+                className='selectInput'
               >
-                <option value="">Seleccione una opción</option>
+                <option value="">Declarante de Renta</option>
                 <option value="si">Sí</option>
                 <option value="no">No</option>
-              </select>
-              <label>Declarante de Renta</label>
+              </select>             
             </div>
             <div className="select-field">
               <select 
                 value={formData.estadoCivil} 
                 onChange={handleInputChange('estadoCivil')}
                 required
+                className='selectInput'
               >
-                <option value="">Seleccione una opción</option>
+                <option value="">Estado Civil</option>
                 <option value="soltero">Soltero/a</option>
                 <option value="casado">Casado/a</option>
                 <option value="divorciado">Divorciado/a</option>
                 <option value="viudo">Viudo/a</option>
                 <option value="unionLibre">Unión Libre</option>
               </select>
-              <label>Estado Civil</label>
+            
             </div>
 
             <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
@@ -216,56 +217,59 @@ const ElegantBlueFinancialPlanningForm = () => {
   }
 
   return (
-    <div className="form-container">
-      <div className="form-content">
-        
-        
-        <h2>Planeación Financiera</h2>
-        <div className="progress-bar">
-          {[1, 2, 3, 4].map((step) => (
-            <div 
-              key={step} 
-              className={`progress-step ${currentStep >= step ? 'active' : ''}`}
-              onClick={() => setCurrentStep(step)}
-             
-            >
-              {step}
-            </div>
-          ))}
-        </div>
-        <form onSubmit={handleSubmit}>
-          <AnimatePresence mode="wait">
-            {renderStep()}
-          </AnimatePresence>
-          <div className="button-group">
-            {currentStep > 1 && (
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="button"
-                onClick={prevStep}
-                className="btn-secondary"
+    <div>
+      <img src="axia-logo.png" className="logo" alt="logo" />
+      <div className="form-container"> 
+        <div className="form-content">
+          
+          
+          <h2>Planeación Financiera</h2>
+          <div className="progress-bar">
+            {[1, 2, 3, 4].map((step) => (
+              <div 
+                key={step} 
+                className={`progress-step ${currentStep >= step ? 'active' : ''}`}
+                onClick={() => setCurrentStep(step)}
+              
               >
-                Anterior
-              </motion.button>
-            )}
-           {currentStep <4 ? (
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="button"  
-                onClick={nextStep}  
-                className="btn-primary"
-              >
-                Siguiente
-              </motion.button>
-            ) : (
-                 <button className="btn-submit" type="submit" >Enviar</button>              
-            )}
+                {step}
+              </div>
+            ))}
           </div>
-        </form>
-      </div>
+          <form onSubmit={handleSubmit}>
+            <AnimatePresence mode="wait">
+              {renderStep()}
+            </AnimatePresence>
+            <div className="button-group">
+              {currentStep > 1 && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button"
+                  onClick={prevStep}
+                  className="btn-secondary"
+                >
+                  Anterior
+                </motion.button>
+              )}
+            {currentStep <4 ? (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="button"  
+                  onClick={nextStep}  
+                  className="btn-primary"
+                >
+                  Siguiente
+                </motion.button>
+              ) : (
+                  <button className="btn-submit" type="submit" >Enviar</button>              
+              )}
+            </div>
+          </form>
+        </div>
 
+      </div>
     </div>
   )
 }

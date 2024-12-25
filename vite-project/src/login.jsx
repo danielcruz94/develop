@@ -59,8 +59,8 @@ const InteractiveLoginForm = () => {
 
   return (
     <div className="login-container">
-      <div className={`login-form ${shake ? 'shake' : ''}`}>
-        <h2>Axia Finanzas</h2>
+        <img src="axia-logo.png" alt="logo" />
+      <div className={`login-form ${shake ? 'shake' : ''}`}>        
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input

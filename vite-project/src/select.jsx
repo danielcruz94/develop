@@ -236,11 +236,13 @@ function CreativeFloatingSelect({ options, seccion }) {
         {isOtherInputVisible && (
           <div className='modal_conten'>
 
-            <button className="cerrarmodal" onClick={cerrarModal}>X</button>
-            <div className="other-input-container">           
+            <button className="cerrarmodal" onClick={cerrarModal}>
+            <i className="bi bi-x-circle"></i>
+            </button>
+            <div className="other-input-container">  
+             <p>Por favor, ingresa el nombre de la empresa o institución que ofrece el servicio o producto seleccionado.</p>        
               <input
-                type="text"
-                placeholder="Agregar el nombre del producto"
+                type="text"                
                 value={otherProductName}
                 onChange={(e) => setOtherProductName(e.target.value)}
               />

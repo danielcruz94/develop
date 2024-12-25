@@ -265,25 +265,29 @@ input[type="number"]::-ms-clear {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: #000000d1;
   z-index: 1000;
 }
 
 .modal_conten button.cerrarmodal {
   position: absolute;
-  top: 15px;  
-  left: 90%; 
-  background: none;  
-  border: none;     
-  color: rgb(254, 0, 0);     
-  font-size: 20px;  
-  cursor: pointer;  
-  z-index: 1001;    
-  width: 20px; 
-  font-size: 30px;
+  top: 15px;
+  left: 90%;
+  background: none;
+  border: none;
+  color: #f5f7fa;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
   font-weight: 600;
+  background: #06175c;
+  border-radius: 100%;
+  padding: 0px;
 }
 
 
@@ -296,11 +300,21 @@ input[type="number"]::-ms-clear {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 1000; 
+  width: 400px;
+}
+
+.other-input-container p{
+  color: #333333d6;
+  margin-bottom: 20px;  
+  font-size: 13px;
+  font-family: Helvetica, arial, verdana !important;
+  letter-spacing: 1px;
 }
 
 .other-input-container input {
   font-family: Helvetica, arial, verdana !important;
+  border-radius: 20px !important;
 }
 
 .other-input-container input :hover{
@@ -311,6 +325,8 @@ input[type="number"]::-ms-clear {
   background: #06175C;
   color: white;
   font-size: 12px;
+  width: 200px;
+  letter-spacing: 2px;
 }
 
 .label-input{
@@ -328,6 +344,10 @@ input[type="number"]::-ms-clear {
 
 /* Media queries para pantallas pequeñas */
 @media screen and (max-width: 800px) {
+          .container {
+            width: 90vw;
+        }
+
       .selected-options-container  {
         display: flex;
         flex-direction: column; 
@@ -345,4 +365,12 @@ input[type="number"]::-ms-clear {
     .modal_conten button.cerrarmodal { 
       left: 80%; 
     }
+    
+  .other-input-container {
+    width: 80%;
+  }
+
+  .other-input-container input {
+    padding: 10px !important;
+  }
 }

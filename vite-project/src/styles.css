@@ -10,15 +10,11 @@ html {
     background: -webkit-linear-gradient(to left, #6441A5, #2a0845);
 }
 
-body {
-    font-family: Helvetica, arial, verdana;
-    background: transparent;
-    min-width: auto;
-}
 
 
 .container{
  width: 80vw;
+ margin-bottom: 30px;
 }
 
 #msform {
@@ -62,7 +58,7 @@ body {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #F17649;
+    border: 1px solid #06175c;
     outline-width: 0;
     transition: All 0.5s ease-in;
     -webkit-transition: All 0.5s ease-in;
@@ -73,7 +69,7 @@ body {
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #F17649;
+    background: #06175c;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -85,25 +81,9 @@ body {
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #F17649;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #06175c;
 }
 
-#msform .action-button-previous {
-    width: 100px;
-    background: #F17649;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-    font-family: Arial, sans-serif;
-}
-
-#msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
-}
 
 .fs-title {
     font-size: 18px;
@@ -143,7 +123,7 @@ body {
     width: 16%;
     float: left;
     position: relative;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 #progressbar li:before {
@@ -177,8 +157,8 @@ body {
 
 
 #progressbar li.active:before, #progressbar li.active:after {
-    background: #F17649;
-    color: white;
+    background: #22d118;
+    color: rgb(0 0 0);
 }
 
 
