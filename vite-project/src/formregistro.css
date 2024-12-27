@@ -142,6 +142,8 @@ body {
   .btn-secondary {
     background-color: #ecf0f1;
     color: #06175C;
+    border-radius: 20px;
+    letter-spacing: 1px;
   }
   
   button:hover {
