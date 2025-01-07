@@ -179,6 +179,9 @@ export const activoLiquidos = [
 ];
 
 export const activosProductivos = [
+  { value: 'Fondo_De_Cesantias', label: 'Fondo de Cesantías', Help: 'Cuenta de ahorro de los empleados destinada a financiar los períodos de desempleo, en la cual el empleador debe realizar aportes periódicos.', visible: true, type: "number" },
+  { value: 'Fondo_Obligatorio_De_Pensiones', label: 'Fondo Obligatorio de Pensiones', Help: 'Fondos destinados a financiar las pensiones de jubilación de los trabajadores, gestionados por administradoras de fondos de pensiones (AFP).', visible: true, type: "number" },
+  { value: 'Fondo_Voluntario_De_Pensiones', label: 'Fondo Voluntario de Pensiones', Help: 'Ahorro adicional que realiza un trabajador para incrementar el monto de su pensión en el futuro, por encima del aporte obligatorio.', visible: true, type: "number" },
   { value: 'Acciones', label: 'Acciones', Help: 'Títulos valores que representan una parte del capital social de una empresa, que otorgan derechos sobre los dividendos y sobre la propiedad de la empresa.', visible: true, type: "number" },
   { value: 'Apartamento', label: 'Apartamento', Help: 'Bien inmueble, generalmente residencial, que puede generar ingresos a través de su alquiler o apreciación del valor.', visible: true, type: "number" },
   { value: 'Bienes_Raices_Para_Inversion', label: 'Bienes Raíces para Inversión', Help: 'Propiedades adquiridas con el objetivo de generar ingresos pasivos mediante alquileres o para obtener plusvalía con la revalorización.', visible: true, type: "number" },
@@ -191,9 +194,6 @@ export const activosProductivos = [
   { value: 'Cuenta_Por_Cobrar_A_Terceros', label: 'Cuenta por Cobrar a Terceros', Help: 'Derechos que tiene una empresa o individuo para cobrar dinero a otra parte, generalmente por la venta de productos o servicios.', visible: true, type: "number" },
   { value: 'Empresa', label: 'Empresa', Help: 'Entidad dedicada a actividades económicas para generar ingresos. Puede incluir diversos activos productivos como bienes, propiedades y capital humano.', visible: true, type: "number" },
   { value: 'Fiducia', label: 'Fiducia', Help: 'Instrumento legal mediante el cual una persona (fiduciante) transfiere bienes a un fiduciario para que este los administre en beneficio de un tercero.', visible: true, type: "number" },
-  { value: 'Fondo_De_Cesantias', label: 'Fondo de Cesantías', Help: 'Cuenta de ahorro de los empleados destinada a financiar los períodos de desempleo, en la cual el empleador debe realizar aportes periódicos.', visible: true, type: "number" },
-  { value: 'Fondo_Obligatorio_De_Pensiones', label: 'Fondo Obligatorio de Pensiones', Help: 'Fondos destinados a financiar las pensiones de jubilación de los trabajadores, gestionados por administradoras de fondos de pensiones (AFP).', visible: true, type: "number" },
-  { value: 'Fondo_Voluntario_De_Pensiones', label: 'Fondo Voluntario de Pensiones', Help: 'Ahorro adicional que realiza un trabajador para incrementar el monto de su pensión en el futuro, por encima del aporte obligatorio.', visible: true, type: "number" },
   { value: 'Fondos_Mutuos', label: 'Fondos Mutuos', Help: 'Instrumentos financieros donde varios inversores agrupan su dinero para invertir en acciones, bonos y otros activos, bajo la gestión de un administrador profesional.', visible: true, type: "number" },
   { value: 'Local', label: 'Local', Help: 'Espacio inmobiliario comercial destinado a actividades de venta o prestación de servicios, ideal para generar ingresos a través del alquiler o de su propio negocio.', visible: true, type: "number" },
   { value: 'Negocio', label: 'Negocio', Help: 'Actividad económica que busca generar ganancias, ya sea a través de la venta de productos, servicios o cualquier otra forma de operación comercial.', visible: true, type: "number" },

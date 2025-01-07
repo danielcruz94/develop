@@ -54,6 +54,7 @@
     padding: 0px 0px;
     color: #fb0000;
     cursor: pointer;  
+    width: min-content;
 }
    
   .Cont-Help {
