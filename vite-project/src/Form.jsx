@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux';
 import Deudas from './DeudasInputForm';
 import axios from 'axios';  
 
+import DynamicInputs from './DynamicFloatingSelects';  // Importamos el componente DynamicInputs
+
+
 import {
   seguridadsocial,
   ingresos,
@@ -38,13 +41,18 @@ const Form = () => {
 
   const serverURL = useSelector(state => state.serverURL.serverURL);
 
+  const [isDataLoaded, setIsDataLoaded] = useState(false); // Para controlar si los datos se han cargado
+  const [data, setData] = useState(null);
+
   const steps = [
     "Seguridad Social",
     "Ingresos",
     "Gastos Mensuales",
     "Gastos Anuales",
-    "Patrimonio",
-    "Objetivos Financieros"
+    "Activos",
+    "Deudas",
+    "Objetivos Financieros",
+   
   ];
 
  
@@ -66,7 +74,9 @@ useEffect(() => {
     axios.get(`${serverURL}cliente/${cedulaRecuperada}/fieldset`)
       .then(response => {       
 
-            if (response.data.fieldset <= 5) {
+            if (response.data.fieldset <= 6) {              
+              setData(response.data);
+              setIsDataLoaded(true);
               setCurrentStep(response.data.fieldset);
               
           } else {
@@ -82,6 +92,11 @@ useEffect(() => {
   }
 }, []);
 
+
+useEffect(() => {
+  setIsDataLoaded(false)
+  
+}, [data]);
 
 const collectFormData = () => {
   const formData = {};
@@ -178,39 +193,61 @@ const collectFormData = () => {
         }
       };
    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const formData = collectFormData();       
-      sendFormData(formData);           
-    };
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = collectFormData();       
+        sendFormData(formData);           
+      };
 
-
-
-const handleNext = async () => {
-   
-    const formData = collectFormData(); 
-    console.log(formData); 
-  
-    try {
-       
-        const response = await axios.put(`${serverURL}actualizar`, formData);       
-     
-        if (currentStep < steps.length - 1) {            
-            setCurrentStep(currentStep + 1);  
-            window.scrollTo(0, 0);
-
-        } 
-    } catch (error) {
-        console.error('Error al enviar los datos:', error);
+      const handleNext = async () => {
         
-    }
-};  
+          const formData = collectFormData(); 
+          console.log(formData); 
+        
+          try {
+            
+              const response = await axios.put(`${serverURL}actualizar`, formData);       
+          
+              if (currentStep < steps.length - 1) {            
+                  setCurrentStep(currentStep + 1);  
+                  window.scrollTo(0, 0);
 
-const handleLogout = () => {
-   localStorage.removeItem('authToken');
-   window.location.href = '/login'; 
-};
+              } 
+          } catch (error) {
+              console.error('Error al enviar los datos:', error);
+              
+          }
+      };  
 
+      const handlePrev = async () => {
+        const formData = collectFormData(); 
+        console.log(formData); 
+        
+        try {
+            // Si deseas enviar datos antes de retroceder, puedes hacerlo aquí
+            // const response = await axios.put(`${serverURL}actualizar`, formData);
+    
+            // Solo retroceder si no estamos en el primer paso
+            if (currentStep > 0) {
+                setCurrentStep(currentStep - 1);  // Decrementa el paso actual
+                window.scrollTo(0, 0);  // Desplaza la página hacia arriba
+            }
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+        }
+      };    
+
+      const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        window.location.href = '/login'; 
+      };
+
+
+      if (isDataLoaded) {
+        return <p>Cargando datos...</p>; // Renderiza mientras los datos están siendo cargados
+      }
+      
+    
 
   return (
     <div className="container">
@@ -245,6 +282,9 @@ const handleLogout = () => {
            
              <h2>Seguridad Social</h2>
              <Selector options={seguridadsocial} seccion="seguridadsocial" />
+             {data?.seguridadsocial && (
+                <DynamicInputs data={[data.seguridadsocial]} sectionName="seguridadsocial" />
+              )}
               <br />
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
@@ -257,6 +297,7 @@ const handleLogout = () => {
               <h2>Ingresos Anuales</h2>
               <Selector options={ingresosanuales} seccion="IngresosAnuales"/>
               <br />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
@@ -292,11 +333,14 @@ const handleLogout = () => {
               <h2 className="fs-title">Otros</h2>
               <Selector options={otros} seccion="otros"/>  
               <br />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
          
             <fieldset style={{ display: currentStep === 3 ? 'block' : 'none' }}>
               <h2>Gastos Anuales</h2>
+
+              <spsn>dsfdsfsd</spsn>
               <h2 className="fs-title">Seguros</h2>
               
               <Selector options={seguros} seccion="seguros"/>
@@ -310,11 +354,12 @@ const handleLogout = () => {
               <h2 className="fs-title"> Impuestos</h2>
               <Selector options={impuestos} seccion="Impuestos"/>
               <br />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
             <fieldset style={{ display: currentStep === 4 ? 'block' : 'none' }}>
-              <h2>Patrimonio</h2>
+              <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
               <Selector options={activoLiquidos} seccion="activoLiquidos"/>
               <br />
@@ -324,17 +369,24 @@ const handleLogout = () => {
               <h2 className="fs-title">Activos improductivos</h2>
               <Selector options={activosImproductivos} seccion="activosImproductivos"/>
               <br />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
-            </fieldset>
+            </fieldset>            
 
-            <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>
-              <h2>Objetivos Financieros</h2>
-                <Objetivos seccion="objetivos"/>
+            <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>              
                 <h2>Deudas Corto Plazo</h2>
                 <Deudas  seccion="DeudasCortoPlazo"/>
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
-              <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Finalizar" />
+                <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>  
+                <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />              
+            </fieldset>
+
+            <fieldset style={{ display: currentStep === 6 ? 'block' : 'none' }}>
+              <h2>Objetivos Financieros</h2>
+                <Objetivos seccion="objetivos"/> 
+                <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>              
+                <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Finalizar" />        
             </fieldset>
           </div>
         </div>

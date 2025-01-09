@@ -87,7 +87,7 @@ function DebtInputForm({ seccion }) {
             )}
 
             <div className="input-group">
-            <p>Pasivo</p>
+            <p>Nombre de deuda</p>
               <div className="input-container2">
                 <input
                   type="text"
@@ -104,7 +104,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Saldo de Capital</p>
+            <p>Cuanto debes</p>
               <div className="input-container2">
                 <input
                   type="number"
