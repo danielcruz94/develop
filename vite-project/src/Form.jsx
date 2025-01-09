@@ -292,10 +292,16 @@ const collectFormData = () => {
             <fieldset style={{ display: currentStep === 1 ? 'block' : 'none' }}>
             <h2>Ingresos Mensuales</h2>
               <Selector options={ingresos} seccion="ingresos"/>
+              {data?.ingresos && (
+                <DynamicInputs data={[data.ingresos]} sectionName="ingresos" />
+              )}
               <br />
 
               <h2>Ingresos Anuales</h2>
               <Selector options={ingresosanuales} seccion="IngresosAnuales"/>
+              {data?.IngresosAnuales && (
+                <DynamicInputs data={[data.IngresosAnuales]} sectionName="IngresosAnuales" />
+              )}
               <br />
               <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
@@ -306,32 +312,62 @@ const collectFormData = () => {
 
               <h2 className="fs-title">Ahorro</h2>
               <Selector options={ahorro} seccion="Ahorro"/>
+              {data?.Ahorro && (
+                <DynamicInputs data={[data.Ahorro]} sectionName="Ahorro" />
+              )}
               <h2 className="fs-title">Transporte</h2>
               <Selector options={transporte} seccion="Transporte"/>
+              {data?.Transporte && (
+                <DynamicInputs data={[data.Transporte]} sectionName="Transporte" />
+              )}
               <br />
               <h2 className="fs-title"> Gastos Personales</h2>
               <Selector options={gastosPersonales} seccion="gastosPersonales"/>
+              {data?.gastosPersonales && (
+                <DynamicInputs data={[data.gastosPersonales]} sectionName="gastosPersonales" />
+              )}
               <br />
               <h2 className="fs-title">Hogar</h2>
               <Selector options={hogar} seccion="hogar"/>
+              {data?.hogar && (
+                <DynamicInputs data={[data.hogar]} sectionName="hogar" />
+              )}hogar
               <br />
               <h2 className="fs-title">Entretenimiento</h2>
               <Selector options={entretenimiento} seccion="entretenimiento"/>
+              {data?.entretenimiento && (
+                <DynamicInputs data={[data.entretenimiento]} sectionName="entretenimiento" />
+              )}
               <br />
               <h2 className="fs-title">Protecciones Personales</h2>
               <Selector options={protecciones} seccion="protecciones"/>
+                {data?.protecciones && (
+                <DynamicInputs data={[data.protecciones]} sectionName="protecciones" />
+              )}
               <br />
               <h2 className="fs-title">Descuentos de Nomina</h2>
               <Selector options={descuentosnomina} seccion="descuentosnomina"/>
+                {data?.descuentosnomina && (
+                <DynamicInputs data={[data.descuentosnomina]} sectionName="descuentosnomina" />
+              )}
               <br />
               <h2 className="fs-title">Educacion</h2>
               <Selector options={educacion} seccion="educacion"/>
+                {data?.educacion && (
+                <DynamicInputs data={[data.educacion]} sectionName="educacion" />
+              )}
               <br />
               <h2 className="fs-title">Financieros</h2>
               <Selector options={financieros} seccion="financieros" />
+                {data?.financieros && (
+                <DynamicInputs data={[data.financieros]} sectionName="financieros" />
+              )}
               <br />
               <h2 className="fs-title">Otros</h2>
-              <Selector options={otros} seccion="otros"/>  
+              <Selector options={otros} seccion="otros"/>
+                {data?.otros && (
+                <DynamicInputs data={[data.otros]} sectionName="otros" />
+              )}  
               <br />
               <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
@@ -340,19 +376,30 @@ const collectFormData = () => {
             <fieldset style={{ display: currentStep === 3 ? 'block' : 'none' }}>
               <h2>Gastos Anuales</h2>
 
-              <spsn>dsfdsfsd</spsn>
-              <h2 className="fs-title">Seguros</h2>
-              
+             
+              <h2 className="fs-title">Seguros</h2>              
               <Selector options={seguros} seccion="seguros"/>
+                {data?.seguros && (
+                <DynamicInputs data={[data.seguros]} sectionName="seguros" />
+              )} 
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
               <Selector options={anualidadesFijas} seccion="AnualidadesFijas"/>
+                {data?.AnualidadesFijas && (
+                <DynamicInputs data={[data.AnualidadesFijas]} sectionName="AnualidadesFijas" />
+              )} 
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
               <Selector options={anualidadesPresupuestadas} seccion="AnualidadesPresupuestadas"/>
+                {data?.AnualidadesPresupuestadas && (
+                <DynamicInputs data={[data.AnualidadesPresupuestadas]} sectionName="AnualidadesPresupuestadas" />
+              )} 
               <br />
               <h2 className="fs-title"> Impuestos</h2>
               <Selector options={impuestos} seccion="Impuestos"/>
+                {data?.Impuestos && (
+                <DynamicInputs data={[data.Impuestos]} sectionName="Impuestos" />
+              )} 
               <br />
               <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
@@ -362,12 +409,21 @@ const collectFormData = () => {
               <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
               <Selector options={activoLiquidos} seccion="activoLiquidos"/>
+              {data?.activoLiquidos && (
+                <DynamicInputs data={[data.activoLiquidos]} sectionName="activoLiquidos" />
+              )} 
               <br />
               <h2 className="fs-title">Activos Productivos</h2>
               <Selector options={activosProductivos} seccion="activosProductivos"/>
+              {data?.activosProductivos && (
+                <DynamicInputs data={[data.activosProductivos]} sectionName="activosProductivos" />
+              )} 
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
               <Selector options={activosImproductivos} seccion="activosImproductivos"/>
+              {data?.activosImproductivos && (
+                <DynamicInputs data={[data.activosImproductivos]} sectionName="activosImproductivos" />
+              )} 
               <br />
               <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
               <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
@@ -376,6 +432,9 @@ const collectFormData = () => {
             <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>              
                 <h2>Deudas Corto Plazo</h2>
                 <Deudas  seccion="DeudasCortoPlazo"/>
+                {data?.DeudasCortoPlazo && (
+                <DynamicInputs data={[data.DeudasCortoPlazo]} sectionName="DeudasCortoPlazo" />
+              )} 
                 <h2>Deudas Largo Plazo</h2>
                 <Deudas  seccion="DeudasLargoPlazo"/>
                 <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>  
