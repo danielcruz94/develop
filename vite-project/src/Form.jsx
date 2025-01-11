@@ -39,7 +39,7 @@ const Form = () => {
 
   const serverURL = useSelector((state) => state.serverURL.serverURL);
 
-  const [isDataLoaded, setIsDataLoaded] = useState(true); 
+  const [isDataLoaded, setIsDataLoaded] = useState(true);
   const [data, setData] = useState(null);
 
   const steps = [
@@ -237,7 +237,7 @@ const Form = () => {
   };
 
   if (isDataLoaded) {
-    return <p>Cargando datos...</p>; 
+    return <p>Cargando datos...</p>;
   }
 
   return (
@@ -270,12 +270,14 @@ const Form = () => {
 
             <fieldset style={{ display: currentStep === 0 ? "block" : "none" }}>
               <h2>Seguridad Social</h2>
-              <Selector options={seguridadsocial} seccion="seguridadsocial" />
-              {data?.seguridadsocial && (
-                <DynamicInputs
-                  data={[data.seguridadsocial]}
-                  sectionName="seguridadsocial"
+              {data?.seguridadsocial ? (
+                <Selector
+                  options={seguridadsocial}
+                  seccion="seguridadsocial"
+                  data={data.seguridadsocial}
                 />
+              ) : (
+                <Selector options={seguridadsocial} seccion="seguridadsocial" />
               )}
               <br />
               <input
@@ -289,21 +291,33 @@ const Form = () => {
 
             <fieldset style={{ display: currentStep === 1 ? "block" : "none" }}>
               <h2>Ingresos Mensuales</h2>
-              <Selector options={ingresos} seccion="ingresos" />
-              {data?.ingresos && (
-                <DynamicInputs data={[data.ingresos]} sectionName="ingresos" />
+
+              {data?.ingresos ? (
+                <Selector
+                  options={ingresos}
+                  seccion="ingresos"
+                  data={data.ingresos}
+                />
+              ) : (
+                <Selector options={ingresos} seccion="ingresos" />
               )}
+
               <br />
 
               <h2>Ingresos Anuales</h2>
-              <Selector options={ingresosanuales} seccion="IngresosAnuales" />
-              {data?.IngresosAnuales && (
-                <DynamicInputs
-                  data={[data.IngresosAnuales]}
-                  sectionName="IngresosAnuales"
+
+              {data?.IngresosAnuales ? (
+                <Selector
+                  options={ingresosanuales}
+                  seccion="IngresosAnuales"
+                  data={data.IngresosAnuales}
                 />
+              ) : (
+                <Selector options={ingresosanuales} seccion="IngresosAnuales" />
               )}
+
               <br />
+
               <input
                 type="button"
                 name="prev"
@@ -323,84 +337,108 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 2 ? "block" : "none" }}>
               <h2>Gastos Mensuales</h2>
               <h2 className="fs-title">Ahorro</h2>
-              <Selector options={ahorro} seccion="Ahorro" />
-              {data?.Ahorro && (
-                <DynamicInputs data={[data.Ahorro]} sectionName="Ahorro" />
-              )}
-              <h2 className="fs-title">Transporte</h2>
-              <Selector options={transporte} seccion="Transporte" />
-              {data?.Transporte && (
-                <DynamicInputs
-                  data={[data.Transporte]}
-                  sectionName="Transporte"
+
+              {data?.ahorro ? (
+                <Selector
+                  options={ahorro}
+                  seccion="ahorro"
+                  data={data.ahorro}
                 />
+              ) : (
+                <Selector options={ahorro} seccion="ahorro" />
               )}
               <br />
               <h2 className="fs-title"> Gastos Personales</h2>
-              <Selector options={gastosPersonales} seccion="gastosPersonales" />
-              {data?.gastosPersonales && (
-                <DynamicInputs
-                  data={[data.gastosPersonales]}
-                  sectionName="gastosPersonales"
+
+              {data?.gastosPersonales ? (
+                <Selector
+                  options={gastosPersonales}
+                  seccion="gastosPersonales"
+                  data={data.gastosPersonales}
+                />
+              ) : (
+                <Selector
+                  options={gastosPersonales}
+                  seccion="gastosPersonales"
                 />
               )}
+
               <br />
               <h2 className="fs-title">Hogar</h2>
-              <Selector options={hogar} seccion="hogar" />
-              {data?.hogar && (
-                <DynamicInputs data={[data.hogar]} sectionName="hogar" />
+              {data?.hogar ? (
+                <Selector options={hogar} seccion="hogar" data={data.hogar} />
+              ) : (
+                <Selector options={hogar} seccion="hogar" />
               )}
-              hogar
+
               <br />
               <h2 className="fs-title">Entretenimiento</h2>
-              <Selector options={entretenimiento} seccion="entretenimiento" />
-              {data?.entretenimiento && (
-                <DynamicInputs
-                  data={[data.entretenimiento]}
-                  sectionName="entretenimiento"
+              {data?.entretenimiento ? (
+                <Selector
+                  options={entretenimiento}
+                  seccion="entretenimiento"
+                  data={data.entretenimiento}
                 />
+              ) : (
+                <Selector options={entretenimiento} seccion="entretenimiento" />
               )}
+
               <br />
               <h2 className="fs-title">Protecciones Personales</h2>
-              <Selector options={protecciones} seccion="protecciones" />
-              {data?.protecciones && (
-                <DynamicInputs
-                  data={[data.protecciones]}
-                  sectionName="protecciones"
+
+              {data?.protecciones ? (
+                <Selector
+                  options={protecciones}
+                  seccion="protecciones"
+                  data={data.protecciones}
                 />
+              ) : (
+                <Selector options={protecciones} seccion="protecciones" />
               )}
               <br />
               <h2 className="fs-title">Descuentos de Nomina</h2>
-              <Selector options={descuentosnomina} seccion="descuentosnomina" />
-              {data?.descuentosnomina && (
-                <DynamicInputs
-                  data={[data.descuentosnomina]}
-                  sectionName="descuentosnomina"
+
+              {data?.descuentosnomina ? (
+                <Selector
+                  options={descuentosnomina}
+                  seccion="descuentosnomina"
+                  data={data.descuentosnomina}
+                />
+              ) : (
+                <Selector
+                  options={descuentosnomina}
+                  seccion="descuentosnomina"
                 />
               )}
+
               <br />
               <h2 className="fs-title">Educacion</h2>
-              <Selector options={educacion} seccion="educacion" />
-              {data?.educacion && (
-                <DynamicInputs
-                  data={[data.educacion]}
-                  sectionName="educacion"
+              {data?.educacion ? (
+                <Selector
+                  options={educacion}
+                  seccion="educacion"
+                  data={data.educacion}
                 />
+              ) : (
+                <Selector options={educacion} seccion="educacion" />
               )}
               <br />
               <h2 className="fs-title">Financieros</h2>
-              <Selector options={financieros} seccion="financieros" />
-              {data?.financieros && (
-                <DynamicInputs
-                  data={[data.financieros]}
-                  sectionName="financieros"
+              {data?.financieros ? (
+                <Selector
+                  options={financieros}
+                  seccion="financieros"
+                  data={data.financieros}
                 />
+              ) : (
+                <Selector options={financieros} seccion="financieros" />
               )}
               <br />
               <h2 className="fs-title">Otros</h2>
-              <Selector options={otros} seccion="otros" />
-              {data?.otros && (
-                <DynamicInputs data={[data.otros]} sectionName="otros" />
+              {data?.otros ? (
+                <Selector options={otros} seccion="otros" data={data.otros} />
+              ) : (
+                <Selector options={otros} seccion="otros" />
               )}
               <br />
               <input
@@ -423,39 +461,53 @@ const Form = () => {
               <h2>Gastos Anuales</h2>
 
               <h2 className="fs-title">Seguros</h2>
-              <Selector options={seguros} seccion="seguros" />
-              {data?.seguros && (
-                <DynamicInputs data={[data.seguros]} sectionName="seguros" />
+              {data?.seguros ? (
+                <Selector
+                  options={seguros}
+                  seccion="seguros"
+                  data={data.seguros}
+                />
+              ) : (
+                <Selector options={seguros} seccion="seguros" />
               )}
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
-              <Selector options={anualidadesFijas} seccion="AnualidadesFijas" />
-              {data?.AnualidadesFijas && (
-                <DynamicInputs
-                  data={[data.AnualidadesFijas]}
-                  sectionName="AnualidadesFijas"
+              {data?.anualidadesFijas ? (
+                <Selector
+                  options={anualidadesFijas}
+                  seccion="anualidadesFijas"
+                  data={data.anualidadesFijas}
+                />
+              ) : (
+                <Selector
+                  options={anualidadesFijas}
+                  seccion="anualidadesFijas"
                 />
               )}
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
-              <Selector
-                options={anualidadesPresupuestadas}
-                seccion="AnualidadesPresupuestadas"
-              />
-              {data?.AnualidadesPresupuestadas && (
-                <DynamicInputs
-                  data={[data.AnualidadesPresupuestadas]}
-                  sectionName="AnualidadesPresupuestadas"
+              {data?.anualidadesPresupuestadas ? (
+                <Selector
+                  options={anualidadesPresupuestadas}
+                  seccion="anualidadesPresupuestadas"
+                  data={data.anualidadesPresupuestadas}
+                />
+              ) : (
+                <Selector
+                  options={anualidadesPresupuestadas}
+                  seccion="anualidadesPresupuestadas"
                 />
               )}
               <br />
               <h2 className="fs-title"> Impuestos</h2>
-              <Selector options={impuestos} seccion="Impuestos" />
-              {data?.Impuestos && (
-                <DynamicInputs
-                  data={[data.Impuestos]}
-                  sectionName="Impuestos"
+              {data?.impuestos ? (
+                <Selector
+                  options={impuestos}
+                  seccion="impuestos"
+                  data={data.impuestos}
                 />
+              ) : (
+                <Selector options={impuestos} seccion="impuestos" />
               )}
               <br />
               <input
@@ -477,35 +529,41 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 4 ? "block" : "none" }}>
               <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
-              <Selector options={activoLiquidos} seccion="activoLiquidos" />
-              {data?.activoLiquidos && (
-                <DynamicInputs
-                  data={[data.activoLiquidos]}
-                  sectionName="activoLiquidos"
+              {data?.activoLiquidos ? (
+                <Selector
+                  options={activoLiquidos}
+                  seccion="activoLiquidos"
+                  data={data.activoLiquidos}
                 />
+              ) : (
+                <Selector options={activoLiquidos} seccion="activoLiquidos" />
               )}
               <br />
               <h2 className="fs-title">Activos Productivos</h2>
-              <Selector
-                options={activosProductivos}
-                seccion="activosProductivos"
-              />
-              {data?.activosProductivos && (
-                <DynamicInputs
-                  data={[data.activosProductivos]}
-                  sectionName="activosProductivos"
+              {data?.activosProductivos ? (
+                <Selector
+                  options={activosProductivos}
+                  seccion="activosProductivos"
+                  data={data.activosProductivos}
+                />
+              ) : (
+                <Selector
+                  options={activosProductivos}
+                  seccion="activosProductivos"
                 />
               )}
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
-              <Selector
-                options={activosImproductivos}
-                seccion="activosImproductivos"
-              />
-              {data?.activosImproductivos && (
-                <DynamicInputs
-                  data={[data.activosImproductivos]}
-                  sectionName="activosImproductivos"
+              {data?.activosImproductivos ? (
+                <Selector
+                  options={activosImproductivos}
+                  seccion="activosImproductivos"
+                  data={data.activosImproductivos}
+                />
+              ) : (
+                <Selector
+                  options={activosImproductivos}
+                  seccion="activosImproductivos"
                 />
               )}
               <br />
@@ -575,8 +633,6 @@ const Form = () => {
       </div>
     </div>
   );
-
-
 };
 
 export default Form;

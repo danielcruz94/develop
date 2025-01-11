@@ -1,16 +1,19 @@
 import { useState, useRef, useEffect } from "react";
+import DynamicInputs from "./DynamicFloatingSelects"; // Importamos el componente DynamicInputs
 import "./CreativeFloatingSelect.css";
 
-function CreativeFloatingSelect({ options, seccion }) {
+function CreativeFloatingSelect({ options, seccion, data }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [inputRecovery, setInputRecovery] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [helpText, setHelpText] = useState(null);
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [isOtherInputVisible, setIsOtherInputVisible] = useState(false);
   const [otherProductName, setOtherProductName] = useState("");
-  const [newOtherOption, setNewOtherOption] = useState(null);
   const selectRef = useRef(null);
+
+ 
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -23,6 +26,23 @@ function CreativeFloatingSelect({ options, seccion }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const selectedOptionsDiv = document.querySelector(
+        `.select-container[data-section="${seccion}"] .selected-options .Recovery-options`
+      );
+
+      if (selectedOptionsDiv) {
+        const inputs = selectedOptionsDiv.querySelectorAll("input");
+        const inputNames = Array.from(inputs).map((input) => input.name);
+        setSelectedOptions(inputNames);
+        setInputRecovery(inputNames);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSelectChange = (value) => {
@@ -110,11 +130,15 @@ function CreativeFloatingSelect({ options, seccion }) {
 
   const cerrarModal = () => {
     document.body.style.overflow = "auto";
-    setIsOtherInputVisible(false); // Esto cierra el modal
+    setIsOtherInputVisible(false);
   };
 
   const removeOption = (optionToRemove) => {
     setSelectedOptions((prevOptions) =>
+      prevOptions.filter((option) => option !== optionToRemove)
+    );
+
+    setInputRecovery((prevOptions) =>
       prevOptions.filter((option) => option !== optionToRemove)
     );
   };
@@ -209,48 +233,52 @@ function CreativeFloatingSelect({ options, seccion }) {
 
           const firstData = Datos[0] || "default";
 
-          return (
-            <div
-              key={option}
-              className="selected-option"
-              data-section={seccion === "ingresos" ? firstData : undefined}
-            >
-              <div className="label-input">
-                <p>{name.split("--")[0].replace(/[-_]/g, " ").split("@")[0]}</p>
-                <div className="input-container">
-                  {!isCustomOption && selectedOption?.visible && (
-                    <span
-                      className="duplicate-icon"
-                      onClick={() => duplicateInput(option)}
-                    >
-                      <i className="bi bi-plus-circle duplicate-icon2"></i>
-                    </span>
-                  )}
-                  <input
-                    type={selectedOption?.type || "Number"}
-                    name={name.split("@")[0]}
-                    onFocus={() => handleFocus(firstData)}
-                    className="selected-input"
+          if (!inputRecovery.includes(option)) {
+            return (
+              <div
+                key={option}
+                className="selected-option"
+                data-section={seccion === "ingresos" ? firstData : undefined}
+              >
+                <div className="label-input">
+                  <p>
+                    {name.split("--")[0].replace(/[-_]/g, " ").split("@")[0]}
+                  </p>
+                  <div className="input-container">
+                    {!isCustomOption && selectedOption?.visible && (
+                      <span
+                        className="duplicate-icon"
+                        onClick={() => duplicateInput(option)}
+                      >
+                        <i className="bi bi-plus-circle duplicate-icon2"></i>
+                      </span>
+                    )}
+                    <input
+                      type={selectedOption?.type || "Number"}
+                      name={name.split("@")[0]}
+                      onFocus={() => handleFocus(firstData)}
+                      className="selected-input"
+                    />
+                  </div>
+                </div>
+                <div className="icon-container">
+                  <span
+                    className="bi bi-question-circle Icon_Help"
+                    title="Más información"
+                    id={option.includes("-") ? option.split("-")[0] : option}
+                    onClick={(e) => handleHelpClick(e, option)}
                   />
+                  <button
+                    onClick={() => removeOption(option)}
+                    className="remove-button"
+                    aria-label={`Eliminar ${option}`}
+                  >
+                    ✕
+                  </button>
                 </div>
               </div>
-              <div className="icon-container">
-                <span
-                  className="bi bi-question-circle Icon_Help"
-                  title="Más información"
-                  id={option.includes("-") ? option.split("-")[0] : option}
-                  onClick={(e) => handleHelpClick(e, option)}
-                />
-                <button
-                  onClick={() => removeOption(option)}
-                  className="remove-button"
-                  aria-label={`Eliminar ${option}`}
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-          );
+            );
+          }
         })}
       </div>
     );
@@ -279,9 +307,18 @@ function CreativeFloatingSelect({ options, seccion }) {
 
         <div className="selected-options">
           <h2>Opciones seleccionadas</h2>
+
+          {data && (
+            <DynamicInputs
+              data={[data]}
+              sectionName={seccion}
+              removeOption={removeOption}
+              options={options}
+            />
+          )}
+
           {renderSelectedOptions()}
-          <div className="Recovery-options" >    
-          </div>
+          <div className="Recovery-options"></div>
         </div>
 
         {isOtherInputVisible && (

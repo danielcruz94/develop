@@ -252,6 +252,14 @@ html {
     color: white;
   }
 
+  .close-btn {
+    position: absolute;
+    background: none;
+    width: 100vw;
+    height: 100%;
+    top: 0px;
+    color: transparent;
+} 
 
 @media screen and (max-width: 800px) {
     #msform fieldset{
