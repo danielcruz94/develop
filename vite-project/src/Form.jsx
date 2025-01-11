@@ -53,6 +53,10 @@ const Form = () => {
   ];
 
   useEffect(() => {
+     setTimeout(() => { setIsDataLoaded(false); }, 3000);
+  }, []);
+
+  useEffect(() => {
     const cedulaExistente = localStorage.getItem("cedula");
 
     if (!cedulaExistente) {
@@ -69,8 +73,7 @@ const Form = () => {
         .get(`${serverURL}cliente/${cedulaRecuperada}/fieldset`)
         .then((response) => {
           if (response.data.fieldset <= 6) {
-            setData(response.data);
-            setIsDataLoaded(false);
+            setData(response.data);            
             setCurrentStep(response.data.fieldset);
           } else {
             window.location.href = "https://axia.com.co/";
@@ -237,7 +240,7 @@ const Form = () => {
   };
 
   if (isDataLoaded) {
-    return <p>Cargando datos...</p>;
+    return <div className="loading"></div>;
   }
 
   return (
