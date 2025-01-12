@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; 
 
-function DebtInputForm({ seccion }) {
-
+function DebtInputForm({ seccion, data }) {
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
@@ -12,6 +11,7 @@ function DebtInputForm({ seccion }) {
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };
 
+  console.log(data)
   
   const [rows, setRows] = useState([{
     pasivo: '',
@@ -25,12 +25,45 @@ function DebtInputForm({ seccion }) {
   const [helpText, setHelpText] = useState(null);  
   const helpPopupRef = useRef(null);
 
+  useEffect(() => {
+    if (data && Array.isArray(data[0].pasivo)) {
+      const formattedData = data[0].pasivo.map((pasivo, index) => ({
+        pasivo: pasivo,
+        saldoCapital: data[0].saldoCapital[index],
+        entidad: data[0].entidad[index],
+        tasa: data[0].tasa[index],
+        cuotasPendientes: data[0].cuotasPendientes[index],
+        cuotaMensual: data[0].cuotaMensual[index],
+      }));
+      setRows(formattedData);
+    } else if (data && typeof data[0].pasivo === 'string') {
+      const formattedData = [{
+        pasivo: data[0].pasivo || '',
+        saldoCapital: data[0].saldoCapital || '',
+        entidad: data[0].entidad || '',
+        tasa: data[0].tasa || '',
+        cuotasPendientes: data[0].cuotasPendientes || '',
+        cuotaMensual: data[0].cuotaMensual || '',
+      }];
+      setRows(formattedData);
+    } else {
+      setRows([{
+        pasivo: '',
+        saldoCapital: '',
+        entidad: '',
+        tasa: '',
+        cuotasPendientes: '',
+        cuotaMensual: '',
+      }]);
+    }
+  }, [data]);
+
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
- 
+
   const handleDuplicateRow = () => {
     setRows([...rows, {
       pasivo: '',
@@ -51,12 +84,10 @@ function DebtInputForm({ seccion }) {
     setHelpText(fieldHelpText[field]);
   };
 
-
   const handleClickAnywhere = () => {
     setHelpText(null); // Cerrar el popup
   };
 
- 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickAnywhere);
     
@@ -67,17 +98,15 @@ function DebtInputForm({ seccion }) {
 
   return (
     <div className="debt-input-form" data-section={seccion || 'default-value'}>
-
       <div className="form-container">
         {rows.map((row, index) => (
           <div key={index} className="form-row">
-          
             {index > 0 && (
               <button onClick={() => handleRemoveRow(index)} className="remove-btn">
                 <span className="bi bi-x"></span> 
               </button>
             )}
-           
+
             {index === 0 && (
               <span
                 className="bi bi-plus-circle duplicate-icon"
@@ -87,7 +116,7 @@ function DebtInputForm({ seccion }) {
             )}
 
             <div className="input-group">
-            <p>Nombre de deuda</p>
+              <p>Nombre de deuda</p>
               <div className="input-container2">
                 <input
                   type="text"
@@ -104,7 +133,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuanto debes</p>
+              <p>Cuanto debes</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -121,11 +150,12 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Entidad</p>
+              <p>Entidad</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`entidad`}  
+                  value={row.entidad}
                   onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}                  
                 />
                 <span
@@ -137,7 +167,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Tasa (%)</p>
+              <p>Tasa (%)</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -154,7 +184,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuotas Pendientes</p>
+              <p>Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -171,7 +201,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuota Mensual</p>
+              <p>Cuota Mensual</p>
               <div className="input-container2">
                 <input
                   type="number"

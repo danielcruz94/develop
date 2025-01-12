@@ -587,16 +587,27 @@ const Form = () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
-              <h2>Deudas Corto Plazo</h2>
-              <Deudas seccion="DeudasCortoPlazo" />
-              {data?.DeudasCortoPlazo && (
-                <DynamicInputs
-                  data={[data.DeudasCortoPlazo]}
-                  sectionName="DeudasCortoPlazo"
+              <h2>Deudas Corto Plazo</h2>             
+
+             {data?.DeudasCortoPlazo ? (
+                <Deudas
+                  seccion="DeudasCortoPlazo"
+                  data={data.DeudasCortoPlazo}
                 />
-              )}
+              ) : (
+                <Deudas seccion="DeudasCortoPlazo" />
+                )}
+
+
               <h2>Deudas Largo Plazo</h2>
-              <Deudas seccion="DeudasLargoPlazo" />
+              {data?.DeudasLargoPlazo ? (
+                <Deudas
+                  seccion="DeudasLargoPlazo"
+                  data={data.DeudasLargoPlazo}
+                />
+              ) : (
+                <Deudas seccion="DeudasLargoPlazo" />
+                )}
               <input
                 type="button"
                 name="prev"
