@@ -270,7 +270,7 @@ const collectFormData = () => {
           <div className='progressbar'>
            <ul id="progressbar">
               {steps.map((step, index) => (
-                <li key={index} className={index <= currentStep ? "active" : ""}>
+                <li key={index} className={index <= currentStep ? "active" : ""} style={{'letterSpacing':'0px'}}>
                   <p>{step} </p>
                 </li>
               ))}
@@ -281,6 +281,10 @@ const collectFormData = () => {
             <fieldset style={{ display: currentStep === 0 ? 'block' : 'none' }}>
            
              <h2>Seguridad Social</h2>
+             <span style={{'fontSize':'12px'}}>Por favor, selecciona las opciones que te correspondan de la siguiente lista y luego indica el valor específico (entidad) para cada opción seleccionada.</span>
+             <br />
+             <br />
+
              <Selector options={seguridadsocial} seccion="seguridadsocial" />
              {data?.seguridadsocial && (
                 <DynamicInputs data={[data.seguridadsocial]} sectionName="seguridadsocial" />
@@ -291,6 +295,11 @@ const collectFormData = () => {
 
             <fieldset style={{ display: currentStep === 1 ? 'block' : 'none' }}>
             <h2>Ingresos Mensuales</h2>
+            <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}>Por favor, selecciona las <b>opciones </b> que te correspondan de la siguientes listas, luego registra el  <b>monto</b> de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
+              
+            </div>
+            
               <Selector options={ingresos} seccion="ingresos"/>
               {data?.ingresos && (
                 <DynamicInputs data={[data.ingresos]} sectionName="ingresos" />
@@ -298,6 +307,10 @@ const collectFormData = () => {
               <br />
 
               <h2>Ingresos Anuales</h2>
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda:</b> La idea es solo poner en este registro el dinero que recibes de forma <b>Anual</b> Ej:Primas,Dividendos,Bonos,Bonificaciones, etc.</span>
+              
+            </div>
               <Selector options={ingresosanuales} seccion="IngresosAnuales"/>
               {data?.IngresosAnuales && (
                 <DynamicInputs data={[data.IngresosAnuales]} sectionName="IngresosAnuales" />
@@ -311,6 +324,10 @@ const collectFormData = () => {
               <h2>Gastos Mensuales</h2>
 
               <h2 className="fs-title">Ahorro</h2>
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  En este item solo deberas ingresar el monto que ahorras mensualmente,<b> NO DEBES </b>ingresar el saldo de tus ahorros ya que seran validados mas adelante.</span>
+              
+            </div>
               <Selector options={ahorro} seccion="Ahorro"/>
               {data?.Ahorro && (
                 <DynamicInputs data={[data.Ahorro]} sectionName="Ahorro" />
@@ -331,7 +348,7 @@ const collectFormData = () => {
               <Selector options={hogar} seccion="hogar"/>
               {data?.hogar && (
                 <DynamicInputs data={[data.hogar]} sectionName="hogar" />
-              )}hogar
+              )}
               <br />
               <h2 className="fs-title">Entretenimiento</h2>
               <Selector options={entretenimiento} seccion="entretenimiento"/>
@@ -375,6 +392,7 @@ const collectFormData = () => {
          
             <fieldset style={{ display: currentStep === 3 ? 'block' : 'none' }}>
               <h2>Gastos Anuales</h2>
+              <span style={{'fontSize':'12px'}}>La idea es solo poner en este registro los gastos que pagas de forma <b>Anual</b>,Ej:Soat,Impuestos,Matricula,Suscripciones Anuales,Etc.</span>
 
              
               <h2 className="fs-title">Seguros</h2>              
@@ -408,6 +426,10 @@ const collectFormData = () => {
             <fieldset style={{ display: currentStep === 4 ? 'block' : 'none' }}>
               <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  En este item  deberas ingresar el saldo de tus productos, o dinero que tengas en efectivo.Recuerda si no recuerdas el monto puedes llenarlo despues.</span>
+              
+            </div>
               <Selector options={activoLiquidos} seccion="activoLiquidos"/>
               {data?.activoLiquidos && (
                 <DynamicInputs data={[data.activoLiquidos]} sectionName="activoLiquidos" />
@@ -431,11 +453,19 @@ const collectFormData = () => {
 
             <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>              
                 <h2>Deudas Corto Plazo</h2>
+                <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60.</span>
+              
+            </div>
                 <Deudas  seccion="DeudasCortoPlazo"/>
                 {data?.DeudasCortoPlazo && (
                 <DynamicInputs data={[data.DeudasCortoPlazo]} sectionName="DeudasCortoPlazo" />
               )} 
                 <h2>Deudas Largo Plazo</h2>
+                <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60.</span>
+              
+            </div>
                 <Deudas  seccion="DeudasLargoPlazo"/>
                 <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>  
                 <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />              
