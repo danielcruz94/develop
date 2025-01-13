@@ -65,7 +65,7 @@
   
   .Icon_Help2 {
     font-size: 18px;
-    margin-right: 0px;
+    margin-right: 5px;
     color:  #06175C;
     cursor: pointer;
   }
@@ -86,21 +86,38 @@
   /* Media queries para pantallas pequeñas */
 @media screen and (max-width: 800px) {
 
+  .h2deudas{
+    background: white;
+    margin: 0px;
+    padding-top: 20px;
+    border-radius: 40px;
+  }
+
   .objective-input-form {
     margin: 0px;    
 }
 
 .debt-input-form .form-container, 
-.objective-input-form .form-container {
-  background: radial-gradient(circle, #d7dbe544, #d7dbe560);
+.objective-input-form 
+.form-container { 
+  border-radius: 0px;
+  padding: 0px 0px 15px 0px;
+  background: none !important;
+  box-shadow: none
 }
 
-
 .form-row {
-  flex-direction: column;  
+  flex-direction: column;
   border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.129);
+  border: 1px solid rgba(0, 0, 0, 0.218);
   background: white;
+  margin: 0px 20px 0px 20px;
+  padding: 15px 0px 20px 0px;  
+}
+
+.next,
+.prev{
+   margin: 20px 3% !important;
 }
 
   .input-group{

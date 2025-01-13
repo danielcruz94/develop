@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; 
+import { data } from 'react-router-dom';
 
 function DebtInputForm({ seccion, data }) {
 
@@ -13,12 +14,27 @@ function DebtInputForm({ seccion, data }) {
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };
 
-  
+  const [deudas, setDeudas] = useState([
+    {
+        "pasivo": "",
+        "saldoCapital": "",
+        "entidad": "",
+        "tasa": "",
+        "cuotasPendientes": "",
+        "cuotaMensual": ""
+    }
+]);
 
-  if (!data || !data.pasivo || !data.saldoCapital || !data.entidad || !data.tasa || !data.cuotasPendientes || !data.cuotaMensual) {
-    return ;
-  }
-  
+useEffect(() => {
+  setDeudas(data)
+}, [data]);
+
+
+ 
+
+  console.log(deudas)
+
+ 
   
   const [rows, setRows] = useState([{
     pasivo: '',
@@ -33,37 +49,33 @@ function DebtInputForm({ seccion, data }) {
   const helpPopupRef = useRef(null);
 
   useEffect(() => {
-    if (data && Array.isArray(data[0].pasivo)) {
-      const formattedData = data[0].pasivo.map((pasivo, index) => ({
-        pasivo: pasivo,
-        saldoCapital: data[0].saldoCapital[index],
-        entidad: data[0].entidad[index],
-        tasa: data[0].tasa[index],
-        cuotasPendientes: data[0].cuotasPendientes[index],
-        cuotaMensual: data[0].cuotaMensual[index],
-      }));
-      setRows(formattedData);
-    } else if (data && typeof data[0].pasivo === 'string') {
-      const formattedData = [{
-        pasivo: data[0].pasivo || '',
-        saldoCapital: data[0].saldoCapital || '',
-        entidad: data[0].entidad || '',
-        tasa: data[0].tasa || '',
-        cuotasPendientes: data[0].cuotasPendientes || '',
-        cuotaMensual: data[0].cuotaMensual || '',
-      }];
-      setRows(formattedData);
+    if (deudas && deudas.length > 0 && deudas[0].pasivo) {
+      if (Array.isArray(deudas[0].pasivo)) {
+        const formattedData = deudas[0].pasivo.map((pasivo, index) => ({
+          pasivo: pasivo,
+          saldoCapital: deudas[0].saldoCapital[index],
+          entidad: deudas[0].entidad[index],
+          tasa: deudas[0].tasa[index],
+          cuotasPendientes: deudas[0].cuotasPendientes[index],
+          cuotaMensual: deudas[0].cuotaMensual[index],
+        }));
+        setRows(formattedData);
+      } else if (typeof deudas[0].pasivo === 'string') {
+        const formattedData = [{
+          pasivo: deudas[0].pasivo || '',
+          saldoCapital: deudas[0].saldoCapital || '',
+          entidad: deudas[0].entidad || '',
+          tasa: deudas[0].tasa || '',
+          cuotasPendientes: deudas[0].cuotasPendientes || '',
+          cuotaMensual: deudas[0].cuotaMensual || '',
+        }];
+        setRows(formattedData);
+      }
     } else {
-      setRows([{
-        pasivo: '',
-        saldoCapital: '',
-        entidad: '',
-        tasa: '',
-        cuotasPendientes: '',
-        cuotaMensual: '',
-      }]);
+       console.log('Deudas no está disponible o no tiene el formato esperado');
     }
-  }, [data]);
+  }, [deudas]);
+  
 
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];

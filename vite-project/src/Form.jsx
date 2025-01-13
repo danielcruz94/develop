@@ -30,7 +30,6 @@ import {
   anualidadesFijas,
   ingresosanuales,
 } from "./DatosSelect";
-import { path } from "framer-motion/client";
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -587,7 +586,7 @@ const Form = () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
-              <h2>Deudas Corto Plazo</h2>             
+              <h2 className="h2deudas" >Deudas Corto Plazo</h2>             
 
              {data?.DeudasCortoPlazo ? (
                 <Deudas
@@ -599,7 +598,7 @@ const Form = () => {
                 )}
 
 
-              <h2>Deudas Largo Plazo</h2>
+              <h2 className="h2deudas" >Deudas Largo Plazo</h2>
               {data?.DeudasLargoPlazo ? (
                 <Deudas
                   seccion="DeudasLargoPlazo"
@@ -625,7 +624,7 @@ const Form = () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 6 ? "block" : "none" }}>
-              <h2>Objetivos Financieros</h2>
+              <h2 className="h2deudas" >Objetivos Financieros</h2>
               <Objetivos seccion="objetivos" />
               <input
                 type="button"
