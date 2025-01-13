@@ -28,12 +28,6 @@ function DebtInputForm({ seccion, data }) {
 useEffect(() => {
   setDeudas(data)
 }, [data]);
-
-
- 
-
-  console.log(deudas)
-
  
   
   const [rows, setRows] = useState([{
@@ -72,7 +66,7 @@ useEffect(() => {
         setRows(formattedData);
       }
     } else {
-       console.log('Deudas no está disponible o no tiene el formato esperado');
+       //console.log('Deudas no está disponible o no tiene el formato esperado');
     }
   }, [deudas]);
   
