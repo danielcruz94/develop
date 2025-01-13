@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; 
+import { data } from 'react-router-dom';
 
-function DebtInputForm({ seccion }) {
+function DebtInputForm({ seccion, data }) {
+
 
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
@@ -12,6 +14,21 @@ function DebtInputForm({ seccion }) {
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };
 
+  const [deudas, setDeudas] = useState([
+    {
+        "pasivo": "",
+        "saldoCapital": "",
+        "entidad": "",
+        "tasa": "",
+        "cuotasPendientes": "",
+        "cuotaMensual": ""
+    }
+]);
+
+useEffect(() => {
+  setDeudas(data)
+}, [data]);
+ 
   
   const [rows, setRows] = useState([{
     pasivo: '',
@@ -25,12 +42,41 @@ function DebtInputForm({ seccion }) {
   const [helpText, setHelpText] = useState(null);  
   const helpPopupRef = useRef(null);
 
+  useEffect(() => {
+    if (deudas && deudas.length > 0 && deudas[0].pasivo) {
+      if (Array.isArray(deudas[0].pasivo)) {
+        const formattedData = deudas[0].pasivo.map((pasivo, index) => ({
+          pasivo: pasivo,
+          saldoCapital: deudas[0].saldoCapital[index],
+          entidad: deudas[0].entidad[index],
+          tasa: deudas[0].tasa[index],
+          cuotasPendientes: deudas[0].cuotasPendientes[index],
+          cuotaMensual: deudas[0].cuotaMensual[index],
+        }));
+        setRows(formattedData);
+      } else if (typeof deudas[0].pasivo === 'string') {
+        const formattedData = [{
+          pasivo: deudas[0].pasivo || '',
+          saldoCapital: deudas[0].saldoCapital || '',
+          entidad: deudas[0].entidad || '',
+          tasa: deudas[0].tasa || '',
+          cuotasPendientes: deudas[0].cuotasPendientes || '',
+          cuotaMensual: deudas[0].cuotaMensual || '',
+        }];
+        setRows(formattedData);
+      }
+    } else {
+       //console.log('Deudas no está disponible o no tiene el formato esperado');
+    }
+  }, [deudas]);
+  
+
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
- 
+
   const handleDuplicateRow = () => {
     setRows([...rows, {
       pasivo: '',
@@ -51,12 +97,10 @@ function DebtInputForm({ seccion }) {
     setHelpText(fieldHelpText[field]);
   };
 
-
   const handleClickAnywhere = () => {
     setHelpText(null); // Cerrar el popup
   };
 
- 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickAnywhere);
     
@@ -67,17 +111,15 @@ function DebtInputForm({ seccion }) {
 
   return (
     <div className="debt-input-form" data-section={seccion || 'default-value'}>
-
       <div className="form-container">
         {rows.map((row, index) => (
           <div key={index} className="form-row">
-          
             {index > 0 && (
               <button onClick={() => handleRemoveRow(index)} className="remove-btn">
                 <span className="bi bi-x"></span> 
               </button>
             )}
-           
+
             {index === 0 && (
               <span
                 className="bi bi-plus-circle duplicate-icon"
@@ -87,7 +129,7 @@ function DebtInputForm({ seccion }) {
             )}
 
             <div className="input-group">
-            <p>Nombre de deuda</p>
+              <p>Nombre de deuda</p>
               <div className="input-container2">
                 <input
                   type="text"
@@ -104,7 +146,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuanto debes</p>
+              <p>Cuanto debes</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -121,11 +163,12 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Entidad</p>
+              <p>Entidad</p>
               <div className="input-container2">
                 <input
                   type="text"
                   name={`entidad`}  
+                  value={row.entidad}
                   onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}                  
                 />
                 <span
@@ -137,7 +180,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Tasa (%)</p>
+              <p>Tasa (%)</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -154,7 +197,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuotas Pendientes</p>
+              <p>Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -171,7 +214,7 @@ function DebtInputForm({ seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Cuota Mensual</p>
+              <p>Cuota Mensual</p>
               <div className="input-container2">
                 <input
                   type="number"
@@ -200,6 +243,61 @@ function DebtInputForm({ seccion }) {
       )}
     </div>
   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 export default DebtInputForm;
