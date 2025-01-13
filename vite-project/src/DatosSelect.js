@@ -114,8 +114,7 @@ export const entretenimiento = [
 ];
 
 export const protecciones = [
-  { value: 'aporte_a_pension_obligatoria', label: 'Aporte a Pensión Obligatoria', Help: 'Es el aporte obligatorio que haces a un fondo de pensiones para asegurar tu jubilación. Este pago es obligatorio por ley.', visible: false, type: "number" },
-  { value: 'aporte_a_salud_obligatoria', label: 'Aporte a Salud Obligatoria', Help: 'Es el aporte obligatorio al sistema de salud, que te garantiza acceso a servicios médicos y de salud según la legislación vigente.', visible: false, type: "number" },
+  
   { value: 'salud_prepagada', label: 'Salud Prepagada', Help: 'Es un tipo de seguro de salud privado que permite acceder a atención médica con mejores tiempos de respuesta y servicios adicionales.', visible: false, type: "number" },
   { value: 'seguro_de_contenidos', label: 'Seguro de Contenidos', Help: 'Es un seguro que cubre los daños o pérdida de tus bienes materiales en caso de eventos como robo, incendios o accidentes.', visible: false, type: "number" },
   { value: 'seguro_de_invalidez', label: 'Seguro de Invalidez', Help: 'Es un seguro que cubre la pérdida de ingresos debido a una invalidez permanente o temporal que impida trabajar.', visible: false, type: "number" },

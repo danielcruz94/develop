@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import "./styles.css";
-import Selector from "./select";
-import Objetivos from "./ObjectiveInputForm";
-import { useSelector } from "react-redux";
-import Deudas from "./DeudasInputForm";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import './styles.css';
+import Selector from './select';
+import Objetivos from './ObjectiveInputForm';
+import { useSelector } from 'react-redux';
+import Deudas from './DeudasInputForm';
+import axios from 'axios';  
 
-import DynamicInputs from "./DynamicFloatingSelects"; // Importamos el componente DynamicInputs
+import DynamicInputs from './DynamicFloatingSelects';  // Importamos el componente DynamicInputs
+
 
 import {
   seguridadsocial,
@@ -29,16 +30,18 @@ import {
   impuestos,
   anualidadesFijas,
   ingresosanuales,
-} from "./DatosSelect";
+
+} from './DatosSelect';
+import { path } from 'framer-motion/client';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const datosMongo = useSelector((state) => state.datosMongo.datosMongo);
   const [cedula, setCedula] = useState("");
 
-  const serverURL = useSelector((state) => state.serverURL.serverURL);
+  const serverURL = useSelector(state => state.serverURL.serverURL);
 
-  const [isDataLoaded, setIsDataLoaded] = useState(true);
+  const [isDataLoaded, setIsDataLoaded] = useState(false); // Para controlar si los datos se han cargado
   const [data, setData] = useState(null);
 
   const steps = [
@@ -49,597 +52,430 @@ const Form = () => {
     "Activos",
     "Deudas",
     "Objetivos Financieros",
+   
   ];
 
-  useEffect(() => {
-     setTimeout(() => { setIsDataLoaded(false); }, 3000);
-  }, []);
+ 
 
-  useEffect(() => {
-    const cedulaExistente = localStorage.getItem("cedula");
+useEffect(() => {
+  const cedulaExistente = localStorage.getItem('cedula');
 
-    if (!cedulaExistente) {
-      setCedula(datosMongo.cedula);
-      localStorage.setItem("cedula", datosMongo.cedula);
-    }
+  if (!cedulaExistente) {
+    setCedula(datosMongo.cedula);
+    localStorage.setItem('cedula', datosMongo.cedula);
+  }
 
-    const cedulaRecuperada = localStorage.getItem("cedula");
+  const cedulaRecuperada = localStorage.getItem('cedula');
 
-    if (cedulaRecuperada) {
-      setCedula(cedulaRecuperada);
+  if (cedulaRecuperada) {
+    setCedula(cedulaRecuperada);
+    
 
-      axios
-        .get(`${serverURL}cliente/${cedulaRecuperada}/fieldset`)
-        .then((response) => {
-          if (response.data.fieldset <= 6) {
-            setData(response.data);            
-            setCurrentStep(response.data.fieldset);
+    axios.get(`${serverURL}cliente/${cedulaRecuperada}/fieldset`)
+      .then(response => {       
+
+            if (response.data.fieldset <= 6) {              
+              setData(response.data);
+              setIsDataLoaded(true);
+              setCurrentStep(response.data.fieldset);
+              
           } else {
-            window.location.href = "https://axia.com.co/";
+              window.location.href = 'https://axia.com.co/';
           }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      console.log("La cédula no está disponible.");
-    }
-  }, []);
+        
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  } else {
+    console.log("La cédula no está disponible.");
+  }
+}, []);
 
-  useEffect(() => {
-    setIsDataLoaded(false);
-  }, [data]);
 
-  const collectFormData = () => {
-    const formData = {};
+useEffect(() => {
+  setIsDataLoaded(false)
+  
+}, [data]);
 
-    const fieldsets = document.querySelectorAll("fieldset");
+const collectFormData = () => {
+  const formData = {};
 
-    const processSection = (section) => {
+  const fieldsets = document.querySelectorAll('fieldset');
+
+  const processSection = (section) => {
       const sectionData = {};
-      const inputs = section.querySelectorAll("input");
-      const placeholdersCount = {};
+      const inputs = section.querySelectorAll('input');
+      const placeholdersCount = {}; 
 
-      inputs.forEach((input) => {
-        const placeholder = input.name || "Campo sin name";
-        placeholdersCount[placeholder] =
-          (placeholdersCount[placeholder] || 0) + 1;
+      inputs.forEach(input => {
+          const placeholder = input.name || 'Campo sin name';
+          placeholdersCount[placeholder] = (placeholdersCount[placeholder] || 0) + 1;
       });
 
-      inputs.forEach((input) => {
-        const placeholder = input.name || "Campo sin name";
-        const value = input.value.trim();
-        if (value) {
-          if (placeholdersCount[placeholder] > 1) {
-            if (sectionData[placeholder]) {
-              sectionData[placeholder].push(value);
-            } else {
-              sectionData[placeholder] = [value];
-            }
-          } else {
-            sectionData[placeholder] = value;
+      inputs.forEach(input => {
+          const placeholder = input.name || 'Campo sin name';
+          const value = input.value.trim();
+          if (value) {
+              if (placeholdersCount[placeholder] > 1) {
+                  if (sectionData[placeholder]) {
+                      sectionData[placeholder].push(value);
+                  } else {
+                      sectionData[placeholder] = [value];
+                  }
+              } else {
+                  sectionData[placeholder] = value;
+              }
           }
-        }
       });
 
-      const subsections = section.querySelectorAll("[data-section]");
-      subsections.forEach((subsection) => {
-        const subData = processSection(subsection);
-        sectionData[subsection.getAttribute("data-section")] = subData;
+      const subsections = section.querySelectorAll('[data-section]');
+      subsections.forEach(subsection => {
+          const subData = processSection(subsection); 
+          sectionData[subsection.getAttribute('data-section')] = subData;
       });
 
       return sectionData;
-    };
+  };
 
-    fieldsets.forEach((fieldset) => {
-      if (window.getComputedStyle(fieldset).display === "block") {
-        const sections = fieldset.querySelectorAll("[data-section]");
+  fieldsets.forEach(fieldset => {
+      if (window.getComputedStyle(fieldset).display === 'block') {
+          const sections = fieldset.querySelectorAll('[data-section]'); 
 
-        sections.forEach((section) => {
-          const sectionName = section.getAttribute("data-section");
-          const validValues = [
-            "Salario_Tradicional",
-            "Salario_Integral",
-            "Arriendo",
-            "Auxilio",
-            "Beneficio",
-            "Bonificacion",
-            "Comisiones",
-            "Dividendos",
-            "Honorarios",
-            "Prima_De_Servicios",
-            "Prima_Extra_legal",
-            "Renta",
-            "Subsidio_De_Transporte",
-            "Subsidio_Familiar",
-          ];
+          sections.forEach(section => {
+              const sectionName = section.getAttribute('data-section');
+              const validValues = [
+                  'Salario_Tradicional', 'Salario_Integral', 'Arriendo', 'Auxilio', 
+                  'Beneficio', 'Bonificacion', 'Comisiones', 'Dividendos', 
+                  'Honorarios', 'Prima_De_Servicios', 'Prima_Extra_legal', 'Renta', 
+                  'Subsidio_De_Transporte', 'Subsidio_Familiar'
+              ];
 
-          if (sectionName === "ingresos") {
-            if (!formData.ingresos) formData.ingresos = {};
+              if (sectionName === 'ingresos') {
+                if (!formData.ingresos) formData.ingresos = {};
+                
+                const subsections = section.querySelectorAll('[data-section]');
+                subsections.forEach(subsection => {
+                    const subData = processSection(subsection);
+                    const subsectionKey = subsection.getAttribute('data-section');
+                    
+                    if (formData.ingresos[subsectionKey]) {
+                        if (Array.isArray(formData.ingresos[subsectionKey])) {
+                            formData.ingresos[subsectionKey].push(subData);
+                        } else {
+                            formData.ingresos[subsectionKey] = [formData.ingresos[subsectionKey], subData];
+                        }
+                    } else {
+                        formData.ingresos[subsectionKey] = subData;
+                    }
+                });
+            } else if (!validValues.includes(sectionName)) {
+                formData[sectionName] = processSection(section);
+            }
+            
+          });
+      }
+  });
 
-            const subsections = section.querySelectorAll("[data-section]");
-            subsections.forEach((subsection) => {
-              const subData = processSection(subsection);
-              const subsectionKey = subsection.getAttribute("data-section");
+  formData.datosMongo = { ...formData.datosMongo, cedula , fieldset: currentStep+1 };
 
-              if (formData.ingresos[subsectionKey]) {
-                if (Array.isArray(formData.ingresos[subsectionKey])) {
-                  formData.ingresos[subsectionKey].push(subData);
-                } else {
-                  formData.ingresos[subsectionKey] = [
-                    formData.ingresos[subsectionKey],
-                    subData,
-                  ];
-                }
-              } else {
-                formData.ingresos[subsectionKey] = subData;
-              }
-            });
-          } else if (!validValues.includes(sectionName)) {
-            formData[sectionName] = processSection(section);
+  return formData;
+};
+
+
+    
+      const sendFormData = async (formData) => {
+        try {
+            const response = await axios.put(`${serverURL}actualizar`, formData);            
+              window.location.href = 'https://axia.com.co/';
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+        }
+      };
+   
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = collectFormData();       
+        sendFormData(formData);           
+      };
+
+      const handleNext = async () => {
+        
+          const formData = collectFormData(); 
+          console.log(formData); 
+        
+          try {
+            
+              const response = await axios.put(`${serverURL}actualizar`, formData);       
+          
+              if (currentStep < steps.length - 1) {            
+                  setCurrentStep(currentStep + 1);  
+                  window.scrollTo(0, 0);
+
+              } 
+          } catch (error) {
+              console.error('Error al enviar los datos:', error);
+              
           }
-        });
+      };  
+
+      const handlePrev = async () => {
+        const formData = collectFormData(); 
+        console.log(formData); 
+        
+        try {
+            // Si deseas enviar datos antes de retroceder, puedes hacerlo aquí
+            // const response = await axios.put(`${serverURL}actualizar`, formData);
+    
+            // Solo retroceder si no estamos en el primer paso
+            if (currentStep > 0) {
+                setCurrentStep(currentStep - 1);  // Decrementa el paso actual
+                window.scrollTo(0, 0);  // Desplaza la página hacia arriba
+            }
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+        }
+      };    
+
+      const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        window.location.href = '/login'; 
+      };
+
+
+      if (isDataLoaded) {
+        return <p>Cargando datos...</p>; // Renderiza mientras los datos están siendo cargados
       }
-    });
-
-    formData.datosMongo = {
-      ...formData.datosMongo,
-      cedula,
-      fieldset: currentStep + 1,
-    };
-
-    return formData;
-  };
-
-  const sendFormData = async (formData) => {
-    try {
-      const response = await axios.put(`${serverURL}actualizar`, formData);
-      window.location.href = "https://axia.com.co/";
-    } catch (error) {
-      console.error("Error al enviar los datos:", error);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = collectFormData();
-    sendFormData(formData);
-  };
-
-  const handleNext = async () => {
-    const formData = collectFormData();
-    console.log(formData);
-
-    try {
-      const response = await axios.put(`${serverURL}actualizar`, formData);
-
-      if (currentStep < steps.length - 1) {
-        setCurrentStep(currentStep + 1);
-        window.scrollTo(0, 0);
-      }
-    } catch (error) {
-      console.error("Error al enviar los datos:", error);
-    }
-  };
-
-  const handlePrev = async () => {
-    try {
-      if (currentStep > 0) {
-        setCurrentStep(currentStep - 1);
-        window.scrollTo(0, 0);
-      }
-    } catch (error) {
-      console.error("Error al enviar los datos:", error);
-    }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    window.location.href = "/login";
-  };
-
-  if (isDataLoaded) {
-    return <div className="loading"></div>;
-  }
+      
+    
 
   return (
     <div className="container">
-      <div className="logout-button-container">
-        <button className="logout-button" onClick={handleLogout}>
-          {/* Icono de Bootstrap */}
-          <i className="bi bi-box-arrow-right"></i>{" "}
-          {/* Icono de cerrar sesión */}
-        </button>
-      </div>
 
+      <div className="logout-button-container">
+          <button className="logout-button" onClick={handleLogout}>
+            {/* Icono de Bootstrap */}
+            <i className="bi bi-box-arrow-right"></i> {/* Icono de cerrar sesión */}
+          </button>
+      </div>
+    
+      
       <div className="row">
         <div className="col-md-12">
           <div id="msform">
-            <img src="axia-logo.png" alt="logo" />
+          <img src="axia-logo.png" alt="logo" />
 
-            <div className="progressbar">
-              <ul id="progressbar">
-                {steps.map((step, index) => (
-                  <li
-                    key={index}
-                    className={index <= currentStep ? "active" : ""}
-                  >
-                    <p>{step} </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+         
 
-            <fieldset style={{ display: currentStep === 0 ? "block" : "none" }}>
-              <h2>Seguridad Social</h2>
-              {data?.seguridadsocial ? (
-                <Selector
-                  options={seguridadsocial}
-                  seccion="seguridadsocial"
-                  data={data.seguridadsocial}
-                />
-              ) : (
-                <Selector options={seguridadsocial} seccion="seguridadsocial" />
+          <div className='progressbar'>
+           <ul id="progressbar">
+              {steps.map((step, index) => (
+                <li key={index} className={index <= currentStep ? "active" : ""} style={{'letterSpacing':'0px'}}>
+                  <p>{step} </p>
+                </li>
+              ))}
+            </ul>  
+          </div>           
+
+          
+            <fieldset style={{ display: currentStep === 0 ? 'block' : 'none' }}>
+           
+             <h2>Seguridad Social</h2>
+             <span style={{'fontSize':'12px'}}>Por favor, selecciona las opciones que te correspondan de la siguiente lista y luego indica el valor específico (entidad) para cada opción seleccionada.</span>
+             <br />
+             <br />
+
+             <Selector options={seguridadsocial} seccion="seguridadsocial" />
+             {data?.seguridadsocial && (
+                <DynamicInputs data={[data.seguridadsocial]} sectionName="seguridadsocial" />
               )}
               <br />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
+              <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
-            <fieldset style={{ display: currentStep === 1 ? "block" : "none" }}>
-              <h2>Ingresos Mensuales</h2>
-
-              {data?.ingresos ? (
-                <Selector
-                  options={ingresos}
-                  seccion="ingresos"
-                  data={data.ingresos}
-                />
-              ) : (
-                <Selector options={ingresos} seccion="ingresos" />
+            <fieldset style={{ display: currentStep === 1 ? 'block' : 'none' }}>
+            <h2>Ingresos Mensuales</h2>
+            <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}>Por favor, selecciona las <b>opciones </b> que te correspondan de la siguientes listas, luego registra el  <b>monto</b> de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
+              
+            </div>
+            
+              <Selector options={ingresos} seccion="ingresos"/>
+              {data?.ingresos && (
+                <DynamicInputs data={[data.ingresos]} sectionName="ingresos" />
               )}
-
               <br />
 
               <h2>Ingresos Anuales</h2>
-
-              {data?.IngresosAnuales ? (
-                <Selector
-                  options={ingresosanuales}
-                  seccion="IngresosAnuales"
-                  data={data.IngresosAnuales}
-                />
-              ) : (
-                <Selector options={ingresosanuales} seccion="IngresosAnuales" />
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda:</b> La idea es solo poner en este registro el dinero que recibes de forma <b>Anual</b> Ej:Primas,Dividendos,Bonos,Bonificaciones, etc.</span>
+              
+            </div>
+              <Selector options={ingresosanuales} seccion="IngresosAnuales"/>
+              {data?.IngresosAnuales && (
+                <DynamicInputs data={[data.IngresosAnuales]} sectionName="IngresosAnuales" />
               )}
-
               <br />
-
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
+              <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
-            <fieldset style={{ display: currentStep === 2 ? "block" : "none" }}>
+            <fieldset style={{ display: currentStep === 2 ? 'block' : 'none' }}>
               <h2>Gastos Mensuales</h2>
-              <h2 className="fs-title">Ahorro</h2>
 
-              {data?.ahorro ? (
-                <Selector
-                  options={ahorro}
-                  seccion="ahorro"
-                  data={data.ahorro}
-                />
-              ) : (
-                <Selector options={ahorro} seccion="ahorro" />
+              <h2 className="fs-title">Ahorro</h2>
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  En este item solo deberas ingresar el monto que ahorras mensualmente,<b> NO DEBES </b>ingresar el saldo de tus ahorros ya que seran validados mas adelante.</span>
+              
+            </div>
+              <Selector options={ahorro} seccion="Ahorro"/>
+              {data?.Ahorro && (
+                <DynamicInputs data={[data.Ahorro]} sectionName="Ahorro" />
+              )}
+              <h2 className="fs-title">Transporte</h2>
+              <Selector options={transporte} seccion="Transporte"/>
+              {data?.Transporte && (
+                <DynamicInputs data={[data.Transporte]} sectionName="Transporte" />
               )}
               <br />
               <h2 className="fs-title"> Gastos Personales</h2>
-
-              {data?.gastosPersonales ? (
-                <Selector
-                  options={gastosPersonales}
-                  seccion="gastosPersonales"
-                  data={data.gastosPersonales}
-                />
-              ) : (
-                <Selector
-                  options={gastosPersonales}
-                  seccion="gastosPersonales"
-                />
+              <Selector options={gastosPersonales} seccion="gastosPersonales"/>
+              {data?.gastosPersonales && (
+                <DynamicInputs data={[data.gastosPersonales]} sectionName="gastosPersonales" />
               )}
-
               <br />
               <h2 className="fs-title">Hogar</h2>
-              {data?.hogar ? (
-                <Selector options={hogar} seccion="hogar" data={data.hogar} />
-              ) : (
-                <Selector options={hogar} seccion="hogar" />
+              <Selector options={hogar} seccion="hogar"/>
+              {data?.hogar && (
+                <DynamicInputs data={[data.hogar]} sectionName="hogar" />
               )}
-
               <br />
               <h2 className="fs-title">Entretenimiento</h2>
-              {data?.entretenimiento ? (
-                <Selector
-                  options={entretenimiento}
-                  seccion="entretenimiento"
-                  data={data.entretenimiento}
-                />
-              ) : (
-                <Selector options={entretenimiento} seccion="entretenimiento" />
+              <Selector options={entretenimiento} seccion="entretenimiento"/>
+              {data?.entretenimiento && (
+                <DynamicInputs data={[data.entretenimiento]} sectionName="entretenimiento" />
               )}
-
               <br />
               <h2 className="fs-title">Protecciones Personales</h2>
-
-              {data?.protecciones ? (
-                <Selector
-                  options={protecciones}
-                  seccion="protecciones"
-                  data={data.protecciones}
-                />
-              ) : (
-                <Selector options={protecciones} seccion="protecciones" />
+              <Selector options={protecciones} seccion="protecciones"/>
+                {data?.protecciones && (
+                <DynamicInputs data={[data.protecciones]} sectionName="protecciones" />
               )}
               <br />
               <h2 className="fs-title">Descuentos de Nomina</h2>
-
-              {data?.descuentosnomina ? (
-                <Selector
-                  options={descuentosnomina}
-                  seccion="descuentosnomina"
-                  data={data.descuentosnomina}
-                />
-              ) : (
-                <Selector
-                  options={descuentosnomina}
-                  seccion="descuentosnomina"
-                />
+              <Selector options={descuentosnomina} seccion="descuentosnomina"/>
+                {data?.descuentosnomina && (
+                <DynamicInputs data={[data.descuentosnomina]} sectionName="descuentosnomina" />
               )}
-
               <br />
               <h2 className="fs-title">Educacion</h2>
-              {data?.educacion ? (
-                <Selector
-                  options={educacion}
-                  seccion="educacion"
-                  data={data.educacion}
-                />
-              ) : (
-                <Selector options={educacion} seccion="educacion" />
+              <Selector options={educacion} seccion="educacion"/>
+                {data?.educacion && (
+                <DynamicInputs data={[data.educacion]} sectionName="educacion" />
               )}
               <br />
               <h2 className="fs-title">Financieros</h2>
-              {data?.financieros ? (
-                <Selector
-                  options={financieros}
-                  seccion="financieros"
-                  data={data.financieros}
-                />
-              ) : (
-                <Selector options={financieros} seccion="financieros" />
+              <Selector options={financieros} seccion="financieros" />
+                {data?.financieros && (
+                <DynamicInputs data={[data.financieros]} sectionName="financieros" />
               )}
               <br />
               <h2 className="fs-title">Otros</h2>
-              {data?.otros ? (
-                <Selector options={otros} seccion="otros" data={data.otros} />
-              ) : (
-                <Selector options={otros} seccion="otros" />
-              )}
+              <Selector options={otros} seccion="otros"/>
+                {data?.otros && (
+                <DynamicInputs data={[data.otros]} sectionName="otros" />
+              )}  
               <br />
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
+              <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
-
-            <fieldset style={{ display: currentStep === 3 ? "block" : "none" }}>
+         
+            <fieldset style={{ display: currentStep === 3 ? 'block' : 'none' }}>
               <h2>Gastos Anuales</h2>
+              <span style={{'fontSize':'12px'}}>La idea es solo poner en este registro los gastos que pagas de forma <b>Anual</b>,Ej:Soat,Impuestos,Matricula,Suscripciones Anuales,Etc.</span>
 
-              <h2 className="fs-title">Seguros</h2>
-              {data?.seguros ? (
-                <Selector
-                  options={seguros}
-                  seccion="seguros"
-                  data={data.seguros}
-                />
-              ) : (
-                <Selector options={seguros} seccion="seguros" />
-              )}
+             
+              <h2 className="fs-title">Seguros</h2>              
+              <Selector options={seguros} seccion="seguros"/>
+                {data?.seguros && (
+                <DynamicInputs data={[data.seguros]} sectionName="seguros" />
+              )} 
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
-              {data?.anualidadesFijas ? (
-                <Selector
-                  options={anualidadesFijas}
-                  seccion="anualidadesFijas"
-                  data={data.anualidadesFijas}
-                />
-              ) : (
-                <Selector
-                  options={anualidadesFijas}
-                  seccion="anualidadesFijas"
-                />
-              )}
+              <Selector options={anualidadesFijas} seccion="AnualidadesFijas"/>
+                {data?.AnualidadesFijas && (
+                <DynamicInputs data={[data.AnualidadesFijas]} sectionName="AnualidadesFijas" />
+              )} 
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
-              {data?.anualidadesPresupuestadas ? (
-                <Selector
-                  options={anualidadesPresupuestadas}
-                  seccion="anualidadesPresupuestadas"
-                  data={data.anualidadesPresupuestadas}
-                />
-              ) : (
-                <Selector
-                  options={anualidadesPresupuestadas}
-                  seccion="anualidadesPresupuestadas"
-                />
-              )}
+              <Selector options={anualidadesPresupuestadas} seccion="AnualidadesPresupuestadas"/>
+                {data?.AnualidadesPresupuestadas && (
+                <DynamicInputs data={[data.AnualidadesPresupuestadas]} sectionName="AnualidadesPresupuestadas" />
+              )} 
               <br />
               <h2 className="fs-title"> Impuestos</h2>
-              {data?.impuestos ? (
-                <Selector
-                  options={impuestos}
-                  seccion="impuestos"
-                  data={data.impuestos}
-                />
-              ) : (
-                <Selector options={impuestos} seccion="impuestos" />
-              )}
+              <Selector options={impuestos} seccion="Impuestos"/>
+                {data?.Impuestos && (
+                <DynamicInputs data={[data.Impuestos]} sectionName="Impuestos" />
+              )} 
               <br />
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
+              <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
             </fieldset>
 
-            <fieldset style={{ display: currentStep === 4 ? "block" : "none" }}>
+            <fieldset style={{ display: currentStep === 4 ? 'block' : 'none' }}>
               <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
-              {data?.activoLiquidos ? (
-                <Selector
-                  options={activoLiquidos}
-                  seccion="activoLiquidos"
-                  data={data.activoLiquidos}
-                />
-              ) : (
-                <Selector options={activoLiquidos} seccion="activoLiquidos" />
-              )}
+              <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  En este item  deberas ingresar el saldo de tus productos, o dinero que tengas en efectivo.Recuerda si no recuerdas el monto puedes llenarlo despues.</span>
+              
+            </div>
+              <Selector options={activoLiquidos} seccion="activoLiquidos"/>
+              {data?.activoLiquidos && (
+                <DynamicInputs data={[data.activoLiquidos]} sectionName="activoLiquidos" />
+              )} 
               <br />
               <h2 className="fs-title">Activos Productivos</h2>
-              {data?.activosProductivos ? (
-                <Selector
-                  options={activosProductivos}
-                  seccion="activosProductivos"
-                  data={data.activosProductivos}
-                />
-              ) : (
-                <Selector
-                  options={activosProductivos}
-                  seccion="activosProductivos"
-                />
-              )}
+              <Selector options={activosProductivos} seccion="activosProductivos"/>
+              {data?.activosProductivos && (
+                <DynamicInputs data={[data.activosProductivos]} sectionName="activosProductivos" />
+              )} 
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
-              {data?.activosImproductivos ? (
-                <Selector
-                  options={activosImproductivos}
-                  seccion="activosImproductivos"
-                  data={data.activosImproductivos}
-                />
-              ) : (
-                <Selector
-                  options={activosImproductivos}
-                  seccion="activosImproductivos"
-                />
-              )}
+              <Selector options={activosImproductivos} seccion="activosImproductivos"/>
+              {data?.activosImproductivos && (
+                <DynamicInputs data={[data.activosImproductivos]} sectionName="activosImproductivos" />
+              )} 
               <br />
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
+              <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>
+              <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />
+            </fieldset>            
+
+            <fieldset style={{ display: currentStep === 5 ? 'block' : 'none' }}>              
+                <h2>Deudas Corto Plazo</h2>
+                <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60.</span>
+              
+            </div>
+                <Deudas  seccion="DeudasCortoPlazo"/>
+                {data?.DeudasCortoPlazo && (
+                <DynamicInputs data={[data.DeudasCortoPlazo]} sectionName="DeudasCortoPlazo" />
+              )} 
+                <h2>Deudas Largo Plazo</h2>
+                <div style={{'margin':'10px'}}>
+            <span style={{'fontSize':'12px'}}> <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60.</span>
+              
+            </div>
+                <Deudas  seccion="DeudasLargoPlazo"/>
+                <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>  
+                <input type="button" name="next" className="next action-button" value="Siguiente" onClick={handleNext} />              
             </fieldset>
 
-            <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
-              <h2 className="h2deudas" >Deudas Corto Plazo</h2>             
-
-             {data?.DeudasCortoPlazo ? (
-                <Deudas
-                  seccion="DeudasCortoPlazo"
-                  data={data.DeudasCortoPlazo}
-                />
-              ) : (
-                <Deudas seccion="DeudasCortoPlazo" />
-                )}
-
-
-              <h2 className="h2deudas" >Deudas Largo Plazo</h2>
-              {data?.DeudasLargoPlazo ? (
-                <Deudas
-                  seccion="DeudasLargoPlazo"
-                  data={data.DeudasLargoPlazo}
-                />
-              ) : (
-                <Deudas seccion="DeudasLargoPlazo" />
-                )}
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="button"
-                name="next"
-                className="next action-button"
-                value="Siguiente"
-                onClick={handleNext}
-              />
-            </fieldset>
-
-            <fieldset style={{ display: currentStep === 6 ? "block" : "none" }}>
-              <h2 className="h2deudas" >Objetivos Financieros</h2>
-              <Objetivos seccion="objetivos" />
-              <input
-                type="button"
-                name="prev"
-                className="prev action-button"
-                value="Anterior"
-                onClick={handlePrev}
-              />
-              <input
-                type="submit"
-                name="submit"
-                onClick={handleSubmit}
-                className="submit action-button"
-                value="Finalizar"
-              />
+            <fieldset style={{ display: currentStep === 6 ? 'block' : 'none' }}>
+              <h2>Objetivos Financieros</h2>
+                <Objetivos seccion="objetivos"/> 
+                <input type="button" name="prev" className="prev action-button" value="Anterior" onClick={handlePrev}/>              
+                <input type="submit" name="submit" onClick={handleSubmit} className="submit action-button" value="Finalizar" />        
             </fieldset>
           </div>
         </div>
