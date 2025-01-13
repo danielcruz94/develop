@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; 
 
 function DebtInputForm({ seccion, data }) {
+
+
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
@@ -11,7 +13,12 @@ function DebtInputForm({ seccion, data }) {
     cuotaMensual: "El monto de la cuota mensual que se debe pagar."
   };
 
-  console.log(data)
+  
+
+  if (!data || !data.pasivo || !data.saldoCapital || !data.entidad || !data.tasa || !data.cuotasPendientes || !data.cuotaMensual) {
+    return ;
+  }
+  
   
   const [rows, setRows] = useState([{
     pasivo: '',
@@ -230,6 +237,61 @@ function DebtInputForm({ seccion, data }) {
       )}
     </div>
   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 export default DebtInputForm;
