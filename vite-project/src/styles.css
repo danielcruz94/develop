@@ -139,6 +139,8 @@ html {
     float: left;
     position: relative;
     letter-spacing: 2px;
+    text-align: -webkit-center;
+
 }
 
 #progressbar li:before {
