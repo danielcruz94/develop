@@ -41,7 +41,7 @@ html {
 }
 
 .INFO span { 
- font-size: 2vw;
+    font-size: clamp(12px, 1vw, 20px);
  letter-spacing: 1px;
  text-align: justify;
  
@@ -274,6 +274,14 @@ html {
 } 
 
 @media screen and (max-width: 800px) {
+
+    .INFO span { 
+        font-size: clamp(12px, 1vw, 20px);
+        letter-spacing: 1px;
+        text-align: justify;        
+       }
+       
+
     #msform fieldset{
         margin: 0px;
         width: 100%; 
