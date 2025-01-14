@@ -8,9 +8,7 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
         setRecovery(data);
       }
     }, [data]); 
-        
-    console.log(data)
-    console.log(sectionName)
+            
 
   useEffect(() => {
     const ContenP = document.querySelector(
