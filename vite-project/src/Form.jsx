@@ -271,8 +271,13 @@ const Form = () => {
             </div>
 
             <fieldset style={{ display: currentStep === 0 ? "block" : "none" }}>
-              <h2>Seguridad Social</h2>
-              {data?.seguridadsocial ? (
+            <h2>Seguridad Social</h2>
+            <div className="INFO">
+            <span  >Por favor, selecciona las opciones que te correspondan de la siguiente lista y luego indica el valor específico (entidad) para cada opción seleccionada.</span>
+
+            </div>
+            <br />
+             <br />              {data?.seguridadsocial ? (
                 <Selector
                   options={seguridadsocial}
                   seccion="seguridadsocial"
@@ -293,7 +298,10 @@ const Form = () => {
 
             <fieldset style={{ display: currentStep === 1 ? "block" : "none" }}>
               <h2>Ingresos Mensuales</h2>
-
+              <div className="INFO">
+            <span style={{'fontSize':'12px'}}>Por favor, selecciona las <b>opciones </b> que te correspondan de la siguientes listas, luego registra el  <b>monto</b> de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
+              
+            </div>
               {data?.ingresos ? (
                 <Selector
                   options={ingresos}
@@ -307,7 +315,10 @@ const Form = () => {
               <br />
 
               <h2>Ingresos Anuales</h2>
-
+              <div className="INFO">
+              <span > <b>Recuerda:</b> La idea es solo poner en este registro el dinero que recibes de forma <b>Anual</b> Ej:Primas, Dividendos, Bonos, Bonificaciones, etc.</span>
+              
+            </div>
               {data?.IngresosAnuales ? (
                 <Selector
                   options={ingresosanuales}
@@ -339,7 +350,10 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 2 ? "block" : "none" }}>
               <h2>Gastos Mensuales</h2>
               <h2 className="fs-title">Ahorro</h2>
-
+              <div className="INFO">
+            <span > <b>Recuerda: </b>  En este item solo deberas ingresar el monto que ahorras mensualmente,<b> NO DEBES </b>ingresar el saldo de tus ahorros ya que seran validados mas adelante.</span>
+              
+            </div>
               {data?.ahorro ? (
                 <Selector
                   options={ahorro}
@@ -460,7 +474,12 @@ const Form = () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 3 ? "block" : "none" }}>
-              <h2>Gastos Anuales</h2>
+            <h2>Gastos Anuales</h2>
+
+            <div className="INFO">
+
+              <span style={{'fontSize':'12px'}}>La idea es solo poner en este registro los gastos que pagas de forma <b>Anual</b>,Ej:Soat, Impuestos, Matricula, Suscripciones Anuales,Etc.</span>
+            </div>
 
               <h2 className="fs-title">Seguros</h2>
               {data?.seguros ? (
@@ -528,9 +547,13 @@ const Form = () => {
               />
             </fieldset>
 
-            <fieldset style={{ display: currentStep === 4 ? "block" : "none" }}>
+            <fieldset style={{ display: currentStep === 4 ? "block" : "none" }}>           
               <h2>Activos</h2>
               <h2 className="fs-title">Activos Liquidos</h2>
+              <div className="INFO">
+            <span > <b>Recuerda: </b>  En este item  deberas ingresar el saldo de tus productos, o dinero que tengas en efectivo. Recuerda si no recuerdas el monto puedes llenarlo despues.</span>
+              
+            </div>
               {data?.activoLiquidos ? (
                 <Selector
                   options={activoLiquidos}
@@ -586,7 +609,11 @@ const Form = () => {
             </fieldset>
 
             <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
-              <h2 className="h2deudas" >Deudas Corto Plazo</h2>             
+            <h2>Deudas Corto Plazo</h2>
+            <div className="INFO">
+            <span > <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60.</span>
+              
+            </div>             
 
              {data?.DeudasCortoPlazo ? (
                 <Deudas
@@ -598,7 +625,11 @@ const Form = () => {
                 )}
 
 
-              <h2 className="h2deudas" >Deudas Largo Plazo</h2>
+            <h2>Deudas Largo Plazo</h2>
+            <div className="INFO">
+            <span > <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60.</span>
+              
+            </div>
               {data?.DeudasLargoPlazo ? (
                 <Deudas
                   seccion="DeudasLargoPlazo"
