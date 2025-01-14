@@ -75,6 +75,7 @@ const Form = () => {
             setData(response.data);            
             setCurrentStep(response.data.fieldset);
           } else {
+            localStorage.removeItem("authToken");
             window.location.href = "https://axia.com.co/";
           }
         })
@@ -194,6 +195,7 @@ const Form = () => {
   const sendFormData = async (formData) => {
     try {
       const response = await axios.put(`${serverURL}actualizar`, formData);
+      localStorage.removeItem("authToken");
       window.location.href = "https://axia.com.co/";
     } catch (error) {
       console.error("Error al enviar los datos:", error);

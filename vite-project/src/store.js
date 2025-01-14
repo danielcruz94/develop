@@ -5,8 +5,8 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const serverUrlSlice = createSlice({
   name: 'serverURL',
   initialState: {
-    //serverURL: 'http://localhost:3001/api/', 
-    serverURL: 'https://server-axia.vercel.app/api/',  
+   //serverURL: 'http://localhost:3001/api/', 
+  serverURL: 'https://server-axia.vercel.app/api/',  
   },
   reducers: {
     setServerURL: (state, action) => {
