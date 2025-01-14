@@ -276,7 +276,7 @@ html {
 @media screen and (max-width: 800px) {
 
     .INFO span { 
-        font-size: clamp(12px, 1vw, 20px);
+        font-size: clamp(12px, 1vw, 25px);
         letter-spacing: 1px;
         text-align: justify;        
        }
