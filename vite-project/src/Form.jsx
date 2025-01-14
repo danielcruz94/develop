@@ -93,24 +93,28 @@ const Form = () => {
 
   const collectFormData = () => {
     const formData = {};
-
+  
     const fieldsets = document.querySelectorAll("fieldset");
-
+  
     const processSection = (section) => {
       const sectionData = {};
       const inputs = section.querySelectorAll("input");
       const placeholdersCount = {};
-
+  
       inputs.forEach((input) => {
         const placeholder = input.name || "Campo sin name";
-        placeholdersCount[placeholder] =
-          (placeholdersCount[placeholder] || 0) + 1;
+        placeholdersCount[placeholder] = (placeholdersCount[placeholder] || 0) + 1;
       });
-
+  
       inputs.forEach((input) => {
-        const placeholder = input.name || "Campo sin name";
-        const value = input.value.trim();
+        let placeholder = input.name || "Campo sin name";
+        let value = input.value.trim();
         if (value) {
+          // Verificar si el valor es un número (y no es NaN)
+          if (!isNaN(value.replace(/\./g, "")) && value !== "") {
+            value = value.replace(/\./g, ""); // Elimina puntos si es un número
+          }
+  
           if (placeholdersCount[placeholder] > 1) {
             if (sectionData[placeholder]) {
               sectionData[placeholder].push(value);
@@ -122,20 +126,20 @@ const Form = () => {
           }
         }
       });
-
+  
       const subsections = section.querySelectorAll("[data-section]");
       subsections.forEach((subsection) => {
         const subData = processSection(subsection);
         sectionData[subsection.getAttribute("data-section")] = subData;
       });
-
+  
       return sectionData;
     };
-
+  
     fieldsets.forEach((fieldset) => {
       if (window.getComputedStyle(fieldset).display === "block") {
         const sections = fieldset.querySelectorAll("[data-section]");
-
+  
         sections.forEach((section) => {
           const sectionName = section.getAttribute("data-section");
           const validValues = [
@@ -154,15 +158,15 @@ const Form = () => {
             "Subsidio_De_Transporte",
             "Subsidio_Familiar",
           ];
-
+  
           if (sectionName === "ingresos") {
             if (!formData.ingresos) formData.ingresos = {};
-
+  
             const subsections = section.querySelectorAll("[data-section]");
             subsections.forEach((subsection) => {
               const subData = processSection(subsection);
               const subsectionKey = subsection.getAttribute("data-section");
-
+  
               if (formData.ingresos[subsectionKey]) {
                 if (Array.isArray(formData.ingresos[subsectionKey])) {
                   formData.ingresos[subsectionKey].push(subData);
@@ -182,15 +186,16 @@ const Form = () => {
         });
       }
     });
-
+  
     formData.datosMongo = {
       ...formData.datosMongo,
       cedula,
       fieldset: currentStep + 1,
     };
-
+  
     return formData;
   };
+  
 
   const sendFormData = async (formData) => {
     try {

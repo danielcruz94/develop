@@ -13,7 +13,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
   const [otherProductName, setOtherProductName] = useState("");
   const selectRef = useRef(null);
 
- 
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -206,6 +206,26 @@ function CreativeFloatingSelect({ options, seccion, data }) {
       return <p className="selected-P">No hay opciones seleccionadas</p>;
     }
 
+      const formatNumber = (value) => {  
+        let numericValue = value.replace(/[^\d]/g, '');
+        if (!isNaN(numericValue)) {
+          const [integer, decimal] = numericValue.split('.');
+          const formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+          return decimal ? `${formattedInteger}.${decimal}` : formattedInteger;
+        }
+
+        return value;
+      };
+
+  // Manejador del cambio en el input
+  const handleInputChange = (e) => {
+    const value = e.target.value; 
+    if (!isNaN(value.replace(/\./g, '')) && value.replace(/\./g, '') !== "") {
+      setInputValue(formatNumber(value));
+    }
+  };
+
+
     return (
       <div className="selected-options-container">
         {selectedOptions.map((option) => {
@@ -253,12 +273,13 @@ function CreativeFloatingSelect({ options, seccion, data }) {
                         <i className="bi bi-plus-circle duplicate-icon2"></i>
                       </span>
                     )}
-                    <input
-                      type={selectedOption?.type || "Number"}
-                      name={name.split("@")[0]}
-                      onFocus={() => handleFocus(firstData)}
-                      className="selected-input"
-                    />
+                <input
+                  type="text" 
+                  name={name.split("@")[0]}                  
+                  onChange={handleInputChange} 
+                  value={inputValue} 
+                  className="selected-input"
+                />        
                   </div>
                 </div>
                 <div className="icon-container">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css';
 
-function ObjectiveInputForm( {seccion }) {
+function ObjectiveInputForm({ seccion }) {
   const fieldHelpText = {
     objetivo: "El objetivo que deseas alcanzar, por ejemplo, 'Ahorro para la educación'.",
     descripcion: "Describe el objetivo detalladamente, incluyendo los motivos por los que lo estableces.",
@@ -9,8 +9,6 @@ function ObjectiveInputForm( {seccion }) {
     vrObjetivo: "El valor monetario estimado para cumplir con el objetivo.",
     comentarios: "Comentarios adicionales sobre el objetivo o el plan para alcanzarlo."
   };
-
- 
 
   const [rows, setRows] = useState([{
     objetivo: '',
@@ -20,12 +18,22 @@ function ObjectiveInputForm( {seccion }) {
     comentarios: ''
   }]);
 
-  const [helpText, setHelpText] = useState(null);  // Para mostrar el texto de ayuda
+  const [helpText, setHelpText] = useState(null); // Para mostrar el texto de ayuda
   const helpPopupRef = useRef(null);
+
+  const formatNumber = (value) => {
+    return value.replace(/\D/g, '') // Remueve caracteres no numéricos
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Agrega puntos para miles
+  };
 
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
-    updatedRows[index][field] = value;
+    // Aplica formato solo para los campos numéricos
+    if (field === 'plazo' || field === 'vrObjetivo') {
+      updatedRows[index][field] = formatNumber(value);
+    } else {
+      updatedRows[index][field] = value;
+    }
     setRows(updatedRows);
   };
 
@@ -60,8 +68,7 @@ function ObjectiveInputForm( {seccion }) {
   }, []);
 
   return (
-    <div className="objective-input-form" data-section={seccion || 'default-value'}> 
-
+    <div className="objective-input-form" data-section={seccion || 'default-value'}>
       <div className="form-container">
         {rows.map((row, index) => (
           <div key={index} className="form-row">
@@ -84,9 +91,9 @@ function ObjectiveInputForm( {seccion }) {
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`objetivo`}  // Asignamos el name único por fila
+                  name={`objetivo`}
                   value={row.objetivo}
-                  onChange={(e) => handleInputChange(index, 'objetivo', e.target.value)}                  
+                  onChange={(e) => handleInputChange(index, 'objetivo', e.target.value)}
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -97,13 +104,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Descripción</p>
+              <p>Descripción</p>
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`descripcion`} 
+                  name={`descripcion`}
                   value={row.descripcion}
-                  onChange={(e) => handleInputChange(index, 'descripcion', e.target.value)}                
+                  onChange={(e) => handleInputChange(index, 'descripcion', e.target.value)}
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -114,13 +121,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Plazo (Años)</p>
+              <p>Plazo (Años)</p>
               <div className="input-container2">
                 <input
-                  type="number"
+                  type="text" // Cambiado a 'text' para permitir el formato
                   name={`plazo`}
                   value={row.plazo}
-                  onChange={(e) => handleInputChange(index, 'plazo', e.target.value)}                 
+                  onChange={(e) => handleInputChange(index, 'plazo', e.target.value)}
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -131,13 +138,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Valor del objetivo</p>
+              <p>Valor del objetivo</p>
               <div className="input-container2">
                 <input
-                  type="number"
-                  name={`vrObjetivo`} 
+                  type="text" // Cambiado a 'text' para permitir el formato
+                  name={`vrObjetivo`}
                   value={row.vrObjetivo}
-                  onChange={(e) => handleInputChange(index, 'vrObjetivo', e.target.value)}                 
+                  onChange={(e) => handleInputChange(index, 'vrObjetivo', e.target.value)}
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -148,13 +155,13 @@ function ObjectiveInputForm( {seccion }) {
             </div>
 
             <div className="input-group">
-            <p>Comentarios</p>
+              <p>Comentarios</p>
               <div className="input-container2">
                 <input
                   type="text"
-                  name={`comentarios`}  
+                  name={`comentarios`}
                   value={row.comentarios}
-                  onChange={(e) => handleInputChange(index, 'comentarios', e.target.value)}                 
+                  onChange={(e) => handleInputChange(index, 'comentarios', e.target.value)}
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -177,6 +184,6 @@ function ObjectiveInputForm( {seccion }) {
       )}
     </div>
   );
-};
+}
 
 export default ObjectiveInputForm;

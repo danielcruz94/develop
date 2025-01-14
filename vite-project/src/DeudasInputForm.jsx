@@ -4,7 +4,6 @@ import { data } from 'react-router-dom';
 
 function DebtInputForm({ seccion, data }) {
 
-
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
@@ -16,20 +15,19 @@ function DebtInputForm({ seccion, data }) {
 
   const [deudas, setDeudas] = useState([
     {
-        "pasivo": "",
-        "saldoCapital": "",
-        "entidad": "",
-        "tasa": "",
-        "cuotasPendientes": "",
-        "cuotaMensual": ""
+      "pasivo": "",
+      "saldoCapital": "",
+      "entidad": "",
+      "tasa": "",
+      "cuotasPendientes": "",
+      "cuotaMensual": ""
     }
-]);
+  ]);
 
-useEffect(() => {
-  setDeudas(data)
-}, [data]);
- 
-  
+  useEffect(() => {
+    setDeudas(data);
+  }, [data]);
+
   const [rows, setRows] = useState([{
     pasivo: '',
     saldoCapital: '',
@@ -47,33 +45,40 @@ useEffect(() => {
       if (Array.isArray(deudas[0].pasivo)) {
         const formattedData = deudas[0].pasivo.map((pasivo, index) => ({
           pasivo: pasivo,
-          saldoCapital: deudas[0].saldoCapital[index],
+          saldoCapital: formatNumber(deudas[0].saldoCapital[index]),
           entidad: deudas[0].entidad[index],
-          tasa: deudas[0].tasa[index],
-          cuotasPendientes: deudas[0].cuotasPendientes[index],
-          cuotaMensual: deudas[0].cuotaMensual[index],
+          tasa: formatNumber(deudas[0].tasa[index]),
+          cuotasPendientes: formatNumber(deudas[0].cuotasPendientes[index]),
+          cuotaMensual: formatNumber(deudas[0].cuotaMensual[index]),
         }));
         setRows(formattedData);
       } else if (typeof deudas[0].pasivo === 'string') {
         const formattedData = [{
           pasivo: deudas[0].pasivo || '',
-          saldoCapital: deudas[0].saldoCapital || '',
+          saldoCapital: formatNumber(deudas[0].saldoCapital || ''),
           entidad: deudas[0].entidad || '',
-          tasa: deudas[0].tasa || '',
-          cuotasPendientes: deudas[0].cuotasPendientes || '',
-          cuotaMensual: deudas[0].cuotaMensual || '',
+          tasa: formatNumber(deudas[0].tasa || ''),
+          cuotasPendientes: formatNumber(deudas[0].cuotasPendientes || ''),
+          cuotaMensual: formatNumber(deudas[0].cuotaMensual || ''),
         }];
         setRows(formattedData);
       }
-    } else {
-       //console.log('Deudas no está disponible o no tiene el formato esperado');
     }
   }, [deudas]);
-  
+
+  const formatNumber = (num) => {
+    if (!num) return '';
+    return num.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  };
+
+  const parseNumber = (num) => {
+    return num.replace(/\./g, '').trim(); // Eliminar puntos y devolver como texto para manejarlo como número
+  };
 
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
-    updatedRows[index][field] = value;
+    // Se parsea el valor al número para luego formatearlo correctamente
+    updatedRows[index][field] = formatNumber(parseNumber(value));
     setRows(updatedRows);
   };
 
@@ -87,7 +92,7 @@ useEffect(() => {
       cuotaMensual: ''
     }]);
   };
-  
+
   const handleRemoveRow = (index) => {
     const updatedRows = rows.filter((_, i) => i !== index);
     setRows(updatedRows);
@@ -103,7 +108,7 @@ useEffect(() => {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickAnywhere);
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickAnywhere);
     };
@@ -149,7 +154,7 @@ useEffect(() => {
               <p>Cuanto debes</p>
               <div className="input-container2">
                 <input
-                  type="number"
+                  type="text"  // Cambiado a text para manejar mejor el formateo de números
                   name={`saldoCapital`}  
                   value={row.saldoCapital}
                   onChange={(e) => handleInputChange(index, 'saldoCapital', e.target.value)}                 
@@ -169,7 +174,7 @@ useEffect(() => {
                   type="text"
                   name={`entidad`}  
                   value={row.entidad}
-                  onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}                  
+                  onChange={(e) => handleInputChange(index, 'entidad', e.target.value)}                   
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -183,10 +188,10 @@ useEffect(() => {
               <p>Tasa (%)</p>
               <div className="input-container2">
                 <input
-                  type="number"
+                  type="text"  // Cambiado a text para manejar correctamente el formato
                   name={`tasa`}  
                   value={row.tasa}
-                  onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}                  
+                  onChange={(e) => handleInputChange(index, 'tasa', e.target.value)}                   
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -200,7 +205,7 @@ useEffect(() => {
               <p>Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
-                  type="number"
+                  type="text"  // Cambiado a text para el mismo motivo
                   name={`cuotasPendientes`} 
                   value={row.cuotasPendientes}
                   onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}                 
@@ -217,10 +222,10 @@ useEffect(() => {
               <p>Cuota Mensual</p>
               <div className="input-container2">
                 <input
-                  type="number"
+                  type="text"  // Cambiado a text para el mismo motivo
                   name={`cuotaMensual`}  
                   value={row.cuotaMensual}
-                  onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}                  
+                  onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}                   
                 />
                 <span
                   className="bi bi-question-circle Icon_Help2"
@@ -243,61 +248,6 @@ useEffect(() => {
       )}
     </div>
   );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 export default DebtInputForm;
