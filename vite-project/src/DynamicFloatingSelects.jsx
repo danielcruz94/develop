@@ -9,6 +9,8 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
       }
     }, [data]); 
         
+    console.log(data)
+    console.log(sectionName)
 
   useEffect(() => {
     const ContenP = document.querySelector(

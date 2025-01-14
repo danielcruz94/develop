@@ -356,14 +356,14 @@ const Form = () => {
             <span > <b>Recuerda: </b>  En este item solo deberas ingresar el monto que ahorras mensualmente,<b> NO DEBES </b>ingresar el saldo de tus ahorros ya que seran validados mas adelante.</span>
               
             </div>
-              {data?.ahorro ? (
+              {data?.Ahorro ? (
                 <Selector
                   options={ahorro}
-                  seccion="ahorro"
-                  data={data.ahorro}
+                  seccion="Ahorro"
+                  data={data.Ahorro}
                 />
               ) : (
-                <Selector options={ahorro} seccion="ahorro" />
+                <Selector options={ahorro} seccion="Ahorro" />
               )}
               <br />
               <h2 className="fs-title"> Gastos Personales</h2>
@@ -495,42 +495,42 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
-              {data?.anualidadesFijas ? (
+              {data?.AnualidadesFijas ? (
                 <Selector
                   options={anualidadesFijas}
-                  seccion="anualidadesFijas"
-                  data={data.anualidadesFijas}
+                  seccion="AnualidadesFijas"
+                  data={data.AnualidadesFijas}
                 />
               ) : (
                 <Selector
                   options={anualidadesFijas}
-                  seccion="anualidadesFijas"
+                  seccion="AnualidadesFijas"
                 />
               )}
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
-              {data?.anualidadesPresupuestadas ? (
+              {data?.AnualidadesPresupuestadas ? (
                 <Selector
                   options={anualidadesPresupuestadas}
-                  seccion="anualidadesPresupuestadas"
-                  data={data.anualidadesPresupuestadas}
+                  seccion="AnualidadesPresupuestadas"
+                  data={data.AnualidadesPresupuestadas}
                 />
               ) : (
                 <Selector
                   options={anualidadesPresupuestadas}
-                  seccion="anualidadesPresupuestadas"
+                  seccion="AnualidadesPresupuestadas"
                 />
               )}
               <br />
               <h2 className="fs-title"> Impuestos</h2>
-              {data?.impuestos ? (
+              {data?.Impuestos ? (
                 <Selector
                   options={impuestos}
-                  seccion="impuestos"
-                  data={data.impuestos}
+                  seccion="Impuestos"
+                  data={data.Impuestos}
                 />
               ) : (
-                <Selector options={impuestos} seccion="impuestos" />
+                <Selector options={impuestos} seccion="Impuestos" />
               )}
               <br />
               <input
