@@ -5,6 +5,7 @@ import "./CreativeFloatingSelect.css";
 function CreativeFloatingSelect({ options, seccion, data }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [inputValues, setInputValues] = useState({});
   const [inputRecovery, setInputRecovery] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [helpText, setHelpText] = useState(null);
@@ -47,7 +48,6 @@ function CreativeFloatingSelect({ options, seccion, data }) {
 
   const handleSelectChange = (value) => {
     setSelectedValue(value);
-
     const validValues = [
       "salario_tradicional",
       "salario_integral",
@@ -219,91 +219,101 @@ function CreativeFloatingSelect({ options, seccion, data }) {
 
   // Manejador del cambio en el input
   const handleInputChange = (e) => {
-    const value = e.target.value; 
-    if (!isNaN(value.replace(/\./g, '')) && value.replace(/\./g, '') !== "") {
-      setInputValue(formatNumber(value));
+    const { name, value } = e.target; 
+    const sanitizedValue = value.replace(/\./g, ""); 
+    if (!isNaN(sanitizedValue) && sanitizedValue !== "") {
+      setInputValues((prev) => ({
+        ...prev,
+        [name]: formatNumber(value), 
+      }));
+    } else {
+      setInputValues((prev) => ({
+        ...prev,
+        [name]: value, 
+      }));
     }
   };
 
 
-    return (
-      <div className="selected-options-container">
-        {selectedOptions.map((option) => {
-          const variable = false;
-          const isCustomOption = option.includes("Otros");
-          const selectedOption =
-            options.find((opt) => opt.value === option) || {};
-          const name = variable ? otherProductName || "default" : option;
+  return (
+    <div className="selected-options-container">
+      {selectedOptions.map((option) => {
+        const variable = false;
+        const isCustomOption = option.includes("Otros");
+        const selectedOption =
+          options.find((opt) => opt.value === option) || {};
+        const name = variable ? otherProductName || "default" : option;
 
-          let Datos = [];
+        let Datos = [];
 
-          if (name === "") {
-            if (option.includes("-")) {
-              Datos = option.split("-");
-            } else {
-              Datos = [option, option];
-            }
+        if (name === "") {
+          if (option.includes("-")) {
+            Datos = option.split("-");
           } else {
-            if (name.includes("-")) {
-              Datos = name.split("-");
-            } else {
-              Datos = [name, name];
-            }
+            Datos = [option, option];
           }
+        } else {
+          if (name.includes("-")) {
+            Datos = name.split("-");
+          } else {
+            Datos = [name, name];
+          }
+        }
 
-          const firstData = Datos[0] || "default";
+        const firstData = Datos[0] || "default";
 
-          if (!inputRecovery.includes(option)) {
-            return (
-              <div
-                key={option}
-                className="selected-option"
-                data-section={seccion === "ingresos" ? firstData : undefined}
-              >
-                <div className="label-input">
-                  <p>
-                    {name.split("--")[0].replace(/[-_]/g, " ").split("@")[0]}
-                  </p>
-                  <div className="input-container">
-                    {!isCustomOption && selectedOption?.visible && (
-                      <span
-                        className="duplicate-icon"
-                        onClick={() => duplicateInput(option)}
-                      >
-                        <i className="bi bi-plus-circle duplicate-icon2"></i>
-                      </span>
-                    )}
-                <input
-                  type="text" 
-                  name={name.split("@")[0]}                  
-                  onChange={handleInputChange} 
-                  value={inputValue} 
-                  className="selected-input"
-                />        
-                  </div>
-                </div>
-                <div className="icon-container">
-                  <span
-                    className="bi bi-question-circle Icon_Help"
-                    title="Más información"
-                    id={option.includes("-") ? option.split("-")[0] : option}
-                    onClick={(e) => handleHelpClick(e, option)}
+        if (!inputRecovery.includes(option)) {
+          return (
+            <div
+              key={option}
+              className="selected-option"
+              data-section={seccion === "ingresos" ? firstData : undefined}
+            >
+              <div className="label-input">
+                <p>
+                  {name.split("--")[0].replace(/[-_]/g, " ").split("@")[0]}
+                </p>
+                <div className="input-container">
+                  {!isCustomOption && selectedOption?.visible && (
+                    <span
+                      className="duplicate-icon"
+                      onClick={() => duplicateInput(option)}
+                    >
+                      <i className="bi bi-plus-circle duplicate-icon2"></i>
+                    </span>
+                  )}
+                  <input
+                    type="text"
+                    name={name.split("@")[0]}
+                    value={inputValues[name] || ""} // Usa el estado dinámico
+                    onChange={handleInputChange}
+                    className="selected-input"
                   />
-                  <button
-                    onClick={() => removeOption(option)}
-                    className="remove-button"
-                    aria-label={`Eliminar ${option}`}
-                  >
-                    ✕
-                  </button>
                 </div>
               </div>
-            );
-          }
-        })}
-      </div>
-    );
-  };
+              <div className="icon-container">
+                <span
+                  className="bi bi-question-circle Icon_Help"
+                  title="Más información"
+                  id={option.includes("-") ? option.split("-")[0] : option}
+                  onClick={(e) => handleHelpClick(e, option)}
+                />
+                <button
+                  onClick={() => removeOption(option)}
+                  className="remove-button"
+                  aria-label={`Eliminar ${option}`}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          );
+        }
+      })}
+    </div>
+  );
+};
+  
 
   return (
     <div className="SelectContainer">
@@ -329,6 +339,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
         <div className="selected-options">
           <h2>Opciones seleccionadas</h2>
 
+          <div className="Recovery-options"></div>
           {data && (
             <DynamicInputs
               data={[data]}
@@ -339,7 +350,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
           )}
 
           {renderSelectedOptions()}
-          <div className="Recovery-options"></div>
+          
         </div>
 
         {isOtherInputVisible && (

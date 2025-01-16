@@ -192,6 +192,8 @@
   color:  #06175C;
   cursor: pointer;
 }
+
+.Recovery-options-container,
 .selected-options-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -348,7 +350,8 @@ input[type="number"]::-ms-clear {
             width: 90vw;
         }
 
-      .selected-options-container  {
+        .Recovery-options-container,
+        .selected-options-container {
         display: flex;
         flex-direction: column; 
       }
