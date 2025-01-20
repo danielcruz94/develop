@@ -185,7 +185,7 @@ function DebtInputForm({ seccion, data }) {
             </div>
 
             <div className="input-group">
-              <p>Tasa (%)</p>
+              <p>Tasa Anual (%)</p>
               <div className="input-container2">
                 <input
                   type="text"  // Cambiado a text para manejar correctamente el formato

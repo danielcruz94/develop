@@ -634,7 +634,7 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
             <h2>Deudas Corto Plazo</h2>
             <div className="INFO">
-            <span > <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60.</span>
+            <span > <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60 meses.</span>
               
             </div>             
 
@@ -650,7 +650,7 @@ const Form = () => {
 
             <h2>Deudas Largo Plazo</h2>
             <div className="INFO">
-            <span > <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60.</span>
+            <span > <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60 meses.</span>
               
             </div>
               {data?.DeudasLargoPlazo ? (
