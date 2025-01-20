@@ -9,7 +9,7 @@ export const seguridadsocial = [
 export const ingresos = [
   { value: 'Salario_Tradicional', label: 'Salario Tradicional', Help: 'Este es el salario mensual base que recibes como compensación por tu trabajo. Es un pago fijo acordado entre tú y tu empleador.', visible: true, type: "number" },
   { value: 'Salario_Integral', label: 'Salario Integral', Help: 'Es un salario que incluye todos los beneficios y prestaciones sociales, como pensión, cesantías y vacaciones, dentro del pago acordado.', visible: true, type: "number" },
-  { value: 'Arriendo', label: 'Arriendo', Help: 'Es el valor que recibes por el alquiler de una propiedad. Puede ser por un apartamento, casa o cualquier inmueble que alquiles a otros.', visible: true, type: "number" },
+  { value: 'Arriendo', label: 'Ingreso por Arriendo', Help: 'Es el valor que recibes por el alquiler de una propiedad. Puede ser por un apartamento, casa o cualquier inmueble que alquiles a otros.', visible: true, type: "number" },
   { value: 'Auxilio', label: 'Auxilio', Help: 'Un pago adicional que se otorga para cubrir necesidades específicas, como transporte, alimentación u otros gastos relacionados con tu trabajo o situación personal.', visible: true, type: "number" },
   { value: 'Beneficio', label: 'Beneficio', Help: 'Pago adicional o ventaja proporcionada por tu empleador o institución. Pueden ser beneficios de salud, educación, transporte, entre otros.', visible: true, type: "number" },
   { value: 'Bonificacion', label: 'Bonificación', Help: 'Un pago adicional que se otorga en función del desempeño, resultados o alguna meta alcanzada, como incentivo o reconocimiento.', visible: true, type: "number" },
@@ -114,8 +114,7 @@ export const entretenimiento = [
 ];
 
 export const protecciones = [
-  { value: 'aporte_a_pension_obligatoria', label: 'Aporte a Pensión Obligatoria', Help: 'Es el aporte obligatorio que haces a un fondo de pensiones para asegurar tu jubilación. Este pago es obligatorio por ley.', visible: false, type: "number" },
-  { value: 'aporte_a_salud_obligatoria', label: 'Aporte a Salud Obligatoria', Help: 'Es el aporte obligatorio al sistema de salud, que te garantiza acceso a servicios médicos y de salud según la legislación vigente.', visible: false, type: "number" },
+
   { value: 'salud_prepagada', label: 'Salud Prepagada', Help: 'Es un tipo de seguro de salud privado que permite acceder a atención médica con mejores tiempos de respuesta y servicios adicionales.', visible: false, type: "number" },
   { value: 'seguro_de_contenidos', label: 'Seguro de Contenidos', Help: 'Es un seguro que cubre los daños o pérdida de tus bienes materiales en caso de eventos como robo, incendios o accidentes.', visible: false, type: "number" },
   { value: 'seguro_de_invalidez', label: 'Seguro de Invalidez', Help: 'Es un seguro que cubre la pérdida de ingresos debido a una invalidez permanente o temporal que impida trabajar.', visible: false, type: "number" },
