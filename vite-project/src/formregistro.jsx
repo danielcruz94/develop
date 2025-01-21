@@ -207,7 +207,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             </div>
 
             <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
-            <InputField label="Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
+            <InputField label="Nueva Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
             
           </motion.div>
         )

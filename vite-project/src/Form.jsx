@@ -270,6 +270,7 @@ const Form = () => {
                   <li
                     key={index}
                     className={index <= currentStep ? "active" : ""}
+                    style={{'letterSpacing':'0px'}}
                   >
                     <p>{step} </p>
                   </li>
@@ -306,8 +307,9 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 1 ? "block" : "none" }}>
               <h2>Ingresos Mensuales</h2>
               <div className="INFO">
-            <span style={{'fontSize':'12px'}}>Por favor, selecciona las <b>opciones </b> que te correspondan de la siguientes listas, luego registra el  <b>monto</b> de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
-              
+            <span style={{'fontSize':'12px'}}>Por favor, selecciona las opciones que te correspondan de la siguientes listas, luego registra el  monto de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
+              <br />
+              <br />
             </div>
               {data?.ingresos ? (
                 <Selector
@@ -323,8 +325,10 @@ const Form = () => {
 
               <h2>Ingresos Anuales</h2>
               <div className="INFO">
-              <span > <b>Recuerda:</b> La idea es solo poner en este registro el dinero que recibes de forma <b>Anual</b> Ej:Primas, Dividendos, Bonos, Bonificaciones, etc.</span>
-              
+              <span style={{'fontSize':'12px'}}> <b>Recuerda:</b> La idea es solo poner en este registro el dinero que recibes de forma <b>Anual.</b> Ej:Primas, Dividendos, Bonos, Bonificaciones, etc.</span>
+              <br />
+              <br />
+
             </div>
               {data?.IngresosAnuales ? (
                 <Selector
@@ -359,7 +363,9 @@ const Form = () => {
               <h2 className="fs-title">Ahorro</h2>
               <div className="INFO">
             <span > <b>Recuerda: </b>  En este item solo deberas ingresar el monto que ahorras mensualmente,<b> NO DEBES </b>ingresar el saldo de tus ahorros ya que seran validados mas adelante.</span>
-              
+              <br />
+              <br />
+
             </div>
               {data?.Ahorro ? (
                 <Selector
@@ -500,6 +506,9 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Anualidades Fijas</h2>
+              <span style={{'fontSize':'12px'}}>Son aquellas de las que ya conoces el valor a pagar y es fijo por un año. Ejemplo: la suscripción a Spotify.</span>
+                <br />
+                <br />
               {data?.AnualidadesFijas ? (
                 <Selector
                   options={anualidadesFijas}
@@ -514,6 +523,9 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Anualidades Presupuestadas</h2>
+              <span style={{'fontSize':'12px'}}>Son aquellas que tú crees que te va a costar un monto, pero puede que sea otro diferente al pagarlas. Ejemplo: el mantenimiento del carro.</span>
+                <br />
+                <br />
               {data?.AnualidadesPresupuestadas ? (
                 <Selector
                   options={anualidadesPresupuestadas}
@@ -556,9 +568,11 @@ const Form = () => {
 
             <fieldset style={{ display: currentStep === 4 ? "block" : "none" }}>           
               <h2>Activos</h2>
+              <span > <b>Recuerda: </b>  En este item  deberas ingresar el saldo de tus productos.</span>
               <h2 className="fs-title">Activos Liquidos</h2>
+              <span style={{'fontSize':'12px'}}>Un activo líquido es algo que puedes convertir en dinero en efectivo rápidamente y sin perder mucho valor.</span>
               <div className="INFO">
-            <span > <b>Recuerda: </b>  En este item  deberas ingresar el saldo de tus productos, o dinero que tengas en efectivo. Recuerda si no recuerdas el monto puedes llenarlo despues.</span>
+           
               
             </div>
               {data?.activoLiquidos ? (
@@ -572,6 +586,7 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Activos Productivos</h2>
+              <span style={{'fontSize':'12px'}}>Un activo productivo es algo que genera ingresos o valor a lo largo del tiempo.Como fondo de pensiones,Apartamneto en renta,Acciones.</span>
               {data?.activosProductivos ? (
                 <Selector
                   options={activosProductivos}
@@ -586,6 +601,7 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
+              <span style={{'fontSize':'12px'}}>Un activo improductivo es algo que no genera ingresos ni valor, y que incluso puede generar costos.Como un vehiculo,una casa etc.</span>
               {data?.activosImproductivos ? (
                 <Selector
                   options={activosImproductivos}
@@ -618,7 +634,7 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 5 ? "block" : "none" }}>
             <h2>Deudas Corto Plazo</h2>
             <div className="INFO">
-            <span > <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60.</span>
+            <span > <b>Recuerda: </b>  Corto plazo son aquellas deudas que tienen cuotas inferiores a 60 meses.</span>
               
             </div>             
 
@@ -634,7 +650,7 @@ const Form = () => {
 
             <h2>Deudas Largo Plazo</h2>
             <div className="INFO">
-            <span > <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60.</span>
+            <span > <b>Recuerda: </b>  Largo plazo son aquellas deudas que tienen cuotas mayores a 60 meses.</span>
               
             </div>
               {data?.DeudasLargoPlazo ? (
