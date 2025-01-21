@@ -6,8 +6,7 @@ import { useSelector } from "react-redux";
 import Deudas from "./DeudasInputForm";
 import axios from "axios";
 
-import DynamicInputs from "./DynamicFloatingSelects"; // Importamos el componente DynamicInputs
-
+import DynamicInputs from "./DynamicFloatingSelects"; 
 import {
   seguridadsocial,
   ingresos,
@@ -307,7 +306,7 @@ const Form = () => {
             <fieldset style={{ display: currentStep === 1 ? "block" : "none" }}>
               <h2>Ingresos Mensuales</h2>
               <div className="INFO">
-            <span style={{'fontSize':'12px'}}>Por favor, selecciona las opciones que te correspondan de la siguientes listas, luego registra el  monto de lo que gastas al mes.Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
+            <span style={{'fontSize':'12px'}}>Por favor, selecciona las opciones que te correspondan de la siguientes listas, luego registra el  monto de lo que gastas al mes. Recuerda que estos gastos son unicamente los que se realizan <b>mensualmente</b> como Arriendo,Servicios publicos, etc.</span>
               <br />
               <br />
             </div>
@@ -586,7 +585,7 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Activos Productivos</h2>
-              <span style={{'fontSize':'12px'}}>Un activo productivo es algo que genera ingresos o valor a lo largo del tiempo.Como fondo de pensiones,Apartamneto en renta,Acciones.</span>
+              <span style={{'fontSize':'12px'}}>Un activo productivo es algo que genera ingresos o valor a lo largo del tiempo. Como fondo de pensiones, Apartamento en renta, Acciones.</span>
               {data?.activosProductivos ? (
                 <Selector
                   options={activosProductivos}
@@ -601,7 +600,7 @@ const Form = () => {
               )}
               <br />
               <h2 className="fs-title">Activos improductivos</h2>
-              <span style={{'fontSize':'12px'}}>Un activo improductivo es algo que no genera ingresos ni valor, y que incluso puede generar costos.Como un vehiculo,una casa etc.</span>
+              <span style={{'fontSize':'12px'}}>Un activo improductivo es algo que no genera ingresos ni valor, y que incluso puede generar costos. Como un vehiculo, una casa etc.</span>
               {data?.activosImproductivos ? (
                 <Selector
                   options={activosImproductivos}

@@ -12,6 +12,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
   const [isOtherInputVisible, setIsOtherInputVisible] = useState(false);
   const [otherProductName, setOtherProductName] = useState("");
+  const [categoryText, setcategoryText] = useState("");
   const selectRef = useRef(null);
 
   const [inputValue, setInputValue] = useState("");
@@ -38,15 +39,23 @@ function CreativeFloatingSelect({ options, seccion, data }) {
       if (selectedOptionsDiv) {
         const inputs = selectedOptionsDiv.querySelectorAll("input");
         const inputNames = Array.from(inputs).map((input) => input.name);
+        
         setSelectedOptions(inputNames);
         setInputRecovery(inputNames);
       }
     }, 500);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer);x
   }, []);
 
-  const handleSelectChange = (value) => {
+  const handleSelectChange = (value) => {   
+
+    if(value ===  "Otros"){
+      setcategoryText("Por favor ingrese el texto de la categoria.")     
+    }else{
+      setcategoryText("Por favor, ingresa el nombre de la empresa o institución que ofrece el servicio o producto seleccionado.")      
+    }
+
     setSelectedValue(value);
     const validValues = [
       "salario_tradicional",
@@ -285,7 +294,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
                   <input
                     type="text"
                     name={name.split("@")[0]}
-                    value={inputValues[name] || ""} // Usa el estado dinámico
+                    value={inputValues[name] || ""} 
                     onChange={handleInputChange}
                     className="selected-input"
                   />
@@ -360,8 +369,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
             </button>
             <div className="other-input-container">
               <p>
-                Por favor, ingresa el nombre de la empresa o institución que
-                ofrece el servicio o producto seleccionado.
+               {categoryText}
               </p>
               <input
                 type="text"
