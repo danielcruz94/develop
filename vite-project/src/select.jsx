@@ -51,7 +51,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
   const handleSelectChange = (value) => {   
 
     if(value ===  "Otros"){
-      setcategoryText("Por favor ingrese el texto de la categoria.")     
+      setcategoryText("Por favor, ingrese el nombre de la nueva categoría que le gustaría agregar.")     
     }else{
       setcategoryText("Por favor, ingresa el nombre de la empresa o institución que ofrece el servicio o producto seleccionado.")      
     }

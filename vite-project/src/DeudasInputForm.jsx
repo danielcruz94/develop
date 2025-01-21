@@ -4,6 +4,9 @@ import { data } from 'react-router-dom';
 
 function DebtInputForm({ seccion, data }) {
 
+
+ 
+
   const fieldHelpText = {
     pasivo: "El nombre del pasivo o deuda, por ejemplo, 'Préstamo Personal'.",
     saldoCapital: "El saldo actual de la deuda o préstamo.",
@@ -72,7 +75,7 @@ function DebtInputForm({ seccion, data }) {
   };
 
   const parseNumber = (num) => {
-    return num.replace(/\./g, '').trim(); // Eliminar puntos y devolver como texto para manejarlo como número
+    return num.replace(/\./g, '').trim(); 
   };
 
   const handleInputChange = (index, field, value) => {
@@ -205,7 +208,7 @@ function DebtInputForm({ seccion, data }) {
               <p>Cuotas Pendientes</p>
               <div className="input-container2">
                 <input
-                  type="text"  // Cambiado a text para el mismo motivo
+                  type="text" 
                   name={`cuotasPendientes`} 
                   value={row.cuotasPendientes}
                   onChange={(e) => handleInputChange(index, 'cuotasPendientes', e.target.value)}                 
@@ -222,7 +225,7 @@ function DebtInputForm({ seccion, data }) {
               <p>Cuota Mensual</p>
               <div className="input-container2">
                 <input
-                  type="text"  // Cambiado a text para el mismo motivo
+                  type="text"  
                   name={`cuotaMensual`}  
                   value={row.cuotaMensual}
                   onChange={(e) => handleInputChange(index, 'cuotaMensual', e.target.value)}                   
