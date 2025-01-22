@@ -14,8 +14,8 @@ function App() {
       <>
         <Routes>
           <Route path='formulario' element={<ProtectedRoute element={<Form />} />} />
-          <Route path='login' element={<LoginForm />} />
-          <Route path='/' element={<Formregistro />} />
+          <Route path='/' element={<LoginForm />} />
+          <Route path='Formregistro' element={<Formregistro />} />
         </Routes>
       </>
     </Provider>

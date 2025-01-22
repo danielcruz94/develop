@@ -5,7 +5,7 @@ const ProtectedRoute = ({ element, ...rest }) => {
   const token = localStorage.getItem('authToken');
   
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   
   return React.cloneElement(element, rest);  // Esto renderiza el elemento con las props adicionales

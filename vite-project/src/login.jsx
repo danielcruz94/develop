@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'; 
 import Swal from 'sweetalert2';
 import './login.css';
+import { span } from 'framer-motion/client';
 const InteractiveLoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -55,7 +56,9 @@ const InteractiveLoginForm = () => {
     }
   };
   
-  
+  const handleClick = () => {
+    navigate('/Formregistro');
+  };
 
   return (
     <div className="login-container">
@@ -90,6 +93,8 @@ const InteractiveLoginForm = () => {
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
+         <span className='btn-registrarse' onClick={handleClick}>Registrarse</span>
       </div>
     
     </div>
