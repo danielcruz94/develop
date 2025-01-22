@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './ObjectiveInputForm.css'; 
-import { data } from 'react-router-dom';
+//import { data } from 'react-router-dom';
 
 function DebtInputForm({ seccion, data }) {
 
@@ -28,8 +28,51 @@ function DebtInputForm({ seccion, data }) {
   ]);
 
   useEffect(() => {
-    setDeudas(data);
+    if (Array.isArray(data) && data.length > 0) {
+      const firstItem = data[0];
+      
+      if (
+        firstItem.pasivo.length === 0 &&
+        firstItem.saldoCapital.length === 0 &&
+        firstItem.entidad.length === 0 &&
+        firstItem.tasa.length === 0 &&
+        firstItem.cuotasPendientes.length === 0 &&
+        firstItem.cuotaMensual.length === 0
+      ) {
+        
+        setRows([{
+          pasivo: '',
+          saldoCapital: '',
+          entidad: '',
+          tasa: '',
+          cuotasPendientes: '',
+          cuotaMensual: ''
+        }]);
+      } else {
+       
+        const formattedData = firstItem.pasivo.map((pasivo, index) => ({
+          pasivo: pasivo,
+          saldoCapital: formatNumber(firstItem.saldoCapital[index]),
+          entidad: firstItem.entidad[index],
+          tasa: formatNumber(firstItem.tasa[index]),
+          cuotasPendientes: formatNumber(firstItem.cuotasPendientes[index]),
+          cuotaMensual: formatNumber(firstItem.cuotaMensual[index]),
+        }));
+        setRows(formattedData);
+      }
+    } else {
+     
+      setRows([{
+        pasivo: '',
+        saldoCapital: '',
+        entidad: '',
+        tasa: '',
+        cuotasPendientes: '',
+        cuotaMensual: ''
+      }]);
+    }
   }, [data]);
+  
 
   const [rows, setRows] = useState([{
     pasivo: '',

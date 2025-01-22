@@ -108,21 +108,24 @@ const Form = () => {
       inputs.forEach((input) => {
         let placeholder = input.name || "Campo sin name";
         let value = input.value.trim();
-        if (value) {
+  
+        if (value === "") {
+          value = " "; // Asignar un espacio vacío en lugar de no enviar nada
+        } else {
           // Verificar si el valor es un número (y no es NaN)
           if (!isNaN(value.replace(/\./g, "")) && value !== "") {
             value = value.replace(/\./g, ""); // Elimina puntos si es un número
           }
+        }
   
-          if (placeholdersCount[placeholder] > 1) {
-            if (sectionData[placeholder]) {
-              sectionData[placeholder].push(value);
-            } else {
-              sectionData[placeholder] = [value];
-            }
+        if (placeholdersCount[placeholder] > 1) {
+          if (sectionData[placeholder]) {
+            sectionData[placeholder].push(value);
           } else {
-            sectionData[placeholder] = value;
+            sectionData[placeholder] = [value];
           }
+        } else {
+          sectionData[placeholder] = value;
         }
       });
   
@@ -194,6 +197,7 @@ const Form = () => {
   
     return formData;
   };
+  
   
 
   const sendFormData = async (formData) => {
