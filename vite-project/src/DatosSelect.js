@@ -91,7 +91,7 @@ export const hogar = [
   { value: 'Servicio_Domestico', label: 'Servicio Doméstico', Help: 'Es el costo de los servicios de limpieza, cocina u otros servicios domésticos proporcionados por empleados o agencias especializadas.', visible: false, type: "number" },
   { value: 'Servicios_Publicos', label: 'Servicios Públicos', Help: 'Son los gastos relacionados con los servicios públicos generales, como agua, luz, gas, telecomunicaciones y otros servicios proporcionados por el gobierno o empresas privadas.', visible: false, type: "number" },
   { value: 'Internet', label: 'Internet', Help: 'Es el gasto mensual por el servicio de conexión a Internet en el hogar, utilizado para acceder a redes sociales, trabajo en línea, entretenimiento, entre otros.', visible: false, type: "number" },
-  { value: 'Plataformas_Stremm', label: 'Plataformas Stremm', Help: 'Son los gastos asociados con servicios de streaming o plataformas de entretenimiento en línea, como Netflix, Spotify, Disney+, Amazon Prime, entre otros.', visible: false, type: "number" },
+  { value: 'Plataformas_Streaming', label: 'Plataformas Streaming', Help: 'Son los gastos asociados con servicios de streaming o plataformas de entretenimiento en línea, como Netflix, Spotify, Disney+, Amazon Prime, entre otros.', visible: false, type: "number" },
   { value: 'Otros', label: 'Otros', Help: 'Cualquier otro gasto relacionado con el hogar que no se haya incluido en las categorías anteriores.', visible: true, type: "number" }
 ];
 
