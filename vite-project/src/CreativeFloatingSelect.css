@@ -161,10 +161,14 @@
 }
 
 .duplicate-icon {
-  font-size: 15px;
-  color: #3ef60b;
+  font-size: 20px;
+  color: #156200;
   cursor: pointer;
   border-radius: 1000%;
+}
+
+.bi-x{
+  font-size: 20px;
 }
 
 .selected-input {

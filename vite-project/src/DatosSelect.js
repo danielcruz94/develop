@@ -262,7 +262,6 @@ export const anualidadesFijas = [
   { value: 'curso', label: 'Curso', help: 'Gastos relacionados con la inscripción y matrícula en cursos, ya sean presenciales o en línea, para educación personal o profesional.', type: "number" },
   { value: 'donaciones', label: 'Donaciones', help: 'Aportes económicos a organizaciones benéficas, fundaciones o causas sociales, realizados de manera voluntaria.', type: "number" },
   { value: 'pagos_anuales', label: 'Pagos Anuales', help: 'Gastos de pagos anuales relacionados con servicios, membresías o suscripciones que se pagan una vez al año.', type: "number" },
-  { value: 'pena_infante', label: 'Peña Infante', help: 'Gastos relacionados con actividades, eventos o suscripciones vinculadas a un club o agrupación infantil, como la Peña Infante.', type: "number" },
   { value: 'suscripciones', label: 'Suscripciones', help: 'Gastos recurrentes por servicios de suscripción, como revistas, plataformas de streaming, software, entre otros.', type: "number" },
   { value: 'universidad', label: 'Universidad', help: 'Gastos asociados a la educación universitaria, como matrícula, pensiones, materiales o servicios relacionados con la universidad.', type: "number" },
   { value: 'matriculas_colegio', label: 'Matrículas Colegio', help: 'Gastos relacionados con la matrícula y otros pagos escolares para la educación de los hijos en instituciones de nivel primario o secundario.', type: "number" },

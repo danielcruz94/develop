@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) => {
     const [recovery, setRecovery] = useState([null]);
 
+    console.log(data)
     useEffect(() => {
         if (recovery[0] === null) {
             setRecovery(data);
@@ -78,7 +79,7 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
 
     function OrdenarData(recovery, selectedOptionsDiv, handleRemove) {
         let datos = {};
-
+    
         if (Array.isArray(recovery)) {
             recovery.forEach((item) => {
                 Object.assign(datos, procesarDatosRecursivos(item));
@@ -86,35 +87,47 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
         } else if (typeof recovery === "object") {
             Object.assign(datos, procesarDatosRecursivos(recovery));
         }
-
+    
         generateDynamicContent(datos, selectedOptionsDiv, handleRemove);
     }
-
+    
     function procesarDatosRecursivos(item) {
         let result = {};
-
-        function procesar(itemInterno) {
+    
+        function procesar(itemInterno, parentKey = '') {
+            // Asegúrate de que el itemInterno no sea null ni undefined
+            if (itemInterno === null || itemInterno === undefined) {
+                return {}; // Evita procesar valores nulos o indefinidos
+            }
+    
             if (Array.isArray(itemInterno)) {
-                itemInterno.forEach((subItem) => {
-                    Object.assign(result, procesar(subItem));
+                // Si el valor es un array, se aplana cada valor con el índice
+                itemInterno.forEach((subItem, index) => {
+                    let newKey = `${parentKey}[${index}]`;
+                    Object.assign(result, procesar(subItem, newKey));
                 });
-            } else if (typeof itemInterno === "object" && itemInterno !== null) {
+            } else if (typeof itemInterno === "object") {
+                // Si el valor es un objeto, se itera sobre sus claves
                 Object.keys(itemInterno).forEach((key) => {
                     let value = itemInterno[key];
-
-                    if (typeof value === "object") {
-                        Object.assign(result, procesar(value));
-                    } else {
-                        result[key] = value;
+                    let newKey = parentKey ? `${key}` : key;
+    
+                    if (value !== null && value !== undefined) {
+                        Object.assign(result, procesar(value, newKey));
                     }
                 });
+            } else {
+                // Si es un valor primitivo, se asigna directamente
+                result[parentKey] = itemInterno;
             }
+    
             return result;
         }
-
+    
         procesar(item);
         return result;
     }
+    
 
     // Función para formatear el número con punto como separador de miles
     const formatNumberWithDot = (value) => {
@@ -128,6 +141,8 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
     };
 
     function generateDynamicContent(datos, selectedOptionsDiv, handleRemove) {
+        
+        console.log(sectionName)
         if (datos && typeof datos === "object" && !Array.isArray(datos)) {
             const newOptionsContainer = document.createElement("div");
             newOptionsContainer.classList.add("Recovery-options-container");
@@ -138,11 +153,15 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
                 const optionDiv = document.createElement("div");
                 optionDiv.classList.add("selected-option");
 
+                if (sectionName === "ingresos") {
+                    optionDiv.setAttribute("data-section", key.split('-')[0]);
+                };
+
                 const labelInput = document.createElement("div");
                 labelInput.classList.add("label-input");
 
                 const label = document.createElement("p");
-                label.textContent = formattedKey;
+                label.textContent = formattedKey.split('[')[0]
                 labelInput.appendChild(label);
 
                 const inputContainer = document.createElement("div");
@@ -150,7 +169,7 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
 
                 const input = document.createElement("input");
                 input.type = "text";
-                input.name = key;
+                input.name = key.split('[')[0];
                 input.classList.add("selected-input");
 
                 // Inicializar el valor del input con formato

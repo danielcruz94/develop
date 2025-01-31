@@ -172,17 +172,17 @@ function CreativeFloatingSelect({ options, seccion, data }) {
     }
   };
 
-  const duplicateInput = (option) => {
+  const duplicateInput = (option) => {    
     const index = selectedOptions.findIndex((opt) => opt === option);
 
     if (index !== -1) {
       const newOption = generateUniqueValue(option);
-
       const updatedOptions = [
         ...selectedOptions.slice(0, index + 1),
         newOption,
         ...selectedOptions.slice(index + 1),
       ];
+      
 
       setSelectedOptions(updatedOptions);
     }
@@ -227,18 +227,18 @@ function CreativeFloatingSelect({ options, seccion, data }) {
       };
 
   // Manejador del cambio en el input
-  const handleInputChange = (e) => {
-    const { name, value } = e.target; 
+  const handleInputChange = (e) => {    
+    const { id, value } = e.target;     
     const sanitizedValue = value.replace(/\./g, ""); 
     if (!isNaN(sanitizedValue) && sanitizedValue !== "") {
       setInputValues((prev) => ({
         ...prev,
-        [name]: formatNumber(value), 
+        [id]: formatNumber(value), 
       }));
     } else {
       setInputValues((prev) => ({
         ...prev,
-        [name]: value, 
+        [id]: value, 
       }));
     }
   };
@@ -293,6 +293,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
                   )}
                   <input
                     type="text"
+                    id={name}
                     name={name.split("@")[0]}
                     value={inputValues[name] || ""} 
                     onChange={handleInputChange}
@@ -321,9 +322,8 @@ function CreativeFloatingSelect({ options, seccion, data }) {
       })}
     </div>
   );
-};
+  };
   
-
   return (
     <div className="SelectContainer">
       <div
@@ -374,8 +374,15 @@ function CreativeFloatingSelect({ options, seccion, data }) {
               <input
                 type="text"
                 value={otherProductName}
-                onChange={(e) => setOtherProductName(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Acepta solo letras y espacios
+                  if (/^[a-zA-Z\s]*$/.test(value)) {
+                    setOtherProductName(value);
+                  }
+                }}
               />
+
               <button onClick={handleAddOtherProduct}>Agregar</button>
             </div>
           </div>
