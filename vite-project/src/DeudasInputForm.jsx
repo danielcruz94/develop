@@ -172,11 +172,13 @@ function DebtInputForm({ seccion, data }) {
             )}
 
             {index === 0 && (
-              <span
-                className="bi bi-plus-circle duplicate-icon"
-                onClick={handleDuplicateRow}
-                title="Duplicar fila"
-              />
+              <div className='AgreDeuda'  onClick={handleDuplicateRow}>
+                <span
+                  className="bi bi-plus-circle duplicate-icon"                 
+                  title="Duplicar fila"
+                />
+                <p> Agregar Nueva Deuda</p>
+              </div>
             )}
 
             <div className="input-group">

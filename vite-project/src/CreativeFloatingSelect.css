@@ -167,6 +167,15 @@
   border-radius: 1000%;
 }
 
+.AgreDeuda{
+  display: flex;
+}
+
+.AgreDeuda p{
+  display: none;
+  cursor: pointer;
+}
+
 .bi-x{
   font-size: 20px;
 }
@@ -380,5 +389,28 @@ input[type="number"]::-ms-clear {
 
   .other-input-container input {
     padding: 10px !important;
+  }
+
+  
+  
+  .AgreDeuda{
+    background:#06175C;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .AgreDeuda p {
+    display: block;   
+    font-size: 12px;
+    margin: 0px 10px;
+}
+
+  .AgreDeuda span{
+     display: none;
+  }
+
+  .bi-x{
+    font-size: 25px;
   }
 }
