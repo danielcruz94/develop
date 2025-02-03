@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Deudas from "./DeudasInputForm";
 import axios from "axios";
 
-import DynamicInputs from "./DynamicFloatingSelects"; 
+
 import {
   seguridadsocial,
   ingresos,
@@ -379,6 +379,16 @@ const Form = () => {
               ) : (
                 <Selector options={ahorro} seccion="Ahorro" />
               )}
+
+              <br />
+              <h2 className="fs-title">Transporte</h2>
+              {data?.hogar ? (
+                <Selector options={transporte} seccion="Transporte" data={data.Transporte} />
+              ) : (
+                <Selector options={transporte} seccion="Transporte" />
+              )}
+
+
               <br />
               <h2 className="fs-title"> Gastos Personales</h2>
 
