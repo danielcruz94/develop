@@ -172,6 +172,12 @@ function CreativeFloatingSelect({ options, seccion, data }) {
     }
   };
 
+   const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleAddOtherProduct();
+    }
+  };
+
   const duplicateInput = (option) => {    
     const index = selectedOptions.findIndex((opt) => opt === option);
 
@@ -374,6 +380,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
               <input
                 type="text"
                 value={otherProductName}
+                onKeyDown={handleKeyPress}
                 onChange={(e) => {
                   const value = e.target.value;
                   // Acepta solo letras y espacios
@@ -383,7 +390,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
                 }}
               />
 
-              <button onClick={handleAddOtherProduct}>Agregar</button>
+              <button onClick={handleAddOtherProduct}  onKeyDown={handleKeyPress}>Agregar</button>
             </div>
           </div>
         )}
