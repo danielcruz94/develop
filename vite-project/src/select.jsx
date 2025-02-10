@@ -232,21 +232,53 @@ function CreativeFloatingSelect({ options, seccion, data }) {
         return value;
       };
 
+
+      const sanitizeAndSetInputValue = (value, id) => {
+        const sanitizedValue = value.replace(/\./g, "");
+        
+        if (!isNaN(sanitizedValue) && sanitizedValue !== "") {
+          setInputValues((prev) => ({
+            ...prev,
+            [id]: formatNumber(value),
+          }));
+        } else {
+          setInputValues((prev) => ({
+            ...prev,
+            [id]: value,
+          }));
+        }
+      };
+
+
   // Manejador del cambio en el input
   const handleInputChange = (e) => {    
-    const { id, value } = e.target;     
-    const sanitizedValue = value.replace(/\./g, ""); 
-    if (!isNaN(sanitizedValue) && sanitizedValue !== "") {
-      setInputValues((prev) => ({
-        ...prev,
-        [id]: formatNumber(value), 
-      }));
-    } else {
-      setInputValues((prev) => ({
-        ...prev,
-        [id]: value, 
-      }));
+    const { id, value} = e.target;    
+    
+    let Key = e.nativeEvent.data;   
+
+    const Name = ["EPS", "ARL", "Fondo_Cesantias", "AFP", "Medicina_Prepagada"];
+    const Number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  
+
+    if(e.nativeEvent.inputType === "deleteContentForward" || e.nativeEvent.inputType === "deleteContentBackward" ){
+      sanitizeAndSetInputValue(value,id)
+      return
     }
+
+    if (Name.includes(id) && Number.includes(Key)) {
+      return
+    }else{
+
+      if (Name.includes(id) && !Number.includes(Key)) {       
+      sanitizeAndSetInputValue(value,id)
+      }
+
+      if (!Name.includes(id) && Number.includes(Key)) {        
+        sanitizeAndSetInputValue(value,id)
+      }
+
+    }
+
   };
 
 

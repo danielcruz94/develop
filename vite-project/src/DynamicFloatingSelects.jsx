@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) => {
     const [recovery, setRecovery] = useState([null]);
 
-    console.log(data)
+  
     useEffect(() => {
         if (recovery[0] === null) {
             setRecovery(data);
@@ -142,7 +142,6 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
 
     function generateDynamicContent(datos, selectedOptionsDiv, handleRemove) {
         
-        console.log(sectionName)
         if (datos && typeof datos === "object" && !Array.isArray(datos)) {
             const newOptionsContainer = document.createElement("div");
             newOptionsContainer.classList.add("Recovery-options-container");
@@ -204,14 +203,29 @@ const DynamicInputs = ({ data, sectionName, removeOption, onRemove, options }) =
 
                 // Evento para manejar la entrada de texto
                 input.addEventListener("input", (e) => {
+                    const Name = ["EPS", "ARL", "Fondo_Cesantias", "AFP", "Medicina_Prepagada"];
+                    const Number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+                    let Key = e.data; 
+                
                     let newValue = e.target.value;
-
-                    // Eliminar puntos y verificar si es un número
-                    if (!isNaN(newValue.replace(/\./g, ""))) {
-                        // Formatear el número con puntos como separadores
+                    const { name } = e.target;                 
+                   
+                    if (Name.includes(name)) {
+                        
+                        if (!/^[a-zA-Z\s]*$/.test(Key)) {
+                            newValue = newValue.slice(0, -1); 
+                        }
+                        e.target.value = newValue;  
+                    } 
+                    
+                    else {
+                        if (!Number.includes(Key)) {
+                            newValue = newValue.slice(0, -1); 
+                        }                        
                         e.target.value = formatNumberWithDot(newValue.replace(/\./g, ""));
                     }
                 });
+                
             });
 
             selectedOptionsDiv.appendChild(newOptionsContainer);
