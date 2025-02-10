@@ -110,12 +110,10 @@ const Form = () => {
         let value = input.value.trim();
   
         if (value === "") {
-          value = " "; // Asignar un espacio vacío en lugar de no enviar nada
-        } else {
-          // Verificar si el valor es un número (y no es NaN)
-          if (!isNaN(value.replace(/\./g, "")) && value !== "") {
-            value = value.replace(/\./g, ""); // Elimina puntos si es un número
-          }
+          value = " "; 
+        } else {          
+            value = value.replace(/\./g, "");    
+            value = value.replace(/\$/g, "");       
         }
   
         if (placeholdersCount[placeholder] > 1) {

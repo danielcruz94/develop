@@ -119,6 +119,7 @@ html {
   }
 
 #progressbar {
+    width: 60%;
     margin-bottom: 30px;
     overflow: hidden;    
     counter-reset: step;
@@ -135,7 +136,7 @@ html {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 10%;
+    width: 15%;
     float: left;
     position: relative;
     letter-spacing: 2px;

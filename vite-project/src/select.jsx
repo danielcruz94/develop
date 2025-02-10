@@ -383,12 +383,13 @@ function CreativeFloatingSelect({ options, seccion, data }) {
                 onKeyDown={handleKeyPress}
                 onChange={(e) => {
                   const value = e.target.value;
-                  // Acepta solo letras y espacios
-                  if (/^[a-zA-Z\s]*$/.test(value)) {
+                  // Acepta solo letras, ñ, Ñ y espacios
+                  if (/^[a-zA-ZñÑ\s]*$/.test(value)) {
                     setOtherProductName(value);
                   }
                 }}
               />
+
 
               <button onClick={handleAddOtherProduct}  onKeyDown={handleKeyPress}>Agregar</button>
             </div>
