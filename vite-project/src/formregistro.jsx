@@ -42,7 +42,7 @@ const ElegantBlueFinancialPlanningForm = () => {
    
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
-      'direccionCasa', 'celular', 'profesion', 
+      'direccionCasa', 'celular',
       'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
     ];
     
