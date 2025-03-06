@@ -111,13 +111,15 @@ const ElegantBlueFinancialPlanningForm = () => {
             transition={{ duration: 0.5 }}
           >
           
-            <h3>Información Personal</h3>
+            <h3>Información Personal</h3>    
+            <InputField label="Nombre Asesor" value={formData.nombre} onChange={handleInputChange('asesor')} />       
             <InputField label="Nombre" value={formData.nombre} onChange={handleInputChange('nombre')} />
             <InputField label="Apellidos" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
             <InputField label="Cédula de Ciudadanía"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
             <InputField label="Fecha de Nacimiento" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
             <InputField label="Lugar de Nacimiento" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
             <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
+          
 
             <select 
               className='selectInput'
