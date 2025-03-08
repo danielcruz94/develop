@@ -97,6 +97,9 @@ const InteractiveLoginForm = () => {
          <span className='btn-registrarse' onClick={handleClick}>Registrarse</span>
       </div>
     
+      <div className="firma bottom">
+      <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank">Desarrollado por Oulo Soluciones</a>
+     </div>
     </div>
   )
 }

@@ -274,6 +274,29 @@ html {
     color: transparent;
 } 
 
+.firma {
+    position: absolute;   
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.8em;
+    color: #ccc;
+}
+
+.firma a {
+    color: #ccc; 
+    text-decoration: none; 
+}
+
+.firma a:hover {
+    color: #fff; 
+}
+
+.bottom{
+    bottom: 0%;
+}
+
 @media screen and (max-width: 800px) {
 
     .INFO span { 
