@@ -111,8 +111,8 @@ const ElegantBlueFinancialPlanningForm = () => {
             transition={{ duration: 0.5 }}
           >
           
-            <h3>Información Personal</h3>    
-            <InputField label="Nombre Asesor" value={formData.nombre} onChange={handleInputChange('asesor')} />       
+            <h3>Información Personal</h3>  
+               
             <InputField label="Nombre" value={formData.nombre} onChange={handleInputChange('nombre')} />
             <InputField label="Apellidos" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
             <InputField label="Cédula de Ciudadanía"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
@@ -210,6 +210,7 @@ const ElegantBlueFinancialPlanningForm = () => {
 
             <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
             <InputField label="Nueva Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
+            <InputField label="Nombre del Asesor" value={formData.asesor} onChange={handleInputChange('asesor')} />    
             
           </motion.div>
         )
