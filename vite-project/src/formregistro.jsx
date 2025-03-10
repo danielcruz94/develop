@@ -210,8 +210,8 @@ const ElegantBlueFinancialPlanningForm = () => {
 
             <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
             <InputField label="Nueva Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
-            <InputField label="Nombre del Asesor" value={formData.asesor} onChange={handleInputChange('asesor')} />    
-            
+            <InputField label="Nombre y Apellido del Asesor" value={formData.asesor} onChange={handleInputChange('asesor')} />    
+
           </motion.div>
         )
       default:
