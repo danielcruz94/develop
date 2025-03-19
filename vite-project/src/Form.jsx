@@ -110,7 +110,7 @@ const Form = () => {
         let value = input.value.trim();
   
         if (value === "") {
-          value = " "; 
+          value = 0; 
         } else {          
             value = value.replace(/\./g, "");    
             value = value.replace(/\$/g, "");       
