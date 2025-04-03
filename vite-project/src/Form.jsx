@@ -452,7 +452,7 @@ const Form = () => {
               )}
 
               <br />
-              <h2 className="fs-title">Educacion</h2>
+              <h2 className="fs-title">Educación/Educación Hijos</h2>
               {data?.educacion ? (
                 <Selector
                   options={educacion}
