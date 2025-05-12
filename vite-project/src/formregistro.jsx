@@ -53,7 +53,7 @@ const ElegantBlueFinancialPlanningForm = () => {
       }
     }
   
-    console.log("Datos a enviar:", formData);
+   
   
 
     const serverUrl = `${serverURL}clientes`;
@@ -113,12 +113,12 @@ const ElegantBlueFinancialPlanningForm = () => {
           
             <h3>Información Personal</h3>  
                
-            <InputField label="Nombre" value={formData.nombre} onChange={handleInputChange('nombre')} />
-            <InputField label="Apellidos" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
-            <InputField label="Cédula de Ciudadanía"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
-            <InputField label="Fecha de Nacimiento" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
-            <InputField label="Lugar de Nacimiento" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
-            <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
+            <InputField label="Nombre *" value={formData.nombre} onChange={handleInputChange('nombre')} />
+            <InputField label="Apellidos *" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
+            <InputField label="Cédula de Ciudadanía *"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
+            <InputField label="Fecha de Nacimiento *" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
+            <InputField label="Lugar de Nacimiento *" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
+            <InputField label="Edad *" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
           
 
             <select 
@@ -132,6 +132,8 @@ const ElegantBlueFinancialPlanningForm = () => {
               <option value="Mujer">Mujer</option>
             </select>
 
+            <span style={{fontSize:'9px'}}>Los campos con * son obligatorios</span>
+
           </motion.div>
         )
       case 2:
@@ -144,9 +146,9 @@ const ElegantBlueFinancialPlanningForm = () => {
             transition={{ duration: 0.5 }}
           >
             <h3>Información de Contacto</h3>
-            <InputField label="Dirección Casa" value={formData.direccionCasa} onChange={handleInputChange('direccionCasa')} />
+            <InputField label="Dirección Casa *" value={formData.direccionCasa} onChange={handleInputChange('direccionCasa')} />
             <InputField label="Dirección Oficina" value={formData.direccionOficina} onChange={handleInputChange('direccionOficina')} />
-            <InputField label="Celular" type="number" value={formData.celular} onChange={handleInputChange('celular')} />
+            <InputField label="Celular *" type="number" value={formData.celular} onChange={handleInputChange('celular')} />
             <InputField label="Teléfono Casa" type="number" value={formData.telefonoCasa} onChange={handleInputChange('telefonoCasa')} />
             <InputField label="Teléfono Oficina" type="number" value={formData.telefonoOficina} onChange={handleInputChange('telefonoOficina')} />
           </motion.div>
@@ -166,7 +168,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             <InputField label="Fecha de Ingreso Compañía" type="date"  value={formData.fechaIngreso} onChange={handleInputChange('fechaIngreso')} />
             <InputField label="Tipo de contratación" value={formData.tipoContratacion} onChange={handleInputChange('tipoContratacion')} />
             <InputField label="Profesión" value={formData.profesion} onChange={handleInputChange('profesion')} />
-            <InputField label="Universidad" value={formData.universidad} onChange={handleInputChange('universidad')} />
+            <InputField label="Universidad *" value={formData.universidad} onChange={handleInputChange('universidad')} />
           </motion.div>
         )
       case 4:
@@ -186,7 +188,7 @@ const ElegantBlueFinancialPlanningForm = () => {
                 required
                 className='selectInput'
               >
-                <option value="">Declarante de Renta</option>
+                <option value="">Declarante de Renta *</option>
                 <option value="si">Sí</option>
                 <option value="no">No</option>
               </select>             
@@ -198,7 +200,7 @@ const ElegantBlueFinancialPlanningForm = () => {
                 required
                 className='selectInput'
               >
-                <option value="">Estado Civil</option>
+                <option value="">Estado Civil *</option>
                 <option value="soltero">Soltero/a</option>
                 <option value="casado">Casado/a</option>
                 <option value="divorciado">Divorciado/a</option>
@@ -208,9 +210,9 @@ const ElegantBlueFinancialPlanningForm = () => {
             
             </div>
 
-            <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
-            <InputField label="Nueva Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
-            <InputField label="Nombre y Apellido del Asesor" value={formData.asesor} onChange={handleInputChange('asesor')} />    
+            <InputField label="Correo Electrónico *" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
+            <InputField label="Nueva Contraseña *"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
+            <InputField label="Nombre y Apellido del Asesor *" value={formData.asesor} onChange={handleInputChange('asesor')} />    
 
           </motion.div>
         )
