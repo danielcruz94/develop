@@ -147,6 +147,8 @@ const ElegantBlueFinancialPlanningForm = () => {
               <option value="Mujer">Mujer</option>
             </select>
 
+            <span style={{fontSize:'9px'}}>Los campos con * son obligatorios</span>
+
           </motion.div>
         )
       case 2:

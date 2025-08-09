@@ -3,7 +3,7 @@ export const seguridadsocial = [
   { value: 'Medicina_Prepagada', label: 'Medicina Prepagada', type: 'text', Help: 'Elige tu plan de salud privado que te permite acceder a servicios médicos de calidad con mayor rapidez, mediante un contrato con una aseguradora que cubre consultas, tratamientos y otros servicios.', visible: false },
   { value: 'ARL', label: 'ARL', type: 'text', Help: 'Selecciona la aseguradora que cubre los riesgos laborales. La ARL (Administradora de Riesgos Laborales) se encarga de la prevención, atención y compensación de accidentes laborales y enfermedades profesionales.', visible: false },
   { value: 'Fondo_Cesantias', label: 'Fondo Cesantías', type: 'text', Help: 'Indica el fondo al cual estás afiliado para el manejo de tus cesantías. Las cesantías son un ahorro obligatorio que el empleador debe consignar en favor del trabajador, utilizado principalmente en casos de desempleo.', visible: false },
-  { value: 'AFP', label: 'AFP', type: 'text', Help: 'Elige la Administradora de Fondos de Pensiones a la cual estás afiliado. La AFP es la encargada de administrar y gestionar los fondos de pensión de los trabajadores para su jubilación.', visible: false }
+  { value: 'AFP', label: 'Fondo Pensión Obligatoria', type: 'text', Help: 'Elige la Administradora de Fondos de Pensiones a la cual estás afiliado. La AFP es la encargada de administrar y gestionar los fondos de pensión de los trabajadores para su jubilación.', visible: false }
 ];
 
 export const ingresos = [
