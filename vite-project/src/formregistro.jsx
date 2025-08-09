@@ -37,49 +37,64 @@ const ElegantBlueFinancialPlanningForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-   
-    const requiredFields = [
-      'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
-      'direccionCasa', 'celular',
-      'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
-    ];
-    
-    for (let field of requiredFields) {
-      if (!formData[field]) {
-        alert(`El campo ${field} es obligatorio.`);
-        return;
-      }
-    }
-  
-    console.log("Datos a enviar:", formData);
-  
+  e.preventDefault();
 
-    const serverUrl = `${serverURL}clientes`;
-  
-    try {
-      const response = await axios.post(serverUrl, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });  
+  const requiredFields = [
+    'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
+    'direccionCasa', 'celular',
+    'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
+  ];
+
+  for (let field of requiredFields) {
+    if (!formData[field]) {
+      alert(`El campo ${field} es obligatorio.`);
+      return;
+    }
+  }
  
-      console.log("Respuesta del servidor:", response);  
+  const cleanedData = Object.fromEntries(
+    Object.entries(formData).map(([key, value]) => {
     
-      if (response.status === 201) {
-
-        localStorage.setItem('cedula', response.data.cedula); 
-        navigate('/formulario');
-      } else {
-        alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
+      if (typeof value === 'string' && value.trim() === '') {
+        return [key, null];
       }
-    } catch (error) {
     
-      console.error('Error al enviar el formulario:', error);
-      alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
+      if (
+        key.toLowerCase().includes('fecha') &&
+        (value === null || isNaN(new Date(value).getTime()))
+      ) {
+        return [key, null];
+      }
+
+      return [key, value];
+    })
+  );
+
+  console.log("Datos a enviar:", cleanedData);
+
+  const serverUrl = `${serverURL}clientes`;
+
+  try {
+    const response = await axios.post(serverUrl, cleanedData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log("Respuesta del servidor:", response);
+
+    if (response.status === 201) {
+      localStorage.setItem('cedula', response.data.cedula);
+      navigate('/formulario');
+    } else {
+      alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
     }
-  };
+  } catch (error) {
+    console.error('Error al enviar el formulario:', error);
+    alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
+  }
+};
+
   
   
   
@@ -113,12 +128,12 @@ const ElegantBlueFinancialPlanningForm = () => {
           
             <h3>Información Personal</h3>  
                
-            <InputField label="Nombre" value={formData.nombre} onChange={handleInputChange('nombre')} />
-            <InputField label="Apellidos" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
-            <InputField label="Cédula de Ciudadanía"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
-            <InputField label="Fecha de Nacimiento" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
-            <InputField label="Lugar de Nacimiento" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
-            <InputField label="Edad" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
+            <InputField label="Nombre *" value={formData.nombre} onChange={handleInputChange('nombre')} />
+            <InputField label="Apellidos *" value={formData.apellidos} onChange={handleInputChange('apellidos')} />
+            <InputField label="Cédula de Ciudadanía *"  type="number" value={formData.cedula} onChange={handleInputChange('cedula')} />
+            <InputField label="Fecha de Nacimiento *" type="date" value={formData.fechaNacimiento} onChange={handleInputChange('fechaNacimiento')} />
+            <InputField label="Lugar de Nacimiento *" value={formData.lugarNacimiento} onChange={handleInputChange('lugarNacimiento')} />
+            <InputField label="Edad *" type="number" value={formData.edad} onChange={handleInputChange('edad')} />
           
 
             <select 
@@ -144,9 +159,9 @@ const ElegantBlueFinancialPlanningForm = () => {
             transition={{ duration: 0.5 }}
           >
             <h3>Información de Contacto</h3>
-            <InputField label="Dirección Casa" value={formData.direccionCasa} onChange={handleInputChange('direccionCasa')} />
+            <InputField label="Dirección Casa *" value={formData.direccionCasa} onChange={handleInputChange('direccionCasa')} />
             <InputField label="Dirección Oficina" value={formData.direccionOficina} onChange={handleInputChange('direccionOficina')} />
-            <InputField label="Celular" type="number" value={formData.celular} onChange={handleInputChange('celular')} />
+            <InputField label="Celular *" type="number" value={formData.celular} onChange={handleInputChange('celular')} />
             <InputField label="Teléfono Casa" type="number" value={formData.telefonoCasa} onChange={handleInputChange('telefonoCasa')} />
             <InputField label="Teléfono Oficina" type="number" value={formData.telefonoOficina} onChange={handleInputChange('telefonoOficina')} />
           </motion.div>
@@ -166,7 +181,7 @@ const ElegantBlueFinancialPlanningForm = () => {
             <InputField label="Fecha de Ingreso Compañía" type="date"  value={formData.fechaIngreso} onChange={handleInputChange('fechaIngreso')} />
             <InputField label="Tipo de contratación" value={formData.tipoContratacion} onChange={handleInputChange('tipoContratacion')} />
             <InputField label="Profesión" value={formData.profesion} onChange={handleInputChange('profesion')} />
-            <InputField label="Universidad" value={formData.universidad} onChange={handleInputChange('universidad')} />
+            <InputField label="Universidad *" value={formData.universidad} onChange={handleInputChange('universidad')} />
           </motion.div>
         )
       case 4:
@@ -186,7 +201,7 @@ const ElegantBlueFinancialPlanningForm = () => {
                 required
                 className='selectInput'
               >
-                <option value="">Declarante de Renta</option>
+                <option value="">Declarante de Renta *</option>
                 <option value="si">Sí</option>
                 <option value="no">No</option>
               </select>             
@@ -198,7 +213,7 @@ const ElegantBlueFinancialPlanningForm = () => {
                 required
                 className='selectInput'
               >
-                <option value="">Estado Civil</option>
+                <option value="">Estado Civil *</option>
                 <option value="soltero">Soltero/a</option>
                 <option value="casado">Casado/a</option>
                 <option value="divorciado">Divorciado/a</option>
@@ -208,9 +223,9 @@ const ElegantBlueFinancialPlanningForm = () => {
             
             </div>
 
-            <InputField label="Correo Electrónico" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
-            <InputField label="Nueva Contraseña"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
-            <InputField label="Nombre y Apellido del Asesor" value={formData.asesor} onChange={handleInputChange('asesor')} />    
+            <InputField label="Correo Electrónico *" type="email" value={formData.correoElectronico} onChange={handleInputChange('correoElectronico')} />
+            <InputField label="Nueva Contraseña *"  type="password"   value={formData.contraseña}   onChange={handleInputChange('contraseña')} />
+            <InputField label="Nombre y Apellido del Asesor *" value={formData.asesor} onChange={handleInputChange('asesor')} />    
 
           </motion.div>
         )
@@ -219,65 +234,80 @@ const ElegantBlueFinancialPlanningForm = () => {
     }
   }
 
-  return (
-    <div>
-      <img src="axia-logo.png" className="logo" alt="logo" />
-      <div className="form-container"> 
-        <div className="form-content">
-          
-          
-          <h2>Planeación Financiera</h2>
-          <div className="progress-bar">
-            {[1, 2, 3, 4].map((step) => (
-              <div 
-                key={step} 
-                className={`progress-step ${currentStep >= step ? 'active' : ''}`}
-                onClick={() => setCurrentStep(step)}
-              
-              >
-                {step}
-              </div>
-            ))}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <AnimatePresence mode="wait">
-              {renderStep()}
-            </AnimatePresence>
-            <div className="button-group">
-              {currentStep > 1 && (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"
-                  onClick={prevStep}
-                  className="btn-secondary"
-                >
-                  Anterior
-                </motion.button>
-              )}
-            {currentStep <4 ? (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"  
-                  onClick={nextStep}  
-                  className="btn-primary"
-                >
-                  Siguiente
-                </motion.button>
-              ) : (
-                  <button className="btn-submit" type="submit" >Enviar</button>              
-              )}
+ return (
+  <div>
+    <img src="axia-logo.png" className="logo" alt="logo" />
+    
+    <div className="form-container"> 
+      <div className="form-content">
+        <h2>Planeación Financiera</h2>
+
+        <div className="progress-bar">
+          {[1, 2, 3, 4].map((step) => (
+            <div 
+              key={step} 
+              className={`progress-step ${currentStep >= step ? 'active' : ''}`}
+              onClick={() => setCurrentStep(step)}
+            >
+              {step}
             </div>
-          </form>
+          ))}
         </div>
 
+        <form onSubmit={handleSubmit}>
+          <AnimatePresence mode="wait">
+            {renderStep()}
+          </AnimatePresence>
+
+          <span style={{ fontSize: '9px' }}>
+            Los campos con * son obligatorios
+          </span>
+
+          <div className="button-group">
+            {currentStep > 1 && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={prevStep}
+                className="btn-secondary"
+              >
+                Anterior
+              </motion.button>
+            )}
+
+            {currentStep < 4 ? (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={nextStep}
+                className="btn-primary"
+              >
+                Siguiente
+              </motion.button>
+            ) : (
+              <button className="btn-submit" type="submit">
+                Enviar
+              </button>
+            )}
+          </div>
+        </form>
       </div>
-      <div className="firma">
-      <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank">Desarrollado por Oulo Soluciones</a>
-     </div>
     </div>
-  )
+
+    <div className="firma">
+      <a 
+        href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        Desarrollado por Oulo Soluciones
+      </a>
+    </div>
+  </div>
+);
+
 }
 
 export default ElegantBlueFinancialPlanningForm
