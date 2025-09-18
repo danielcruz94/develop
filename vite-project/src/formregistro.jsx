@@ -21,13 +21,15 @@ const InputField = ({ label, type = "text", value, onChange, required = false })
 
 const ElegantBlueFinancialPlanningForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const serverURL = useSelector(state => state.serverURL.serverURL);
   
   const [formData, setFormData] = useState({
     nombre: '', apellidos: '', cedula: '', fechaNacimiento: '', lugarNacimiento: '', edad: '',
     direccionCasa: '', direccionOficina: '', celular: '', telefonoCasa: '', telefonoOficina: '',
     empresa: '', cargo: '', fechaIngreso: '', tipoContratacion: '', profesion: '', universidad: '',
-    correoElectronico: '', declaranteRenta: '', estadoCivil: '' , contraseña: '', asesor: ''
+    correoElectronico: '', declaranteRenta: '', estadoCivil: '' , contraseña: '', asesor: '', sexo: ''
   })
 
   const navigate = useNavigate(); 
@@ -37,49 +39,53 @@ const ElegantBlueFinancialPlanningForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-   
-    const requiredFields = [
-      'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
-      'direccionCasa', 'celular',
-      'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña', 'asesor'
-    ];
-    
-    for (let field of requiredFields) {
-      if (!formData[field]) {
-        alert(`El campo ${field} es obligatorio.`);
-        return;
-      }
-    }
+  e.preventDefault();
   
-   
-  
+  // Mostrar el modal (bloquear la página)
+  setIsSubmitting(true);
 
-    const serverUrl = `${serverURL}clientes`;
-  
-    try {
-      const response = await axios.post(serverUrl, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });  
- 
-      console.log("Respuesta del servidor:", response);  
-    
-      if (response.status === 201) {
+  const requiredFields = [
+    'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
+    'direccionCasa', 'celular', 'sexo',
+    'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña', 'asesor'
+  ];
 
-        localStorage.setItem('cedula', response.data.cedula); 
-        navigate('/formulario');
-      } else {
-        alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
-      }
-    } catch (error) {
-    
-      console.error('Error al enviar el formulario:', error);
-      alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
+  for (let field of requiredFields) {
+    if (!formData[field]) {
+      alert(`El campo ${field} es obligatorio.`);
+      setIsSubmitting(false); // Desactivar el modal si falta un campo
+      return;
     }
-  };
+  }
+
+  const serverUrl = `${serverURL}clientes`;
+
+  try {
+    const response = await axios.post(serverUrl, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log("Respuesta del servidor:", response);
+
+    if (response.status === 201) {
+      localStorage.setItem('cedula', response.data.cedula);
+      // Redirige si es necesario, por ejemplo a otra página
+              navigate('/formulario');
+
+    } else {
+      alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
+    }
+  } catch (error) {
+    console.error('Error al enviar el formulario:', error);
+    alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
+  } finally {
+    // Ocultar el modal
+    setIsSubmitting(false);
+  }
+};
+
   
   
   
@@ -127,7 +133,7 @@ const ElegantBlueFinancialPlanningForm = () => {
               onChange={handleInputChange('sexo')}
               required
             >
-              <option value="">Sexo</option>
+              <option value="">Sexo *</option>
               <option value="Hombre">Hombre</option>
               <option value="Mujer">Mujer</option>
             </select>
@@ -222,64 +228,80 @@ const ElegantBlueFinancialPlanningForm = () => {
   }
 
   return (
-    <div>
-      <img src="axia-logo.png" className="logo" alt="logo" />
-      <div className="form-container"> 
-        <div className="form-content">
-          
-          
-          <h2>Planeación Financiera</h2>
-          <div className="progress-bar">
-            {[1, 2, 3, 4].map((step) => (
-              <div 
-                key={step} 
-                className={`progress-step ${currentStep >= step ? 'active' : ''}`}
-                onClick={() => setCurrentStep(step)}
-              
-              >
-                {step}
-              </div>
-            ))}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <AnimatePresence mode="wait">
-              {renderStep()}
-            </AnimatePresence>
-            <div className="button-group">
-              {currentStep > 1 && (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"
-                  onClick={prevStep}
-                  className="btn-secondary"
-                >
-                  Anterior
-                </motion.button>
-              )}
-            {currentStep <4 ? (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="button"  
-                  onClick={nextStep}  
-                  className="btn-primary"
-                >
-                  Siguiente
-                </motion.button>
-              ) : (
-                  <button className="btn-submit" type="submit" >Enviar</button>              
-              )}
+  <div>
+    {/* Modal simple */}
+{isSubmitting && (
+  <div className="modal">
+    <div className="content">
+      <div className="spinner"></div> 
+      Enviando datos, por favor espera...
+    </div>
+  </div>
+)}
+
+    <img src="axia-logo.png" className="logo" alt="logo" />
+    <div className="form-container"> 
+      <div className="form-content">
+        <h2>Planeación Financiera</h2>
+        <div className="progress-bar">
+          {[1, 2, 3, 4].map((step) => (
+            <div 
+              key={step} 
+              className={`progress-step ${currentStep >= step ? 'active' : ''}`}
+              onClick={() => setCurrentStep(step)}
+            >
+              {step}
             </div>
-          </form>
+          ))}
         </div>
 
+        <form onSubmit={handleSubmit}>
+          <AnimatePresence mode="wait">
+            {renderStep()}
+          </AnimatePresence>
+
+          <div className="button-group">
+            {currentStep > 1 && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={prevStep}
+                className="btn-secondary"
+                disabled={isSubmitting}
+              >
+                Anterior
+              </motion.button>
+            )}
+            {currentStep < 4 ? (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={nextStep}
+                className="btn-primary"
+                disabled={isSubmitting}
+              >
+                Siguiente
+              </motion.button>
+            ) : (
+              <button className="btn-submit" type="submit" disabled={isSubmitting}>
+                Enviar
+              </button>
+            )}
+          </div>
+        </form>
       </div>
-      <div className="firma">
-      <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank">Desarrollado por Oulo Soluciones</a>
-     </div>
     </div>
-  )
+
+    <div className="firma">
+      <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank" rel="noopener noreferrer">
+        Desarrollado por Oulo Soluciones
+      </a>
+    </div>
+  </div>
+);
+
 }
 
 export default ElegantBlueFinancialPlanningForm
