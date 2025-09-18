@@ -27,7 +27,7 @@ const ElegantBlueFinancialPlanningForm = () => {
     nombre: '', apellidos: '', cedula: '', fechaNacimiento: '', lugarNacimiento: '', edad: '',
     direccionCasa: '', direccionOficina: '', celular: '', telefonoCasa: '', telefonoOficina: '',
     empresa: '', cargo: '', fechaIngreso: '', tipoContratacion: '', profesion: '', universidad: '',
-    correoElectronico: '', declaranteRenta: '', estadoCivil: '' , contraseña: ''
+    correoElectronico: '', declaranteRenta: '', estadoCivil: '' , contraseña: '', asesor: ''
   })
 
   const navigate = useNavigate(); 
@@ -43,7 +43,7 @@ const ElegantBlueFinancialPlanningForm = () => {
     const requiredFields = [
       'nombre', 'apellidos', 'cedula', 'fechaNacimiento', 'lugarNacimiento', 'edad',
       'direccionCasa', 'celular',
-      'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña'
+      'universidad', 'correoElectronico', 'declaranteRenta', 'estadoCivil', 'contraseña', 'asesor'
     ];
     
     for (let field of requiredFields) {
