@@ -22,6 +22,8 @@ const InputField = ({ label, type = "text", value, onChange, required = false })
 const ElegantBlueFinancialPlanningForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false);
+    const [responsealert, setresponsealert] = useState(false);
+
 
   const serverURL = useSelector(state => state.serverURL.serverURL);
   
@@ -68,6 +70,7 @@ const ElegantBlueFinancialPlanningForm = () => {
     });
 
     console.log("Respuesta del servidor:", response);
+    setresponsealert(response)
 
     if (response.status === 201) {
       localStorage.setItem('cedula', response.data.cedula);
@@ -75,7 +78,7 @@ const ElegantBlueFinancialPlanningForm = () => {
               navigate('/formulario');
 
     } else {
-      alert('Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente.');
+      alert(responsealert);
     }
   } catch (error) {
     console.error('Error al enviar el formulario:', error);
