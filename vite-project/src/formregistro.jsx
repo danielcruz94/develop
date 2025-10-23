@@ -82,7 +82,7 @@ const ElegantBlueFinancialPlanningForm = () => {
     }
   } catch (error) {
     console.error('Error al enviar el formulario:', error);
-    alert('Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.');
+      alert(responsealert);
   } finally {
     // Ocultar el modal
     setIsSubmitting(false);
