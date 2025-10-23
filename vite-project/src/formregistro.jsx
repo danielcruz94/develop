@@ -22,7 +22,7 @@ const InputField = ({ label, type = "text", value, onChange, required = false })
 const ElegantBlueFinancialPlanningForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false);
-    const [responsealert, setresponsealert] = useState(false);
+    const [responsealert, setresponsealert] = useState("Hubo un error al enviar el formulario. Por favor, revisa tu conexión y vuelve a intentarlo.");
 
 
   const serverURL = useSelector(state => state.serverURL.serverURL);
@@ -79,7 +79,7 @@ const ElegantBlueFinancialPlanningForm = () => {
 
     } else {
       alert(responsealert);
-    }
+    } 
   } catch (error) {
     console.error('Error al enviar el formulario:', error);
       alert(responsealert);
