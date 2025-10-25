@@ -7,7 +7,8 @@ const serverUrlSlice = createSlice({
   initialState: {
 
 
- serverURL: 'https://tester-axia-server.vercel.app/api/',  
+    serverURL: 'https://server-axia.vercel.app/api/',
+    //serverURL: 'https://tester-axia-server.vercel.app/api/',  
   },
   reducers: {
     setServerURL: (state, action) => {
@@ -31,8 +32,8 @@ const datosMongoSlice = createSlice({
 
 const store = configureStore({
   reducer: {
-    serverURL: serverUrlSlice.reducer, 
-    datosMongo: datosMongoSlice.reducer,  
+    serverURL: serverUrlSlice.reducer,
+    datosMongo: datosMongoSlice.reducer,
   },
 });
 
