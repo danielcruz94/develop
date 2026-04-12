@@ -200,7 +200,7 @@ const Form = () => {
 
   const sendFormData = async (formData) => {
     try {
-      const response = await axios.put(`${serverURL}actualizar`, formData);
+      await axios.put(`${serverURL}actualizar`, formData);
       localStorage.removeItem("authToken");
       window.location.href = "https://axia.com.co/";
     } catch (error) {
@@ -219,7 +219,7 @@ const Form = () => {
     console.log(formData);
 
     try {
-      const response = await axios.put(`${serverURL}actualizar`, formData);
+      await axios.put(`${serverURL}actualizar`, formData);
 
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);

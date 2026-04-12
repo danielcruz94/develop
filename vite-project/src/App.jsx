@@ -7,7 +7,12 @@ import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import ProtectedRoute from './ProtectedRoute '; 
-
+import AxiaAdminLogin from './adminModule/page';
+import AxiaDashboard from './adminModule/componentes/Users/Page';
+import PublicRoute from './adminModule/componentes/PublicRoute';
+import PrivateRoute from './adminModule/componentes/PrivateRoute';
+import UsersManagement from './adminModule/componentes/Users/Usuarios';
+import Clientes from './adminModule/componentes/Users/Clientes';
 function App() {
   return (
     <Provider store={store}>
@@ -16,6 +21,26 @@ function App() {
           <Route path='formulario' element={<ProtectedRoute element={<Form />} />} />
           <Route path='/' element={<LoginForm />} />
           <Route path='Formregistro' element={<Formregistro />} />
+        
+          <Route 
+            path='admin' 
+            element={<PublicRoute element={<AxiaAdminLogin />} />} 
+          />
+          <Route 
+            path="dashboard" 
+            element={<PrivateRoute element={<AxiaDashboard />} />} 
+          />
+
+        
+            <Route 
+    path="dashboard/users"
+    element={<PrivateRoute element={<UsersManagement />} />} 
+  />
+    <Route 
+    path="dashboard/clientes"
+    element={<PrivateRoute element={<Clientes />} />} 
+  />
+          
         </Routes>
       </>
     </Provider>
