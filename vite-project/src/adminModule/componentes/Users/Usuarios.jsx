@@ -8,9 +8,6 @@ import {
 import { authFetch } from '../../utils/auth.fetch';
 import './UsersManagement.css';
 
-/* ══════════════════════════════════════════════
-   Constantes de configuración
-   ══════════════════════════════════════════════ */
 const ALL_ROLES = ['USER', 'ADMIN'];
 
 const ROLE_CONFIG = {

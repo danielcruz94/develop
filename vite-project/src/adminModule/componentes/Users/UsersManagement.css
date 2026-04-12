@@ -721,3 +721,221 @@ body {
 .um-spin {
   animation: umSpin 0.7s linear infinite;
 }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — Tablet (≤ 1024px)
+   ══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .um-header__inner,
+  .um-main {
+    width: 92vw;
+  }
+
+  .um-table__header,
+  .um-row {
+    grid-template-columns: 2fr 2.5fr 1fr 2fr;
+  }
+
+  .um-action-edit,
+  .um-action-delete,
+  .um-action-password {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+   ══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .um-header__inner,
+  .um-main {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .um-header__inner {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .um-header__right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .um-main {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  /* Filtros en columna */
+  .um-filter-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .um-search-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .um-select-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .um-btn-clear {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Tabla → tarjetas */
+  .um-table__header {
+    display: none;
+  }
+
+  .um-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid #f3f4f6 !important;
+  }
+
+  .um-row__user {
+    gap: 10px;
+  }
+
+  .um-row__email {
+    padding-left: 46px;
+  }
+
+  .um-row__role-cell {
+    justify-content: flex-start;
+    padding-left: 46px;
+  }
+
+  .um-row__actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-left: 46px;
+  }
+
+  .um-action-edit,
+  .um-action-delete,
+  .um-action-password {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  /* Modales */
+  .um-modal-form,
+  .um-modal-form--edit-roles {
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0 8px;
+  }
+
+  .um-modal-form__header {
+    padding: 18px 16px 14px;
+  }
+
+  .um-form {
+    padding: 18px 16px;
+  }
+
+  .um-edit-user-info {
+    padding: 14px 16px;
+  }
+
+  .um-role-manager {
+    padding: 16px;
+  }
+
+  .um-modal-delete {
+    padding: 24px 20px;
+    margin: 0 8px;
+  }
+
+  .um-notification {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — Small mobile (≤ 480px)
+   ══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .um-header__left {
+    gap: 10px;
+  }
+
+  .um-header__divider {
+    display: none;
+  }
+
+  .um-header__title {
+    font-size: 16px;
+  }
+
+  .um-btn-back {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .um-btn-new-user {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+
+  .um-row__email,
+  .um-row__role-cell,
+  .um-row__actions {
+    padding-left: 0;
+  }
+
+  .um-row__actions {
+    flex-direction: column;
+  }
+
+  .um-action-edit,
+  .um-action-delete,
+  .um-action-password {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .um-chip {
+    padding: 5px 10px;
+  }
+
+  .um-chip__number {
+    font-size: 12px;
+  }
+
+  .um-chip__label {
+    font-size: 9px;
+  }
+
+  .um-form__footer {
+    flex-direction: column;
+  }
+
+  .um-btn-submit {
+    flex: unset;
+  }
+
+  .um-modal-delete__actions {
+    flex-direction: column;
+  }
+}
