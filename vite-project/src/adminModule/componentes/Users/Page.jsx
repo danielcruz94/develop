@@ -287,7 +287,7 @@ export default function AxiaDashboard() {
                 Bienvenido de vuelta
               </p>
               <h1 style={{ fontSize: 'clamp(30px,3.2vw,48px)', fontWeight: '400', color: '#06175C', letterSpacing: '-0.03em', lineHeight: 1.05, fontFamily: "'Cormorant Garamond', serif" }}>
-                {user?.name?.split(' ')[0] || 'Administrador'}
+                {user?.name?.split(' ')[0] || 'APPS'}
                 <span style={{ background: 'linear-gradient(90deg, #06175C, #6441A5)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>.</span>
               </h1>
             </div>
@@ -331,13 +331,8 @@ export default function AxiaDashboard() {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px' }}>
-                    <div className="axia-icon-box">
-                    
-                    </div>
-                    <div style={{
-                      padding: '4px 12px', border: '1px solid #e9eaf0', borderRadius: '100px',
-                      fontSize: '10px', color: '#9ca3af', fontFamily: "'DM Mono', monospace", letterSpacing: '0.06em',
-                    }}>{module.tag}</div>
+                   
+                   
                   </div>
 
                   <h3 style={{ fontSize: '21px', fontWeight: '500', color: '#111827', marginBottom: '10px', letterSpacing: '-0.02em', fontFamily: "'Cormorant Garamond', serif", lineHeight: 1.3 }}>
@@ -375,9 +370,9 @@ export default function AxiaDashboard() {
           <div style={{ width: '80vw', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '2px', height: '14px', background: 'linear-gradient(180deg,#06175C,#6441A5)', borderRadius: '2px' }} />
-              <span style={{ fontSize: '10px', color: '#9ca3af', fontFamily: "'DM Mono', monospace" }}>© 2024 Axia Finanzas</span>
+              <span style={{ fontSize: '10px', color: '#9ca3af', fontFamily: "'DM Mono', monospace" }}>© 2025 Axia Finanzas</span>
             </div>
-            <span style={{ fontSize: '10px', color: '#d1d5db', fontFamily: "'DM Mono', monospace" }}>v2.4.1 — Todos los derechos reservados</span>
+            <span style={{ fontSize: '10px', color: '#d1d5db', fontFamily: "'DM Mono', monospace" }}>v1 — Todos los derechos reservados</span>
           </div>
         </footer>
       </div>
