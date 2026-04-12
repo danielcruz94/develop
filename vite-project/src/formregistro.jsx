@@ -302,11 +302,7 @@ const ElegantBlueFinancialPlanningForm = () => {
         </div>
       </div>
 
-      <div className="firma">
-        <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank" rel="noopener noreferrer">
-          Desarrollado por Oulo Soluciones
-        </a>
-      </div>
+      
     </div>
   );
 
