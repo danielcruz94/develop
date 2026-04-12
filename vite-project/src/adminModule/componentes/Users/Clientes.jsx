@@ -36,7 +36,8 @@ export default function ClientesTable() {
 
   const fetchClientes = async () => {
     try {
-      const response = await authFetch('http://localhost:3001/api/datos/clientes/plan-financiero');
+      const response = await authFetch('https://server-axia-eosin.vercel.app/api/datos/clientes/plan-financiero');
+      
       const data = await response.json();
       const list = data.data || data;
       setClientes(list);

@@ -95,7 +95,7 @@ export default function UsersManagement() {
   const fetchUsers = async () => {
     setIsLoading(true);
     try {
-      const response = await authFetch('http://localhost:3000/users');
+      const response = await authFetch('https://authsystem-wimn.onrender.com/users');
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
@@ -112,7 +112,7 @@ export default function UsersManagement() {
     e.preventDefault();
     try {
       const token = sessionStorage.getItem('authToken');
-      const url = 'http://localhost:3000/auth/create-user';
+      const url = 'https://authsystem-wimn.onrender.com/auth/create-user';
       const payload = { email: formData.email, roles: [formData.role] };
       if (formData.password) payload.password = formData.password;
 
@@ -142,7 +142,7 @@ export default function UsersManagement() {
     setRoleLoading(role);
     try {
       const res = await authFetch(
-        `http://localhost:3000/users/${selectedUser._id}/add-role`,
+        `https://authsystem-wimn.onrender.com/users/${selectedUser._id}/add-role`,
         { method: 'PATCH', body: JSON.stringify({ role }) }
       );
       if (res.ok) {
@@ -169,7 +169,7 @@ export default function UsersManagement() {
     setRoleLoading(role);
     try {
       const res = await authFetch(
-        `http://localhost:3000/users/${selectedUser._id}/remove-role`,
+        `https://authsystem-wimn.onrender.com/users/${selectedUser._id}/remove-role`,
         { method: 'PATCH', body: JSON.stringify({ role }) }
       );
       if (res.ok) {
@@ -201,7 +201,7 @@ export default function UsersManagement() {
     setPasswordLoading(true);
     try {
       const res = await authFetch(
-        `http://localhost:3000/users/${passwordModal._id}/change-password`,
+        `https://authsystem-wimn.onrender.com/users/${passwordModal._id}/change-password`,
         { method: 'PATCH', body: JSON.stringify({ newPassword }) }
       );
       if (res.ok) {
@@ -227,7 +227,7 @@ export default function UsersManagement() {
   const handleDelete = async (userId) => {
     try {
       const token = sessionStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3000/users/delete/${userId}`, {
+      const response = await fetch(`https://authsystem-wimn.onrender.com/users/delete/${userId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });

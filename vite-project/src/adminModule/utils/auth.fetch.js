@@ -3,7 +3,7 @@
 async function refreshTokens() {
     const refreshToken = sessionStorage.getItem('refreshToken');
     
-    const response = await fetch('http://localhost:3000/auth/refresh', {
+    const response = await fetch('https://authsystem-wimn.onrender.com/auth/refresh', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refreshToken })
