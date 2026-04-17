@@ -13,6 +13,7 @@ import PublicRoute from './adminModule/componentes/PublicRoute';
 import PrivateRoute from './adminModule/componentes/PrivateRoute';
 import UsersManagement from './adminModule/componentes/Users/Usuarios';
 import Clientes from './adminModule/componentes/Users/Clientes';
+import ClientesMiniPlan from './adminModule/componentes/Users/ClientesMiniPlan';
 function App() {
   return (
     <Provider store={store}>
@@ -39,6 +40,10 @@ function App() {
     <Route 
     path="dashboard/clientes"
     element={<PrivateRoute element={<Clientes />} />} 
+  />
+   <Route 
+    path="dashboard/mini-planes"
+    element={<PrivateRoute element={< ClientesMiniPlan />} />}
   />
           
         </Routes>

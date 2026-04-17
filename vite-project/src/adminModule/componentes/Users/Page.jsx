@@ -42,7 +42,7 @@ export default function AxiaDashboard() {
       id: 3, title: 'Mini-Plan Financiero',
       description: 'Gestiona mini planes simplificados para clientes nuevos.',
   
-      path: '/mini-planes', requiredRoles: null,
+      path: 'dashboard/mini-planes', requiredRoles: null,
     
     },
   ];
