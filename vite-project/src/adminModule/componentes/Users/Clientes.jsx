@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 import {
   Search, Download, Calendar, User, Mail, Phone,
   Building, ChevronLeft, ChevronDown, X, AlertCircle
@@ -75,18 +76,23 @@ export default function ClientesTable() {
     return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(amount);
   };
 
-  const exportToCSV = () => {
-    const headers = ['Fecha Registro', 'Cédula', 'Nombre', 'Apellidos', 'Email', 'Celular', 'Empresa', 'Edad', 'Ingresos', 'Asesor'];
-    const rows = filteredClientes.map(c => [
-      formatDate(c.fecha), c.cedula, c.nombre, c.apellidos,
-      c.correoElectronico, c.celular, c.empresa, c.edad,
-      formatCurrency(c.ingresos) || 'Sin completar', c.asesor
-    ]);
-    const csv  = [headers, ...rows].map(r => r.join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url  = window.URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url; a.download = `clientes_${new Date().toISOString().split('T')[0]}.csv`; a.click();
+  const exportToExcel = () => {
+    const rows = filteredClientes.map(c => ({
+      'Fecha Registro': formatDate(c.fecha),
+      'Cédula': c.cedula,
+      'Nombre': c.nombre,
+      'Apellidos': c.apellidos,
+      'Email': c.correoElectronico,
+      'Celular': c.celular,
+      'Empresa': c.empresa,
+      'Edad': c.edad,
+      'Ingresos': formatCurrency(c.ingresos) || 'Sin completar',
+      'Asesor': c.asesor,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Clientes');
+    XLSX.writeFile(wb, `clientes_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   const getInitialGrad = (name) => {
@@ -265,8 +271,8 @@ export default function ClientesTable() {
                   )}
                 </div>
               )}
-              <button className="ct-export" onClick={exportToCSV}>
-                <Download size={14} /> {isMobile ? 'CSV' : 'Exportar CSV'}
+              <button className="ct-export" onClick={exportToExcel}>
+                <Download size={14} /> {isMobile ? 'Excel' : 'Exportar Excel'}
               </button>
             </div>
           </div>

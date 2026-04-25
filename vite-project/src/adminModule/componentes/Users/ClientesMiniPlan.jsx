@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 import {
   Search, Download, User, Mail, Phone,
   Building, ChevronLeft, ChevronDown, X, AlertCircle,
@@ -116,21 +117,24 @@ export default function ClientesMiniPlan() {
     );
   }, [searchTerm, clientes]);
 
-  const exportToCSV = () => {
-    const headers = ['Nombre', 'Email', 'Celular', 'Empresa', 'Cargo', 'AFP', 'Semanas', 'Ingreso Neto', 'Ahorro', 'Deuda', 'Recomendado por'];
-    const rows = filteredClientes.map(c => [
-      c.nombre, c.email, c.celular, c.empresa, c.cargo,
-      c.afp, c.semanasCotizadas,
-      c.ingresoNetoMensual, c.ahorroMensual, c.deuda,
-      c.recomendadoPor,
-    ]);
-    const csv  = [headers, ...rows].map(r => r.join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url  = window.URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url;
-    a.download = `mini_planes_${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
+  const exportToExcel = () => {
+    const rows = filteredClientes.map(c => ({
+      Nombre: c.nombre,
+      Email: c.email,
+      Celular: c.celular,
+      Empresa: c.empresa,
+      Cargo: c.cargo,
+      AFP: c.afp,
+      Semanas: c.semanasCotizadas,
+      'Ingreso Neto': c.ingresoNetoMensual,
+      Ahorro: c.ahorroMensual,
+      Deuda: c.deuda,
+      'Recomendado por': c.recomendadoPor,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Mini Planes');
+    XLSX.writeFile(wb, `mini_planes_${new Date().toISOString().split('T')[0]}.xlsx`);
   };
 
   /* ── MOBILE CARD ── */
@@ -348,8 +352,8 @@ export default function ClientesMiniPlan() {
                   )}
                 </div>
               )}
-              <button className="ct-export" onClick={exportToCSV}>
-                <Download size={14} /> {isMobile ? 'CSV' : 'Exportar CSV'}
+              <button className="ct-export" onClick={exportToExcel}>
+                <Download size={14} /> {isMobile ? 'Excel' : 'Exportar Excel'}
               </button>
             </div>
           </div>
