@@ -6,9 +6,11 @@ import { useSelector } from 'react-redux';
 import "./formregistro.css"
 
 
+// eslint-disable-next-line react/prop-types
 const InputField = ({ label, type = "text", value, onChange, required = false }) => (
   <div className="input-field">
     <input
+
       type={type}
       value={value}
       onChange={onChange}
@@ -234,7 +236,7 @@ const ElegantBlueFinancialPlanningForm = () => {
   }
 
   return (
-    <div>
+    <div className="registro-page">
       {/* Modal simple */}
       {isSubmitting && (
         <div className="modal">
@@ -300,11 +302,7 @@ const ElegantBlueFinancialPlanningForm = () => {
         </div>
       </div>
 
-      <div className="firma">
-        <a href="https://www.instagram.com/oulo_soluciones?igsh=ZW1nYjVtdTYzcWE0" target="_blank" rel="noopener noreferrer">
-          Desarrollado por Oulo Soluciones
-        </a>
-      </div>
+      
     </div>
   );
 

@@ -1,115 +1,124 @@
 .login-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    min-height: 80vh;
-    background-color: #06175C;
-    font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #06175C;
+  font-family: Arial, sans-serif;
+}
+
+.login-container img {
+  margin-bottom: 2rem;
+  max-width: 180px;
+}
+
+.login-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.login-form.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-10px); }
+  75%       { transform: translateX(10px); }
+}
+
+.login-form .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.login-form .form-group input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #333;
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  border-radius: 0 !important;
+  outline: none;
+  background: transparent !important;
+  transition: border-color 0.3s;
+  box-shadow: none !important;
+}
+
+.login-form .form-group input:focus {
+  border-bottom-color: #06175C !important;
+}
+
+.login-form .form-group label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 16px;
+  color: #999;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+.login-form .form-group input:focus ~ label,
+.login-form .form-group input:not(:placeholder-shown) ~ label,
+.login-form .form-group label.active {
+  top: -20px;
+  font-size: 14px;
+  color: #06175C;
+}
+
+.login-form .form-group input:-webkit-autofill ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #06175C;
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #06175C;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #0a2a8a;
+}
+
+.login-form button[type="submit"]:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.login-form button.loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@media screen and (max-width: 800px) {
+  .login-container {
+    min-height: 100vh;
+    padding: 2rem 1rem;
   }
-  
+
   .login-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    transition: transform 0.3s ease;
+    width: min(70vw, 340px);
   }
-  
-  .login-form.shake {
-    animation: shake 0.5s ease-in-out;
-  }
-  
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-  }
-  
-  h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 1.5rem;   
-    margin-top: 10px;
-  }
-  
-  .form-group {
-    position: relative;
-    margin-bottom: 1.5rem;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    outline: none;
-    background: transparent;
-    transition: border-color 0.3s;
-  }
-  
-  input:focus {
-    border-color: #06175C;
-  }
-  
-  label {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    font-size: 16px;
-    color: #999;
-    pointer-events: none;
-    transition: 0.3s ease all;
-  }
-  
-  input:focus ~ label,
-  label.active {
-    top: -20px;
-    font-size: 14px;
-    color: #06175C;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #06175C;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    letter-spacing: 1px;
-  }
-  
-    
-  button:disabled {
-    background-color: #999;
-    cursor: not-allowed;
-  }
-  
-  button.loading {
-    animation: pulse 1.5s infinite;
-  }
-  
-  @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-  }
-  
-
-  @media screen and (max-width: 800px) {
-
-    .login-container {     
-      min-height: 70vh;      
-    }
-
-    .login-form {
-      width: 70vw;
-    }
-
-  }
+}
