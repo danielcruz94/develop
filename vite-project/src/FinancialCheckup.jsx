@@ -157,6 +157,12 @@ function FinancialCheckup() {
 
   const chooseIntent = async (intent) => {
     updateField('intent', intent);
+
+    if (intent === 'PROGRAMS') {
+      window.location.assign('https://axia.com.co/finanzas-personales/');
+      return;
+    }
+
     setStage('loading-intent');
     setRequestError('');
     try {
@@ -187,7 +193,7 @@ function FinancialCheckup() {
   if (stage === 'intro') {
     return (
       <main className="checkup-shell checkup-intro">
-        <div className="checkup-brand">AXIA <span>FINANZAS PERSONALES</span></div>
+        <div className="checkup-brand"><img src="/LOGO.png" alt="Axia" /><span>FINANZAS PERSONALES</span></div>
         <p className="checkup-eyebrow">Chequeo financiero inicial</p>
         <h1>¿Tus ingresos crecieron.<br /><em>Tu patrimonio también?</em></h1>
         <p className="checkup-lead">Descubre en 60 segundos cómo están tus 5 signos vitales financieros.</p>
@@ -201,7 +207,7 @@ function FinancialCheckup() {
   if (stage === 'personal') {
     return (
       <main className="checkup-shell">
-        <div className="checkup-brand">AXIA <span>FINANZAS PERSONALES</span></div>
+        <div className="checkup-brand"><img src="/LOGO.png" alt="Axia" /><span>FINANZAS PERSONALES</span></div>
         <section className="checkup-card">
           <p className="checkup-eyebrow">Antes de comenzar</p>
           <h2>Cuéntanos un poco sobre ti</h2>
@@ -240,7 +246,7 @@ function FinancialCheckup() {
     const current = questions[questionIndex];
     return (
       <main className="checkup-shell">
-        <div className="checkup-topline"><span>AXIA</span><span>{questionIndex + 1} / 5</span></div>
+        <div className="checkup-topline"><img className="checkup-topline-logo" src="/LOGO.png" alt="Axia" /><span>{questionIndex + 1} / 5</span></div>
         <div className="checkup-progress"><span style={{ width: `${((questionIndex + 1) / 5) * 100}%` }} /></div>
         <section className="checkup-question">
           <p className="checkup-eyebrow">{questionIndex + 1} de 5 · {current.name}</p>
@@ -259,7 +265,7 @@ function FinancialCheckup() {
     const isConcern = stage === 'concern';
     return (
       <main className="checkup-shell">
-        <div className="checkup-topline"><span>AXIA</span><span>{isConcern ? 'Una última mirada' : 'Personalicemos tu orientación'}</span></div>
+        <div className="checkup-topline"><img className="checkup-topline-logo" src="/LOGO.png" alt="Axia" /><span>{isConcern ? 'Una última mirada' : 'Personalicemos tu orientación'}</span></div>
         <section className="checkup-question">
           <p className="checkup-eyebrow">{isConcern ? 'Tu prioridad' : 'Rango de ingresos'}</p>
           <h2>{isConcern ? '¿Cuál es hoy el tema financiero que más te gustaría mejorar?' : '¿En qué rango se encuentran aproximadamente tus ingresos mensuales?'}</h2>
@@ -291,12 +297,30 @@ function FinancialCheckup() {
     const priority = result?.priority_area || result?.priorityArea;
     return (
       <main className="checkup-shell">
-        <div className="checkup-brand">AXIA <span>FINANZAS PERSONALES</span></div>
+        <div className="checkup-brand"><img src="/LOGO.png" alt="Axia" /><span>FINANZAS PERSONALES</span></div>
         <section className="checkup-result">
           <p className="checkup-eyebrow">{stage === 'complete' ? 'Gracias por confiar en Axia' : 'Tu chequeo financiero inicial'}</p>
           <h1>{stage === 'complete' ? 'Recibimos tu elección.' : `${form.name.split(' ')[0]}, este es tu chequeo`}</h1>
           <h2>{result?.global_result || 'Hay oportunidades importantes de optimización'}</h2>
-          <div className="score-list">{[['Liquidez', 'liquidity'], ['Deuda', 'debt'], ['Protección', 'protection'], ['Inversión', 'investment'], ['Retiro', 'retirement']].map(([label, key]) => <div className="score-row" key={key}><span>{label}</span><span className="score-dots">{[0, 1, 2, 3].map((dot) => <i className={dot < (scores[key] || 0) ? 'filled' : ''} key={dot} />)}</span></div>)}</div>
+          <div className="score-list">
+            {[['Liquidez', 'liquidity'], ['Deuda', 'debt'], ['Protección', 'protection'], ['Inversión', 'investment'], ['Retiro', 'retirement']].map(([label, key]) => {
+              const score = scores[key] || 0;
+              return (
+                <div className="score-row" key={key}>
+                  <span>{label}</span>
+                  <span className="score-dots" aria-label={`${Math.min(score, 3)} de 3`}>
+                    {[0, 1, 2].map((brain) => (
+                      <svg className={`vascular-icon ${brain < score ? 'filled' : ''}`} viewBox="0 0 40 32" aria-hidden="true" key={brain}>
+                        <path className="brain-outline" d="M20 27c-2 3-7 2-8-2-4 1-7-2-5-5-4-2-3-6 1-7-2-4 1-7 5-6 0-4 5-6 7-2 2-4 7-2 7 2 4-1 7 2 5 6 4 1 5 5 1 7 2 3-1 6-5 5-1 4-6 5-8 2Z" />
+                        <path className="brain-fissure" d="M20 6c-1 4 1 6 0 10s1 6 0 11" />
+                        <path className="vascular-network" d="M20 27c-1-4 1-7 0-11s1-7 0-10M20 12c-3-1-5-3-6-6M20 13c3-1 5-3 6-6M20 16c-4-1-7-2-10-5M20 16c4-1 7-2 10-5M20 19c-3 0-6 1-9 4M20 19c3 0 6 1 9 4M20 22c-2 2-3 3-4 5M20 22c2 2 3 3 5 4" />
+                      </svg>
+                    ))}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
           {priority && <div className="priority-box"><strong>Tu principal oportunidad: {priority}</strong><p>{priorityCopy[priority] || 'Identificar esta área puede ayudarte a tomar mejores decisiones financieras.'}</p></div>}
           <p className="checkup-muted">Este chequeo es solo el comienzo. Una situación financiera no puede evaluarse completamente con cinco preguntas. En Axia analizamos integralmente tu contexto para construir una estrategia personalizada.</p>
           {requestError && <p className="checkup-error" role="alert">{requestError}</p>}
