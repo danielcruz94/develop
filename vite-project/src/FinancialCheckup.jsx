@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { submitFinancialCheckup } from './financialCheckupApi';
 import './financialCheckup.css';
 
@@ -82,12 +83,6 @@ const incomeRanges = [
   ['IP', 'Prefiero conversarlo en privado'],
 ];
 
-const intents = [
-  ['BOOKING', 'Quiero agendar una revisión privada con Axia'],
-  ['PROGRAMS', 'Quiero conocer los programas de planeación financiera'],
-  ['LATER', 'Quiero recibir información y decidir más adelante'],
-];
-
 const initialForm = {
   name: '',
   whatsapp: '',
@@ -115,6 +110,7 @@ const getErrorMessage = (error) => {
 
 function FinancialCheckup() {
   const serverURL = useSelector((state) => state.serverURL.serverURL);
+  const navigate = useNavigate();
   const [stage, setStage] = useState('intro');
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
@@ -155,14 +151,9 @@ function FinancialCheckup() {
     updateField('principal_concern', next);
   };
 
-  const chooseIntent = async (intent) => {
+  const submitCheckup = async () => {
+    const intent = 'BOOKING';
     updateField('intent', intent);
-
-    if (intent === 'PROGRAMS') {
-      window.location.assign('https://axia.com.co/finanzas-personales/');
-      return;
-    }
-
     setStage('loading-intent');
     setRequestError('');
     try {
@@ -172,14 +163,14 @@ function FinancialCheckup() {
       setStage('result');
     } catch (error) {
       setRequestError(getErrorMessage(error));
-      setStage('intent');
+      setStage('income');
     }
   };
 
   const openBooking = () => {
-    const bookingUrl = import.meta.env.VITE_BOOKING_URL;
-    if (bookingUrl) window.location.assign(bookingUrl);
-    else setRequestError('La agenda aún no está configurada. Déjanos tus datos y te contactaremos.');
+    navigate('/google-calendar', {
+      state: { name: form.name.trim(), email: form.email.trim() },
+    });
   };
 
   const priorityCopy = {
@@ -276,7 +267,7 @@ function FinancialCheckup() {
             ))}
           </div>
           {requestError && <p className="checkup-error" role="alert">{requestError}</p>}
-          <button className="checkup-button" disabled={isConcern ? form.principal_concern.length === 0 : !form.income_range} onClick={() => isConcern ? setStage('income') : setStage('intent')}>{isConcern ? 'Continuar' : 'Continuar'}</button>
+          <button className="checkup-button" disabled={isConcern ? form.principal_concern.length === 0 : !form.income_range} onClick={() => isConcern ? setStage('income') : submitCheckup()}>{isConcern ? 'Continuar' : 'Ver mi resultado'}</button>
         </section>
       </main>
     );
@@ -296,12 +287,14 @@ function FinancialCheckup() {
     };
     const priority = result?.priority_area || result?.priorityArea;
     return (
-      <main className="checkup-shell">
+      <main className="checkup-shell checkup-result-shell">
         <div className="checkup-brand"><img src="/LOGO.png" alt="Axia" /><span>FINANZAS PERSONALES</span></div>
         <section className="checkup-result">
           <p className="checkup-eyebrow">{stage === 'complete' ? 'Gracias por confiar en Axia' : 'Tu chequeo financiero inicial'}</p>
           <h1>{stage === 'complete' ? 'Recibimos tu elección.' : `${form.name.split(' ')[0]}, este es tu chequeo`}</h1>
           <h2>{result?.global_result || 'Hay oportunidades importantes de optimización'}</h2>
+          <div className="result-columns">
+            <div className="result-details">
           <div className="score-list">
             {[['Liquidez', 'liquidity'], ['Deuda', 'debt'], ['Protección', 'protection'], ['Inversión', 'investment'], ['Retiro', 'retirement']].map(([label, key]) => {
               const score = scores[key] || 0;
@@ -323,23 +316,22 @@ function FinancialCheckup() {
           </div>
           {priority && <div className="priority-box"><strong>Tu principal oportunidad: {priority}</strong><p>{priorityCopy[priority] || 'Identificar esta área puede ayudarte a tomar mejores decisiones financieras.'}</p></div>}
           <p className="checkup-muted">Este chequeo es solo el comienzo. Una situación financiera no puede evaluarse completamente con cinco preguntas. En Axia analizamos integralmente tu contexto para construir una estrategia personalizada.</p>
+            </div>
+            <div className="result-action">
+          <p className="result-action-eyebrow">Siguiente paso</p>
+          <h3>Conversemos sobre tu resultado</h3>
+          <p className="result-action-copy">Agenda una revisión privada y descubre cómo convertir estas oportunidades en decisiones concretas.</p>
           {requestError && <p className="checkup-error" role="alert">{requestError}</p>}
-          {stage === 'result' && <button className="checkup-button" onClick={openBooking}>Quiero revisar mis resultados con Axia</button>}
+          {stage === 'result' && <button className="checkup-button" onClick={openBooking}>Quiero revisar GRATIS mis resultados con Axia</button>}
+          <span className="result-action-note">Sin compromiso · 30 minutos</span>
+            </div>
+          </div>
         </section>
       </main>
     );
   }
 
-  return (
-    <main className="checkup-shell">
-      <section className="checkup-card">
-        <p className="checkup-eyebrow">Tu siguiente paso</p>
-        <h2>¿Qué te gustaría hacer ahora?</h2>
-        <div className="checkup-options">{intents.map(([value, label]) => <button className="checkup-option" key={value} onClick={() => chooseIntent(value)}>{label}</button>)}</div>
-        {requestError && <p className="checkup-error" role="alert">{requestError}</p>}
-      </section>
-    </main>
-  );
+  return null;
 }
 
 export default FinancialCheckup;

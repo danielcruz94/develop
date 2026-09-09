@@ -15,6 +15,7 @@ import PrivateRoute from './adminModule/componentes/PrivateRoute';
 import UsersManagement from './adminModule/componentes/Users/Usuarios';
 import Clientes from './adminModule/componentes/Users/Clientes';
 import ClientesMiniPlan from './adminModule/componentes/Users/ClientesMiniPlan';
+import GoogleCalendar from './GoogleCalendar';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/' element={<LoginForm />} />
           <Route path='Formregistro' element={<Formregistro />} />
           <Route path='5-signos-vitales' element={<FinancialCheckup />} />
+          <Route path='google-calendar' element={<GoogleCalendar />} />
           <Route path='admin' element={<PublicRoute element={<AxiaAdminLogin />} />} />
           <Route path='dashboard' element={<PrivateRoute element={<AxiaDashboard />} />} />
           <Route path='dashboard/users' element={<PrivateRoute element={<UsersManagement />} />} />

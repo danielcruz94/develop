@@ -151,6 +151,19 @@
   margin: auto;
 }
 
+.checkup-result {
+  max-width: 980px;
+}
+
+.checkup-result-shell {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.checkup-result-shell .checkup-brand {
+  margin-bottom: 20px;
+}
+
 .checkup-field {
   display: block;
   margin: 20px 0;
@@ -287,16 +300,87 @@
 }
 
 .checkup-result h1 {
-  margin-bottom: 28px;
+  max-width: 680px;
+  margin-bottom: 8px;
 }
 
 .checkup-result h2 {
-  font-size: 1.4rem;
+  max-width: 680px;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
   color: #ab7b3d;
 }
 
+.result-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.result-details,
+.result-action {
+  padding: 20px 24px;
+  border: 1px solid #e0ddd5;
+  background: #fff;
+}
+
+.result-details {
+  min-width: 0;
+}
+
+.result-action {
+  position: sticky;
+  top: 24px;
+  background: #17365d;
+  color: #fff;
+}
+
+.result-action-eyebrow {
+  margin: 0 0 13px;
+  color: #d8b579;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.result-action h3 {
+  margin: 0 0 12px;
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.result-action-copy {
+  margin: 0 0 24px;
+  color: #c3cfda;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.result-action .checkup-button {
+  display: block;
+  max-width: none;
+  background: #c89a57;
+  color: #fff;
+}
+
+.result-action .checkup-button:hover {
+  background: #d9ad6d;
+}
+
+.result-action-note {
+  display: block;
+  margin-top: 14px;
+  color: #b8c6d1;
+  font-size: 11px;
+  text-align: center;
+}
+
 .score-list {
-  margin: 32px 0;
+  margin: 0 0 14px;
 }
 
 .score-row {
@@ -304,8 +388,8 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dedbd3;
-  padding: 15px 0;
-  font-size: 14px;
+  padding: 8px 0;
+  font-size: 13px;
 }
 
 .score-dots {
@@ -362,14 +446,14 @@
 }
 
 .priority-box {
-  padding: 22px;
+  padding: 14px 16px;
   background: #ede8de;
-  margin: 28px 0;
+  margin: 14px 0;
 }
 
 .priority-box strong {
   font-family: Georgia, serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -377,7 +461,22 @@
   color: #5c6874;
   font-size: 13px;
   line-height: 1.6;
-  margin: 10px 0 0;
+  margin: 6px 0 0;
+}
+
+.checkup-result-shell .checkup-muted {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.checkup-result-shell .result-action-copy {
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.checkup-result-shell .result-action h3 {
+  font-size: 23px;
 }
 
 .checkup-link {
@@ -520,6 +619,20 @@
 
   .checkup-result h1 {
     margin-bottom: 16px;
+  }
+
+  .result-columns {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .result-details,
+  .result-action {
+    padding: 20px;
+  }
+
+  .result-action {
+    position: static;
   }
 
   .score-list {
