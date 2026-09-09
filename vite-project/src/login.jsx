@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'; 
 import Swal from 'sweetalert2';
 import './login.css';
-import { span } from 'framer-motion/client';
+
 const InteractiveLoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -69,6 +69,7 @@ const InteractiveLoginForm = () => {
             <input
               type="text"
               id="username"
+              placeholder=" "
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -81,6 +82,7 @@ const InteractiveLoginForm = () => {
             <input
               type="password"
               id="password"
+              placeholder=" "
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

@@ -45,7 +45,7 @@ function CreativeFloatingSelect({ options, seccion, data }) {
       }
     }, 500);
 
-    return () => clearTimeout(timer);x
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSelectChange = (value) => {   
