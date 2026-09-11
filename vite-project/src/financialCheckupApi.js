@@ -27,11 +27,11 @@ export const submitFinancialCheckupIntent = async (serverURL, payload, checkupId
   return response.data;
 };
 
-export const getCalendarAvailability = async (serverURL, date) => {
+export const getCalendarAvailability = async (serverURL, date, calendar) => {
   const configuredUrl = import.meta.env.VITE_CALENDAR_AVAILABILITY_URL;
   const endpoint = configuredUrl || `${serverURL.replace(/\/$/, '')}/calendar/availability`;
   const response = await axios.get(endpoint, {
-    params: { date },
+    params: { date, calendar },
     timeout: 15000,
   });
 

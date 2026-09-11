@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react';
 import { createCalendarAppointment, getCalendarAvailability } from './financialCheckupApi';
 import './googleCalendar.css';
@@ -23,7 +23,9 @@ const getErrorMessage = (error) => {
 function GoogleCalendar() {
   const serverURL = useSelector((state) => state.serverURL.serverURL);
   const location = useLocation();
+  const { calendar: routeCalendar } = useParams();
   const { name = '', email = '' } = location.state || {};
+  const calendar = routeCalendar?.toUpperCase();
   const [date, setDate] = useState('');
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -45,7 +47,7 @@ function GoogleCalendar() {
     setError('');
     setSelectedSlot(null);
 
-    getCalendarAvailability(serverURL, date)
+    getCalendarAvailability(serverURL, date, calendar)
       .then((data) => {
         if (!cancelled) setSlots(Array.isArray(data?.slots) ? data.slots : []);
       })
@@ -62,7 +64,7 @@ function GoogleCalendar() {
     return () => {
       cancelled = true;
     };
-  }, [date, serverURL]);
+  }, [calendar, date, serverURL]);
 
   useEffect(() => {
     if (!bookingSuccess) return undefined;
@@ -87,6 +89,7 @@ function GoogleCalendar() {
         email,
         date,
         startTime: selectedSlot.start,
+        calendar,
       });
       setBookingSuccess(true);
     } catch (requestError) {
@@ -117,7 +120,7 @@ function GoogleCalendar() {
             <h2>Una conversación para ordenar tus próximos pasos.</h2>
             <div className="calendar-info-list">
               <div><Clock3 size={17} aria-hidden="true" /><span>Duración<strong>30 minutos</strong></span></div>
-              <div><CalendarDays size={17} aria-hidden="true" /><span>Horario<strong>8:00 a. m. a 5:00 p. m.</strong></span></div>
+              <div><CalendarDays size={17} aria-hidden="true" /><span>Horario<strong>Horarios sujetos a disponibilidad.</strong></span></div>
             </div>
             <p className="calendar-info-note">Elige una fecha disponible y luego selecciona el horario que prefieras.</p>
           </div>
