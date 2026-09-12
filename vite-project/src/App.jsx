@@ -25,8 +25,9 @@ function App() {
           <Route path='formulario' element={<ProtectedRoute element={<Form />} />} />
           <Route path='/' element={<LoginForm />} />
           <Route path='Formregistro' element={<Formregistro />} />
-          <Route path='5-signos-vitales' element={<FinancialCheckup />} />
-          <Route path='google-calendar' element={<GoogleCalendar />} />
+          <Route path='5-signos-vitales/laura' element={<FinancialCheckup />} />
+          <Route path='5-signos-vitales/nicolas' element={<FinancialCheckup />} />
+          <Route path='google-calendar/:calendar' element={<GoogleCalendar />} />
           <Route path='admin' element={<PublicRoute element={<AxiaAdminLogin />} />} />
           <Route path='dashboard' element={<PrivateRoute element={<AxiaDashboard />} />} />
           <Route path='dashboard/users' element={<PrivateRoute element={<UsersManagement />} />} />

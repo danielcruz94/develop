@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { submitFinancialCheckup } from './financialCheckupApi';
 import './financialCheckup.css';
 
@@ -111,6 +111,8 @@ const getErrorMessage = (error) => {
 function FinancialCheckup() {
   const serverURL = useSelector((state) => state.serverURL.serverURL);
   const navigate = useNavigate();
+  const { calendar: routeCalendar } = useParams();
+  const calendar = (routeCalendar || 'laura').toUpperCase();
   const [stage, setStage] = useState('intro');
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
@@ -168,8 +170,8 @@ function FinancialCheckup() {
   };
 
   const openBooking = () => {
-    navigate('/google-calendar', {
-      state: { name: form.name.trim(), email: form.email.trim() },
+    navigate(`/google-calendar/${calendar.toLowerCase()}`, {
+      state: { name: form.name.trim(), email: form.email.trim(), calendar },
     });
   };
 
