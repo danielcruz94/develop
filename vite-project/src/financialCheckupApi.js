@@ -48,3 +48,25 @@ export const createCalendarAppointment = async (serverURL, appointment) => {
 
   return response.data;
 };
+
+const getOracleCalendarUrl = (serverURL, path) => (
+  `${(import.meta.env.VITE_ORACLE_CALENDAR_API_URL || `${serverURL.replace(/\/$/, '')}/calendar/oracle`).replace(/\/$/, '')}/${path}`
+);
+
+export const getOracleAvailability = async (serverURL, date) => {
+  const response = await axios.get(getOracleCalendarUrl(serverURL, 'availability'), {
+    params: { date },
+    timeout: 15000,
+  });
+
+  return response.data;
+};
+
+export const createOracleAppointment = async (serverURL, appointment) => {
+  const response = await axios.post(getOracleCalendarUrl(serverURL, 'appointment'), appointment, {
+    headers: { 'Content-Type': 'application/json' },
+    timeout: 15000,
+  });
+
+  return response.data;
+};

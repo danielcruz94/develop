@@ -16,6 +16,7 @@ import UsersManagement from './adminModule/componentes/Users/Usuarios';
 import Clientes from './adminModule/componentes/Users/Clientes';
 import ClientesMiniPlan from './adminModule/componentes/Users/ClientesMiniPlan';
 import GoogleCalendar from './GoogleCalendar';
+import ConferenciaOracle from './ConferenciaOracle';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='5-signos-vitales/laura' element={<FinancialCheckup />} />
           <Route path='5-signos-vitales/nicolas' element={<FinancialCheckup />} />
           <Route path='google-calendar/:calendar' element={<GoogleCalendar />} />
+          <Route path='conferencia-oracle' element={<ConferenciaOracle />} />
           <Route path='admin' element={<PublicRoute element={<AxiaAdminLogin />} />} />
           <Route path='dashboard' element={<PrivateRoute element={<AxiaDashboard />} />} />
           <Route path='dashboard/users' element={<PrivateRoute element={<UsersManagement />} />} />
